@@ -1,0 +1,44 @@
+#pragma once
+
+class Settings {
+    public:
+        int m_defaultColor;
+        int m_defaultColor2;
+
+        int m_cube_override;
+        int m_ship_override;
+        int m_ball_override;
+        int m_bird_override;
+        int m_dart_override;
+        int m_robot_override;
+        int m_spider_override;
+        int m_swing_override;
+
+        int m_cube_override2;
+        int m_ship_override2;
+        int m_ball_override2;
+        int m_bird_override2;
+        int m_dart_override2;
+        int m_robot_override2;
+        int m_spider_override2;
+        int m_swing_override2;
+
+        bool m_override_cube;
+        bool m_override_ship;
+        bool m_override_ball;
+        bool m_override_bird;
+        bool m_override_dart;
+        bool m_override_robot;
+        bool m_override_spider;
+        bool m_override_swing;
+
+        static Settings* sharedInstance();
+        void setOverrideCube(bool value);
+        void setOverrideShip(bool value);
+        void setOverrideBall(bool value);
+        void setOverrideBird(bool value);
+        void setOverrideDart(bool value);
+        void setOverrideRobot(bool value);
+        void setOverrideSpider(bool value);
+        void setOverrideSwing(bool value);
+};
