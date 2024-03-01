@@ -10,6 +10,8 @@ class $modify(ProfilePage) {
         log::debug("loadPageFromUserInfo");
         ProfilePage::loadPageFromUserInfo(score);
 
+        if(!score->isCurrentUser()) return;
+
         auto gameManager = GameManager::sharedState();
         auto settings = Settings::sharedInstance();
 
