@@ -7,9 +7,6 @@ $execute {
 
 	auto mod = Mod::get();
 
-	// i deadass forgot what this was for lmao
-	auto _ = mod->patch(reinterpret_cast<void*>(base::get() + 0x2c3ebf), { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 });
-
 	// initialize settings (please don't stab me)
 	auto settings = Settings::sharedInstance();
 
@@ -45,8 +42,6 @@ $execute {
 	settings->m_override_robot = mod->getSavedValue<bool>("override_robot", false);
 	settings->m_override_spider = mod->getSavedValue<bool>("override_spider", false);
 	settings->m_override_swing = mod->getSavedValue<bool>("override_swing", false);
-
-	fmt::println("(START) override_cube: {}", settings->m_override_cube);
 }
 
 $on_mod(Loaded) {

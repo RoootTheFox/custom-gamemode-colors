@@ -1,7 +1,6 @@
 using namespace geode::prelude;
 
 #include <Geode/modify/ProfilePage.hpp>
-#include <Geode/Enums.hpp>
 
 #include "settings.hpp"
 

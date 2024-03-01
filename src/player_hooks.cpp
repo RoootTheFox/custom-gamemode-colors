@@ -95,24 +95,12 @@ class $modify(PlayerObject) {
 
     void meow() {
         auto gameManager = GameManager::get();
+        auto settings = Settings::sharedInstance();
 
         // only run on playlayer
         if (gameManager->m_playLayer == nullptr) return;
 
-        auto settings = Settings::sharedInstance();
-        //log::debug("color: {}", this->getColor());
-        //log::debug("default color: {}", settings->m_defaultColor);
-
         bool isCube = !this->m_isShip && !this->m_isBall && !this->m_isBird && !this->m_isDart && !this->m_isRobot && !this->m_isSpider && !this->m_isSwing;
-
-        //log::debug("isCube:   {}", isCube);
-        //log::debug("isShip:   {}", this->m_isShip);
-        //log::debug("isBall:   {}", this->m_isBall);
-        //log::debug("isBird:   {}", this->m_isBird);
-        //log::debug("isDart:   {}", this->m_isDart);
-        //log::debug("isRobot:  {}", this->m_isRobot);
-        //log::debug("isSpider: {}", this->m_isSpider);
-        //log::debug("isSwing:  {}", this->m_isSwing);
 
         if(isCube) {
             log::debug("cube");
@@ -191,12 +179,6 @@ class $modify(PlayerObject) {
             this->setSecondColor(gameManager->colorForIdx(col2));
             gameManager->m_playerColor = col1;
             gameManager->m_playerColor2 = col2;
-            this->m_baseColor->m_colorID = col1;
-            this->m_baseColor->m_defaultColorID = col1;
-
-            //this->m_detailColor->m_colorID = col2;
-            //this->m_detailColor->m_defaultColorID = col2;
-            //this->m_detailSprite->setColor(ccc3(135, 228, 0));
         }
 
         if(this->m_isSwing) {
