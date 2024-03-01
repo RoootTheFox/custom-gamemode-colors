@@ -5,5 +5,12 @@
 	"id": "rooot.iconthing",
 	"name": "iconthing",
 	"developer": "rooot",
-	"description": ""
+	"description": "",
+	"dependencies": [
+		{
+			"id": "geode.node-ids",
+			"version": ">=v1.7.1",
+			"importance": "required"
+		}
+	]
 }
