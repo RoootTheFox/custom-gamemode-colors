@@ -1,5 +1,7 @@
 #pragma once
 
+#include "include.hpp"
+
 class Settings {
     public:
         int m_defaultColor;
@@ -32,13 +34,18 @@ class Settings {
         bool m_override_spider;
         bool m_override_swing;
 
+        // not actual settings, but they're still needed
+        SimplePlayer* m_player_cube;
+        SimplePlayer* m_player_ship;
+        SimplePlayer* m_player_ball;
+        SimplePlayer* m_player_bird;
+        SimplePlayer* m_player_dart;
+        SimplePlayer* m_player_robot;
+        SimplePlayer* m_player_spider;
+        SimplePlayer* m_player_swing;
+
+        void setOverrideEnabled(GameMode mode, bool value);
+        void setOverrideColor(GameMode mode, int color, ColorType type);
+
         static Settings* sharedInstance();
-        void setOverrideCube(bool value);
-        void setOverrideShip(bool value);
-        void setOverrideBall(bool value);
-        void setOverrideBird(bool value);
-        void setOverrideDart(bool value);
-        void setOverrideRobot(bool value);
-        void setOverrideSpider(bool value);
-        void setOverrideSwing(bool value);
 };
