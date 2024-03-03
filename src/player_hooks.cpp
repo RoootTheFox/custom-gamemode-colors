@@ -103,7 +103,6 @@ class $modify(PlayerObject) {
         bool isCube = !this->m_isShip && !this->m_isBall && !this->m_isBird && !this->m_isDart && !this->m_isRobot && !this->m_isSpider && !this->m_isSwing;
 
         if(isCube) {
-            log::debug("cube");
             int col1 = settings->m_override_cube ? settings->m_cube_override  : settings->m_defaultColor;
             int col2 = settings->m_override_cube ? settings->m_cube_override2 : settings->m_defaultColor2;
 
@@ -114,7 +113,6 @@ class $modify(PlayerObject) {
         }
         
         if(this->m_isShip) {
-            log::debug("ship");
             int col1 = settings->m_override_ship ? settings->m_ship_override  : settings->m_defaultColor;
             int col2 = settings->m_override_ship ? settings->m_ship_override2 : settings->m_defaultColor2;
 
@@ -125,7 +123,6 @@ class $modify(PlayerObject) {
         }
 
         if(this->m_isBall) {
-            log::debug("ball");
             int col1 = settings->m_override_ball ? settings->m_ball_override  : settings->m_defaultColor;
             int col2 = settings->m_override_ball ? settings->m_ball_override2 : settings->m_defaultColor2;
 
@@ -136,7 +133,6 @@ class $modify(PlayerObject) {
         }
 
         if(this->m_isBird) {
-            log::debug("ufo");
             int col1 = settings->m_override_ufo ? settings->m_ufo_override  : settings->m_defaultColor;
             int col2 = settings->m_override_ufo ? settings->m_ufo_override2 : settings->m_defaultColor2;
 
@@ -147,7 +143,6 @@ class $modify(PlayerObject) {
         }
 
         if(this->m_isDart) {
-            log::debug("wave");
             int col1 = settings->m_override_wave ? settings->m_wave_override  : settings->m_defaultColor;
             int col2 = settings->m_override_wave ? settings->m_wave_override2 : settings->m_defaultColor2;
 
@@ -158,7 +153,6 @@ class $modify(PlayerObject) {
         }
 
         if(this->m_isRobot) {
-            log::debug("robot");
             int col1 = settings->m_override_robot ? settings->m_robot_override  : settings->m_defaultColor;
             int col2 = settings->m_override_robot ? settings->m_robot_override2 : settings->m_defaultColor2;
 
@@ -196,7 +190,6 @@ class $modify(PlayerObject) {
 
 class $modify(PlayLayer) {
     void onQuit() {
-        log::debug("PlayLayer::onQuit");
         PlayLayer::onQuit();
 
         // whenever we quit a level, reset the gameManager player colors (else they'll reflect the last icon override)
@@ -209,10 +202,7 @@ class $modify(PlayLayer) {
 
 class $modify(GameManager) {
     void setPlayerColor(int id) {
-        log::debug("GameManager::setPlayerColor");
-
         Settings::sharedInstance()->m_defaultColor = id;
-        log::debug("-> color: {} ({})", GameManager::colorForIdx(id), id);
         GameManager::setPlayerColor(id);
     }
 };

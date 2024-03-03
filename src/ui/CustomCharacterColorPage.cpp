@@ -550,8 +550,6 @@ void CustomCharacterColorPage::onColorClicked(CCObject* sender) {
     }
     int tag = node->getTag();
 
-    log::debug("color clicked: {}", tag);
-
     auto settings = Settings::sharedInstance();
 
     settings->setOverrideColor(settings->m_current_mode, tag, settings->m_current_color_type);
@@ -621,8 +619,6 @@ void CustomCharacterColorPage::onColorTypeButtonClicked(CCObject* sender) {
 }
 
 void CustomCharacterColorPage::onGameModeToggleButtonClicked(CCObject* sender) {
-    log::debug("onGameModeToggleButtonClicked");
-
     int tag = sender->getTag();
 
     if (tag < 1 || tag > 8) {
