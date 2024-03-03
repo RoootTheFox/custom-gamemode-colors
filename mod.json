@@ -6,6 +6,8 @@
 	"name": "Custom Gamemode Colors",
 	"developer": "rooot",
 	"description": "Set custom player colors for each gamemode!",
+	"repository": "https://github.com/RoootTheFox/custom-gamemode-colors",
+	"issues": "https://github.com/RoootTheFox/custom-gamemode-colors/issues",
 	"dependencies": [
 		{
 			"id": "geode.node-ids",
