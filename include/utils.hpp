@@ -54,3 +54,4 @@ enum ColorType : int {
 #define TEXTURE_BUTTON_ENABLED "GJ_button_01.png"
 #define TEXTURE_BUTTON_DISABLED "GJ_button_04.png"
 #define TEXTURE_SELECTED_FRAME "GJ_select_001.png"
+#define TEXTURE_PAINT_BUTTON "GJ_paintBtn_001.png"

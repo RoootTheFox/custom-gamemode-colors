@@ -12,7 +12,7 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
         auto menu = static_cast<CCMenu*>(this->getChildByID("shards-menu"));
 
         auto button = CCMenuItemSpriteExtra::create(
-            CCSprite::createWithSpriteFrameName("GJ_paintBtn_001.png"),
+            CCSprite::createWithSpriteFrameName(TEXTURE_PAINT_BUTTON),
             this,
             menu_selector(GJGarageLayerModify::onColorOverrideButton)
         );
@@ -25,7 +25,6 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
 
     void onColorOverrideButton(CCObject* pSender) {
         auto custom_color_page = CustomCharacterColorPage::customCreate();
-        log::debug("custom_color_page CREATED meow");
         dynamic_cast<FLAlertLayer*>(custom_color_page)->show();
     }
 };

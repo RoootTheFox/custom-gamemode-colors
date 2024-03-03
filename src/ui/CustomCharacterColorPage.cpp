@@ -148,7 +148,7 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
         self->m_mainLayer->addChild(current_gamemode_sprite);
         settings->m_current_gamemode_sprite = current_gamemode_sprite;
 
-        self->updatePlayerColors();
+        self->updateUI();
     } else {
         log::error("failed to load icons and selection sprites (this should never happen)");
     }
@@ -309,7 +309,7 @@ void CustomCharacterColorPage::close(CCObject* sender) {
     this->removeFromParentAndCleanup(true);
 }
 
-void CustomCharacterColorPage::updatePlayerColors() {
+void CustomCharacterColorPage::updateUI() {
     auto settings = Settings::sharedInstance();
     auto gameManager = GameManager::get();
 
@@ -554,7 +554,7 @@ void CustomCharacterColorPage::onColorClicked(CCObject* sender) {
 
     settings->setOverrideColor(settings->m_current_mode, tag, settings->m_current_color_type);
 
-    this->updatePlayerColors();
+    this->updateUI();
 }
 
 void CustomCharacterColorPage::onPlayerClicked(CCObject* sender) {
@@ -572,7 +572,7 @@ void CustomCharacterColorPage::onPlayerClicked(CCObject* sender) {
 
     Settings::sharedInstance()->m_current_mode = static_cast<GameMode>(tag);
 
-    this->updatePlayerColors();
+    this->updateUI();
 }
 
 void CustomCharacterColorPage::onColorTypeButtonClicked(CCObject* sender) {
@@ -615,7 +615,7 @@ void CustomCharacterColorPage::onColorTypeButtonClicked(CCObject* sender) {
             break;
     }
 
-    this->updatePlayerColors();
+    this->updateUI();
 }
 
 void CustomCharacterColorPage::onGameModeToggleButtonClicked(CCObject* sender) {
@@ -629,7 +629,7 @@ void CustomCharacterColorPage::onGameModeToggleButtonClicked(CCObject* sender) {
     auto game_mode = static_cast<GameMode>(tag);
 
     Settings::sharedInstance()->toggleOverride(game_mode);
-    updatePlayerColors();
+    updateUI();
 }
 
 // todo: move this to a utils class

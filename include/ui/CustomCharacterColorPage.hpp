@@ -24,7 +24,7 @@ protected:
 
     CCMenuItemSpriteExtra* createGameModeButton(GameMode game_mode, CCPoint position);
 
-    void updatePlayerColors();
+    void updateUI();
 
     void updateColorSelectionSprite(CCSprite* sprite, ColorType type);
 
