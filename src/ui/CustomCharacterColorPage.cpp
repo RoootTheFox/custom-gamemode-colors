@@ -599,19 +599,19 @@ void CustomCharacterColorPage::onColorTypeButtonClicked(CCObject* sender) {
 
     switch (settings->m_current_color_type) {
         case PRIMARY:
-            static_cast<ButtonSprite*>(primary_button->getChildren()->objectAtIndex(0))->updateBGImage("GJ_button_01.png");
-            static_cast<ButtonSprite*>(secondary_button->getChildren()->objectAtIndex(0))->updateBGImage("GJ_button_04.png");
-            static_cast<ButtonSprite*>(glow_button->getChildren()->objectAtIndex(0))->updateBGImage("GJ_button_04.png");
+            static_cast<ButtonSprite*>(primary_button->getChildren()->objectAtIndex(0))->updateBGImage(TEXTURE_BUTTON_ENABLED);
+            static_cast<ButtonSprite*>(secondary_button->getChildren()->objectAtIndex(0))->updateBGImage(TEXTURE_BUTTON_DISABLED);
+            static_cast<ButtonSprite*>(glow_button->getChildren()->objectAtIndex(0))->updateBGImage(TEXTURE_BUTTON_DISABLED);
             break;
         case SECONDARY:
-            static_cast<ButtonSprite*>(primary_button->getChildren()->objectAtIndex(0))->updateBGImage("GJ_button_04.png");
-            static_cast<ButtonSprite*>(secondary_button->getChildren()->objectAtIndex(0))->updateBGImage("GJ_button_01.png");
-            static_cast<ButtonSprite*>(glow_button->getChildren()->objectAtIndex(0))->updateBGImage("GJ_button_04.png");
+            static_cast<ButtonSprite*>(primary_button->getChildren()->objectAtIndex(0))->updateBGImage(TEXTURE_BUTTON_DISABLED);
+            static_cast<ButtonSprite*>(secondary_button->getChildren()->objectAtIndex(0))->updateBGImage(TEXTURE_BUTTON_ENABLED);
+            static_cast<ButtonSprite*>(glow_button->getChildren()->objectAtIndex(0))->updateBGImage(TEXTURE_BUTTON_DISABLED);
             break;
         case GLOW:
-            static_cast<ButtonSprite*>(primary_button->getChildren()->objectAtIndex(0))->updateBGImage("GJ_button_04.png");
-            static_cast<ButtonSprite*>(secondary_button->getChildren()->objectAtIndex(0))->updateBGImage("GJ_button_04.png");
-            static_cast<ButtonSprite*>(glow_button->getChildren()->objectAtIndex(0))->updateBGImage("GJ_button_01.png");
+            static_cast<ButtonSprite*>(primary_button->getChildren()->objectAtIndex(0))->updateBGImage(TEXTURE_BUTTON_DISABLED);
+            static_cast<ButtonSprite*>(secondary_button->getChildren()->objectAtIndex(0))->updateBGImage(TEXTURE_BUTTON_DISABLED);
+            static_cast<ButtonSprite*>(glow_button->getChildren()->objectAtIndex(0))->updateBGImage(TEXTURE_BUTTON_ENABLED);
             break;
     }
 
