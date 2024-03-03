@@ -316,65 +316,81 @@ void CustomCharacterColorPage::updateUI() {
     if(settings->m_player_cube) {
         int col1 = settings->m_override_cube ? settings->m_cube_override  : settings->m_defaultColor;
         int col2 = settings->m_override_cube ? settings->m_cube_override2 : settings->m_defaultColor2;
+        int glow = settings->m_override_cube ? settings->m_cube_override_glow : settings->m_defaultColorGlow;
 
         settings->m_player_cube->setColor(gameManager->colorForIdx(col1));
         settings->m_player_cube->setSecondColor(gameManager->colorForIdx(col2));
+        settings->m_player_cube->m_glowColor =gameManager->colorForIdx(glow);
     }
 
     if(settings->m_player_ship) {
         int col1 = settings->m_override_ship ? settings->m_ship_override  : settings->m_defaultColor;
         int col2 = settings->m_override_ship ? settings->m_ship_override2 : settings->m_defaultColor2;
+        int glow = settings->m_override_ship ? settings->m_ship_override_glow : settings->m_defaultColorGlow;
 
         settings->m_player_ship->setColor(gameManager->colorForIdx(col1));
         settings->m_player_ship->setSecondColor(gameManager->colorForIdx(col2));
+        settings->m_player_ship->m_glowColor =gameManager->colorForIdx(glow);
     }
 
     if(settings->m_player_ball) {
         int col1 = settings->m_override_ball ? settings->m_ball_override  : settings->m_defaultColor;
         int col2 = settings->m_override_ball ? settings->m_ball_override2 : settings->m_defaultColor2;
+        int glow = settings->m_override_ball ? settings->m_ball_override_glow : settings->m_defaultColorGlow;
 
         settings->m_player_ball->setColor(gameManager->colorForIdx(col1));
         settings->m_player_ball->setSecondColor(gameManager->colorForIdx(col2));
+        settings->m_player_ball->m_glowColor =gameManager->colorForIdx(glow);
     }
 
     if(settings->m_player_ufo) {
         int col1 = settings->m_override_ufo ? settings->m_ufo_override  : settings->m_defaultColor;
         int col2 = settings->m_override_ufo ? settings->m_ufo_override2 : settings->m_defaultColor2;
+        int glow = settings->m_override_ufo ? settings->m_ufo_override_glow : settings->m_defaultColorGlow;
 
         settings->m_player_ufo->setColor(gameManager->colorForIdx(col1));
         settings->m_player_ufo->setSecondColor(gameManager->colorForIdx(col2));
+        settings->m_player_ufo->m_glowColor =gameManager->colorForIdx(glow);
     }
 
     if(settings->m_player_wave) {
         int col1 = settings->m_override_wave ? settings->m_wave_override  : settings->m_defaultColor;
         int col2 = settings->m_override_wave ? settings->m_wave_override2 : settings->m_defaultColor2;
+        int glow = settings->m_override_wave ? settings->m_wave_override_glow : settings->m_defaultColorGlow;
 
         settings->m_player_wave->setColor(gameManager->colorForIdx(col1));
         settings->m_player_wave->setSecondColor(gameManager->colorForIdx(col2));
+        settings->m_player_wave->m_glowColor =gameManager->colorForIdx(glow);
     }
 
     if(settings->m_player_robot) {
         int col1 = settings->m_override_robot ? settings->m_robot_override  : settings->m_defaultColor;
         int col2 = settings->m_override_robot ? settings->m_robot_override2 : settings->m_defaultColor2;
+        int glow = settings->m_override_robot ? settings->m_robot_override_glow : settings->m_defaultColorGlow;
 
         settings->m_player_robot->setColor(gameManager->colorForIdx(col1));
         settings->m_player_robot->setSecondColor(gameManager->colorForIdx(col2));
+        settings->m_player_robot->m_glowColor =gameManager->colorForIdx(glow);
     }
 
     if(settings->m_player_spider) {
         int col1 = settings->m_override_spider ? settings->m_spider_override  : settings->m_defaultColor;
         int col2 = settings->m_override_spider ? settings->m_spider_override2 : settings->m_defaultColor2;
+        int glow = settings->m_override_spider ? settings->m_spider_override_glow : settings->m_defaultColorGlow;
 
         settings->m_player_spider->setColor(gameManager->colorForIdx(col1));
         settings->m_player_spider->setSecondColor(gameManager->colorForIdx(col2));
+        settings->m_player_spider->m_glowColor =gameManager->colorForIdx(glow);
     }
 
     if(settings->m_player_swing) {
         int col1 = settings->m_override_swing ? settings->m_swing_override  : settings->m_defaultColor;
         int col2 = settings->m_override_swing ? settings->m_swing_override2 : settings->m_defaultColor2;
+        int glow = settings->m_override_swing ? settings->m_swing_override_glow : settings->m_defaultColorGlow;
 
         settings->m_player_swing->setColor(gameManager->colorForIdx(col1));
         settings->m_player_swing->setSecondColor(gameManager->colorForIdx(col2));
+        settings->m_player_swing->m_glowColor =gameManager->colorForIdx(glow);
     }
 
     if(settings->m_current_color_primary_sprite) {
@@ -394,8 +410,11 @@ void CustomCharacterColorPage::updateUI() {
     }
 
     if(settings->m_current_color_glow_sprite) {
-        // not supported yet
-        settings->m_current_color_glow_sprite->setVisible(false);
+        if (settings->m_current_mode == NONE) {
+            settings->m_current_color_glow_sprite->setVisible(false);
+        } else {
+            this->updateColorSelectionSprite(settings->m_current_color_glow_sprite, GLOW);
+        }
     }
 
     if (settings->m_button_cube) {
@@ -435,28 +454,28 @@ void CustomCharacterColorPage::updateColorSelectionSprite(CCSprite* sprite, Colo
 
     switch (settings->m_current_mode) {
         case CUBE:
-            color = type == PRIMARY ? settings->m_cube_override : settings->m_cube_override2;
+            color = type == PRIMARY ? settings->m_cube_override : (type == SECONDARY ? settings->m_cube_override2 : settings->m_cube_override_glow);
             break;
         case SHIP:
-            color = type == PRIMARY ? settings->m_ship_override : settings->m_ship_override2;
+            color = type == PRIMARY ? settings->m_ship_override : (type == SECONDARY ? settings->m_ship_override2 : settings->m_ship_override_glow);
             break;
         case BALL:
-            color = type == PRIMARY ? settings->m_ball_override : settings->m_ball_override2;
+            color = type == PRIMARY ? settings->m_ball_override : (type == SECONDARY ? settings->m_ball_override2 : settings->m_ball_override_glow);
             break;
         case UFO:
-            color = type == PRIMARY ? settings->m_ufo_override : settings->m_ufo_override2;
+            color = type == PRIMARY ? settings->m_ufo_override : (type == SECONDARY ? settings->m_ufo_override2 : settings->m_ufo_override_glow);
             break;
         case WAVE:
-            color = type == PRIMARY ? settings->m_wave_override : settings->m_wave_override2;
+            color = type == PRIMARY ? settings->m_wave_override : (type == SECONDARY ? settings->m_wave_override2 : settings->m_wave_override_glow);
             break;
         case ROBOT:
-            color = type == PRIMARY ? settings->m_robot_override : settings->m_robot_override2;
+            color = type == PRIMARY ? settings->m_robot_override : (type == SECONDARY ? settings->m_robot_override2 : settings->m_robot_override_glow);
             break;
         case SPIDER:
-            color = type == PRIMARY ? settings->m_spider_override : settings->m_spider_override2;
+            color = type == PRIMARY ? settings->m_spider_override : (type == SECONDARY ? settings->m_spider_override2 : settings->m_spider_override_glow);
             break;
         case SWING:
-            color = type == PRIMARY ? settings->m_swing_override : settings->m_swing_override2;
+            color = type == PRIMARY ? settings->m_swing_override : (type == SECONDARY ? settings->m_swing_override2 : settings->m_swing_override_glow);
             break;
         default:
             break;

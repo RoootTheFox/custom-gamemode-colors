@@ -23,7 +23,9 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
                     this->m_cube_override2 = color;
                     mod->setSavedValue(CUBE_OVERRIDE_SECONDARY, color);
                     break;
-                default:
+                case GLOW:
+                    this->m_cube_override_glow = color;
+                    mod->setSavedValue(CUBE_OVERRIDE_GLOW, color);
                     break;
             }
             break;
@@ -37,7 +39,9 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
                     this->m_ship_override2 = color;
                     mod->setSavedValue(SHIP_OVERRIDE_SECONDARY, color);
                     break;
-                default:
+                case GLOW:
+                    this->m_ship_override_glow = color;
+                    mod->setSavedValue(SHIP_OVERRIDE_GLOW, color);
                     break;
             }
             break;
@@ -51,7 +55,9 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
                     this->m_ball_override2 = color;
                     mod->setSavedValue(BALL_OVERRIDE_SECONDARY, color);
                     break;
-                default:
+                case GLOW:
+                    this->m_ball_override_glow = color;
+                    mod->setSavedValue(BALL_OVERRIDE_GLOW, color);
                     break;
             }
             break;
@@ -65,7 +71,9 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
                     this->m_ufo_override2 = color;
                     mod->setSavedValue(UFO_OVERRIDE_SECONDARY, color);
                     break;
-                default:
+                case GLOW:
+                    this->m_ufo_override_glow = color;
+                    mod->setSavedValue(UFO_OVERRIDE_GLOW, color);
                     break;
             }
             break;
@@ -79,7 +87,9 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
                     this->m_wave_override2 = color;
                     mod->setSavedValue(WAVE_OVERRIDE_SECONDARY, color);
                     break;
-                default:
+                case GLOW:
+                    this->m_wave_override_glow = color;
+                    mod->setSavedValue(WAVE_OVERRIDE_GLOW, color);
                     break;
             }
             break;
@@ -93,7 +103,9 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
                     this->m_robot_override2 = color;
                     mod->setSavedValue(ROBOT_OVERRIDE_SECONDARY, color);
                     break;
-                default:
+                case GLOW:
+                    this->m_robot_override_glow = color;
+                    mod->setSavedValue(ROBOT_OVERRIDE_GLOW, color);
                     break;
             }
             break;
@@ -107,7 +119,9 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
                     this->m_spider_override2 = color;
                     mod->setSavedValue(SPIDER_OVERRIDE_SECONDARY, color);
                     break;
-                default:
+                case GLOW:
+                    this->m_spider_override_glow = color;
+                    mod->setSavedValue(SPIDER_OVERRIDE_GLOW, color);
                     break;
             }
             break;
@@ -121,7 +135,9 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
                     this->m_swing_override2 = color;
                     mod->setSavedValue(SWING_OVERRIDE_SECONDARY, color);
                     break;
-                default:
+                case GLOW:
+                    this->m_swing_override_glow = color;
+                    mod->setSavedValue(SWING_OVERRIDE_GLOW, color);
                     break;
             }
             break;

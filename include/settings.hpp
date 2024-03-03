@@ -6,6 +6,7 @@ class Settings {
     public:
         int m_defaultColor;
         int m_defaultColor2;
+        int m_defaultColorGlow;
 
         int m_cube_override;
         int m_ship_override;
@@ -24,6 +25,15 @@ class Settings {
         int m_robot_override2;
         int m_spider_override2;
         int m_swing_override2;
+
+        int m_cube_override_glow;
+        int m_ship_override_glow;
+        int m_ball_override_glow;
+        int m_ufo_override_glow;
+        int m_wave_override_glow;
+        int m_robot_override_glow;
+        int m_spider_override_glow;
+        int m_swing_override_glow;
 
         bool m_override_cube;
         bool m_override_ship;

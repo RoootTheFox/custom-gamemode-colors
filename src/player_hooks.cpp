@@ -110,85 +110,109 @@ class $modify(PlayerObject) {
         if(isCube) {
             int col1 = settings->m_override_cube ? settings->m_cube_override  : settings->m_defaultColor;
             int col2 = settings->m_override_cube ? settings->m_cube_override2 : settings->m_defaultColor2;
+            int glow = settings->m_override_cube ? settings->m_cube_override_glow : settings->m_defaultColorGlow;
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));
+            this->m_glowColor = gameManager->colorForIdx(glow);
             gameManager->m_playerColor = col1;
             gameManager->m_playerColor2 = col2;
+            gameManager->m_playerGlowColor = glow;
         }
         
         if(this->m_isShip) {
             int col1 = settings->m_override_ship ? settings->m_ship_override  : settings->m_defaultColor;
             int col2 = settings->m_override_ship ? settings->m_ship_override2 : settings->m_defaultColor2;
+            int glow = settings->m_override_ship ? settings->m_ship_override_glow : settings->m_defaultColorGlow;
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));
+            this->m_glowColor = gameManager->colorForIdx(glow);
             gameManager->m_playerColor = col1;
             gameManager->m_playerColor2 = col2;
+            gameManager->m_playerGlowColor = glow;
         }
 
         if(this->m_isBall) {
             int col1 = settings->m_override_ball ? settings->m_ball_override  : settings->m_defaultColor;
             int col2 = settings->m_override_ball ? settings->m_ball_override2 : settings->m_defaultColor2;
+            int glow = settings->m_override_ball ? settings->m_ball_override_glow : settings->m_defaultColorGlow;
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));
+            this->m_glowColor = gameManager->colorForIdx(glow);
             gameManager->m_playerColor = col1;
             gameManager->m_playerColor2 = col2;
+            gameManager->m_playerGlowColor = glow;
         }
 
         if(this->m_isBird) {
             int col1 = settings->m_override_ufo ? settings->m_ufo_override  : settings->m_defaultColor;
             int col2 = settings->m_override_ufo ? settings->m_ufo_override2 : settings->m_defaultColor2;
+            int glow = settings->m_override_ufo ? settings->m_ufo_override_glow : settings->m_defaultColorGlow;
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));
+            this->m_glowColor = gameManager->colorForIdx(glow);
             gameManager->m_playerColor = col1;
             gameManager->m_playerColor2 = col2;
+            gameManager->m_playerGlowColor = glow;
         }
 
         if(this->m_isDart) {
             int col1 = settings->m_override_wave ? settings->m_wave_override  : settings->m_defaultColor;
             int col2 = settings->m_override_wave ? settings->m_wave_override2 : settings->m_defaultColor2;
+            int glow = settings->m_override_wave ? settings->m_wave_override_glow : settings->m_defaultColorGlow;
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));
+            this->m_glowColor = gameManager->colorForIdx(glow);
             gameManager->m_playerColor = col1;
             gameManager->m_playerColor2 = col2;
+            gameManager->m_playerGlowColor = glow;
         }
 
         if(this->m_isRobot) {
             int col1 = settings->m_override_robot ? settings->m_robot_override  : settings->m_defaultColor;
             int col2 = settings->m_override_robot ? settings->m_robot_override2 : settings->m_defaultColor2;
+            int glow = settings->m_override_robot ? settings->m_robot_override_glow : settings->m_defaultColorGlow;
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));
+            this->m_glowColor = gameManager->colorForIdx(glow);
             gameManager->m_playerColor = col1;
             gameManager->m_playerColor2 = col2;
+            gameManager->m_playerGlowColor = glow;
         }
 
         if(this->m_isSpider) {
             log::debug("spider");
             int col1 = settings->m_override_spider ? settings->m_spider_override  : settings->m_defaultColor;
             int col2 = settings->m_override_spider ? settings->m_spider_override2 : settings->m_defaultColor2;
+            int glow = settings->m_override_spider ? settings->m_spider_override_glow : settings->m_defaultColorGlow;
 
             log::debug("colors: {} {}", col1, col2);
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));
+            this->m_glowColor = gameManager->colorForIdx(glow);
             gameManager->m_playerColor = col1;
             gameManager->m_playerColor2 = col2;
+            gameManager->m_playerGlowColor = glow;
         }
 
         if(this->m_isSwing) {
             log::debug("swing");
             int col1 = settings->m_override_swing ? settings->m_swing_override  : settings->m_defaultColor;
             int col2 = settings->m_override_swing ? settings->m_swing_override2 : settings->m_defaultColor2;
+            int glow = settings->m_override_swing ? settings->m_swing_override_glow : settings->m_defaultColorGlow;
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));
+            this->m_glowColor = gameManager->colorForIdx(glow);
             gameManager->m_playerColor = col1;
             gameManager->m_playerColor2 = col2;
+            gameManager->m_playerGlowColor = glow;
         }
     }
 };
@@ -202,6 +226,7 @@ class $modify(PlayLayer) {
         auto settings = Settings::sharedInstance();
         gameManager->m_playerColor = settings->m_defaultColor;
         gameManager->m_playerColor2 = settings->m_defaultColor2;
+        gameManager->m_playerGlowColor = settings->m_defaultColorGlow;
     }
 };
 
