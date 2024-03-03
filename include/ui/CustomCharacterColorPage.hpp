@@ -28,6 +28,8 @@ protected:
 
     void updateColorSelectionSprite(CCSprite* sprite, ColorType type);
 
+    void updateGameModeSelectionSprite();
+
     CCPoint getPositionOfColor(int color_id);
 public:
     static CustomCharacterColorPage* customCreate();

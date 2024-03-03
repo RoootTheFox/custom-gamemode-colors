@@ -141,6 +141,13 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
         auto swing_toggle_button = self->createGameModeButton(SWING, {button_width * 8, -7});
         menu->addChild(swing_toggle_button);
 
+        // sprite to show current player
+        auto current_gamemode_sprite = CCSprite::createWithSpriteFrameName(TEXTURE_SELECTED_FRAME);
+        current_gamemode_sprite->setContentSize({32, 32});
+        current_gamemode_sprite->setScale(1.15f);
+        self->m_mainLayer->addChild(current_gamemode_sprite);
+        settings->m_current_gamemode_sprite = current_gamemode_sprite;
+
         self->updatePlayerColors();
     } else {
         log::error("failed to load icons and selection sprites (this should never happen)");
@@ -415,6 +422,10 @@ void CustomCharacterColorPage::updatePlayerColors() {
     if (settings->m_button_swing) {
         settings->m_button_swing->updateBGImage(settings->m_override_swing ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
+
+    if (settings->m_current_gamemode_sprite) {
+        this->updateGameModeSelectionSprite();
+    }
 }
 
 void CustomCharacterColorPage::updateColorSelectionSprite(CCSprite* sprite, ColorType type) {
@@ -460,6 +471,63 @@ void CustomCharacterColorPage::updateColorSelectionSprite(CCSprite* sprite, Colo
     auto target_pos = this->m_mainLayer->convertToNodeSpaceAR(this->getPositionOfColor(color));
     sprite->setPosition(target_pos);
     sprite->setVisible(true);
+}
+
+void CustomCharacterColorPage::updateGameModeSelectionSprite() {
+    auto settings = Settings::sharedInstance();
+
+    auto sprite = settings->m_current_gamemode_sprite;
+    if (settings->m_current_mode == NONE) {
+        sprite->setVisible(false);
+        return;
+    } else {
+        sprite->setVisible(true);
+    }
+
+    SimplePlayer* player = nullptr;
+
+    switch (settings->m_current_mode) {
+        case CUBE:
+            player = settings->m_player_cube;
+            break;
+        case SHIP:
+            player = settings->m_player_ship;
+            break;
+        case BALL:
+            player = settings->m_player_ball;
+            break;
+        case UFO:
+            player = settings->m_player_bird;
+            break;
+        case WAVE:
+            player = settings->m_player_dart;
+            break;
+        case ROBOT:
+            player = settings->m_player_robot;
+            break;
+        case SPIDER:
+            player = settings->m_player_spider;
+            break;
+        case SWING:
+            player = settings->m_player_swing;
+            break;
+        default:
+            break;
+    }
+
+    if (!player) {
+        log::error("failed to find player for current mode");
+        return;
+    }
+
+    // all simpleplayers (except ship) are initially children of m_mainLayer,
+    // but since we moved them to buttons inside the menu, we need to convert the position
+    auto pos = this->m_mainLayer->convertToNodeSpaceAR(this->m_buttonMenu->convertToWorldSpaceAR(player->getParent()->getPosition()));
+    
+    // pos is slightly off, so we need to fix it
+    auto fixed_pos = ccpAdd(pos, ccp(-3.5, -3));
+
+    sprite->setPosition(fixed_pos);
 }
 
 CCPoint CustomCharacterColorPage::getPositionOfColor(int color_id) {

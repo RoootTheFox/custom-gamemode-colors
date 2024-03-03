@@ -56,6 +56,8 @@ class Settings {
         GameMode m_current_mode = NONE;
         ColorType m_current_color_type = PRIMARY;
 
+        geode::prelude::CCSprite* m_current_gamemode_sprite = nullptr;
+
         geode::prelude::CCSprite* m_current_color_primary_sprite = nullptr;
         geode::prelude::CCSprite* m_current_color_secondary_sprite = nullptr;
         geode::prelude::CCSprite* m_current_color_glow_sprite = nullptr;
