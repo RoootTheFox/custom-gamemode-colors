@@ -177,7 +177,7 @@ CCMenuItemSpriteExtra* CustomCharacterColorPage::createPlayerButton(SimplePlayer
 }
 
 CCMenuItemSpriteExtra* CustomCharacterColorPage::createGameModeButton(GameMode game_mode, CCPoint position) {
-    auto inner_button = ButtonSprite::create(this->getGameModeName(game_mode).c_str(), 16, true, "bigFont.fnt", TEXtURE_BUTTON_ENABLED, 20.0f, 2.0f);
+    auto inner_button = ButtonSprite::create(this->getGameModeName(game_mode).c_str(), 16, true, "bigFont.fnt", TEXTURE_BUTTON_ENABLED, 20.0f, 2.0f);
     auto button = CCMenuItemSpriteExtra::create(
         inner_button,
         this,
@@ -399,28 +399,28 @@ void CustomCharacterColorPage::updatePlayerColors() {
     }
 
     if (settings->m_button_cube) {
-        settings->m_button_cube->updateBGImage(settings->m_override_cube ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+        settings->m_button_cube->updateBGImage(settings->m_override_cube ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
     if (settings->m_button_ship) {
-        settings->m_button_ship->updateBGImage(settings->m_override_ship ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+        settings->m_button_ship->updateBGImage(settings->m_override_ship ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
     if (settings->m_button_ball) {
-        settings->m_button_ball->updateBGImage(settings->m_override_ball ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+        settings->m_button_ball->updateBGImage(settings->m_override_ball ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
     if (settings->m_button_ufo) {
-        settings->m_button_ufo->updateBGImage(settings->m_override_ufo ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+        settings->m_button_ufo->updateBGImage(settings->m_override_ufo ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
     if (settings->m_button_wave) {
-        settings->m_button_wave->updateBGImage(settings->m_override_wave ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+        settings->m_button_wave->updateBGImage(settings->m_override_wave ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
     if (settings->m_button_robot) {
-        settings->m_button_robot->updateBGImage(settings->m_override_robot ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+        settings->m_button_robot->updateBGImage(settings->m_override_robot ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
     if (settings->m_button_spider) {
-        settings->m_button_spider->updateBGImage(settings->m_override_spider ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+        settings->m_button_spider->updateBGImage(settings->m_override_spider ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
     if (settings->m_button_swing) {
-        settings->m_button_swing->updateBGImage(settings->m_override_swing ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+        settings->m_button_swing->updateBGImage(settings->m_override_swing ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
 
     if (settings->m_current_gamemode_sprite) {
