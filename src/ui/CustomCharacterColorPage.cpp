@@ -45,7 +45,9 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
             }
             if (typeinfo_cast<ButtonSprite*>(node_child)) {
                 if (buttons_found > 2) {
-                    log::error("found too many buttons, ignoring");
+                    // this is mainly here to remove the "Rand" button added by Capeling's randomizer mod
+                    log::warn("found too many buttons, removing");
+                    node->removeFromParentAndCleanup(true);
                     continue;
                 }
                 switch (buttons_found) {
