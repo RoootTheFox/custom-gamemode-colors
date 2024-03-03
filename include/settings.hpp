@@ -10,8 +10,8 @@ class Settings {
         int m_cube_override;
         int m_ship_override;
         int m_ball_override;
-        int m_bird_override;
-        int m_dart_override;
+        int m_ufo_override;
+        int m_wave_override;
         int m_robot_override;
         int m_spider_override;
         int m_swing_override;
@@ -19,8 +19,8 @@ class Settings {
         int m_cube_override2;
         int m_ship_override2;
         int m_ball_override2;
-        int m_bird_override2;
-        int m_dart_override2;
+        int m_ufo_override2;
+        int m_wave_override2;
         int m_robot_override2;
         int m_spider_override2;
         int m_swing_override2;
@@ -28,8 +28,8 @@ class Settings {
         bool m_override_cube;
         bool m_override_ship;
         bool m_override_ball;
-        bool m_override_bird;
-        bool m_override_dart;
+        bool m_override_ufo;
+        bool m_override_wave;
         bool m_override_robot;
         bool m_override_spider;
         bool m_override_swing;
@@ -38,8 +38,8 @@ class Settings {
         SimplePlayer* m_player_cube;
         SimplePlayer* m_player_ship;
         SimplePlayer* m_player_ball;
-        SimplePlayer* m_player_bird;
-        SimplePlayer* m_player_dart;
+        SimplePlayer* m_player_ufo;
+        SimplePlayer* m_player_wave;
         SimplePlayer* m_player_robot;
         SimplePlayer* m_player_spider;
         SimplePlayer* m_player_swing;
@@ -47,8 +47,8 @@ class Settings {
         ButtonSprite* m_button_cube = nullptr;
         ButtonSprite* m_button_ship = nullptr;
         ButtonSprite* m_button_ball = nullptr;
-        ButtonSprite* m_button_bird = nullptr;
-        ButtonSprite* m_button_dart = nullptr;
+        ButtonSprite* m_button_ufo = nullptr;
+        ButtonSprite* m_button_wave = nullptr;
         ButtonSprite* m_button_robot = nullptr;
         ButtonSprite* m_button_spider = nullptr;
         ButtonSprite* m_button_swing = nullptr;

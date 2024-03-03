@@ -58,11 +58,11 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
         case UFO:
             switch (type) {
                 case PRIMARY:
-                    this->m_bird_override = color;
+                    this->m_ufo_override = color;
                     mod->setSavedValue(UFO_OVERRIDE_PRIMARY, color);
                     break;
                 case SECONDARY:
-                    this->m_bird_override2 = color;
+                    this->m_ufo_override2 = color;
                     mod->setSavedValue(UFO_OVERRIDE_SECONDARY, color);
                     break;
                 default:
@@ -72,11 +72,11 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
         case WAVE:
             switch (type) {
                 case PRIMARY:
-                    this->m_dart_override = color;
+                    this->m_wave_override = color;
                     mod->setSavedValue(WAVE_OVERRIDE_PRIMARY, color);
                     break;
                 case SECONDARY:
-                    this->m_dart_override2 = color;
+                    this->m_wave_override2 = color;
                     mod->setSavedValue(WAVE_OVERRIDE_SECONDARY, color);
                     break;
                 default:
@@ -147,12 +147,12 @@ void Settings::toggleOverride(GameMode mode) {
             mod->setSavedValue(OVERRIDE_BALL_ENABLED, this->m_override_ball);
             break;
         case UFO:
-            this->m_override_bird = !this->m_override_bird;
-            mod->setSavedValue(OVERRIDE_UFO_ENABLED, this->m_override_bird);
+            this->m_override_ufo = !this->m_override_ufo;
+            mod->setSavedValue(OVERRIDE_UFO_ENABLED, this->m_override_ufo);
             break;
         case WAVE:
-            this->m_override_dart = !this->m_override_dart;
-            mod->setSavedValue(OVERRIDE_WAVE_ENABLED, this->m_override_dart);
+            this->m_override_wave = !this->m_override_wave;
+            mod->setSavedValue(OVERRIDE_WAVE_ENABLED, this->m_override_wave);
             break;
         case ROBOT:
             this->m_override_robot = !this->m_override_robot;

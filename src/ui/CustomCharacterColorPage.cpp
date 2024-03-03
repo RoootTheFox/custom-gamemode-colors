@@ -101,10 +101,10 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
         auto ball_button = self->createPlayerButton(settings->m_player_ball, BALL);
         menu->addChild(ball_button);
 
-        auto ufo_button = self->createPlayerButton(settings->m_player_bird, UFO);
+        auto ufo_button = self->createPlayerButton(settings->m_player_ufo, UFO);
         menu->addChild(ufo_button);
 
-        auto wave_button = self->createPlayerButton(settings->m_player_dart, WAVE);
+        auto wave_button = self->createPlayerButton(settings->m_player_wave, WAVE);
         menu->addChild(wave_button);
 
         auto robot_button = self->createPlayerButton(settings->m_player_robot, ROBOT);
@@ -195,10 +195,10 @@ CCMenuItemSpriteExtra* CustomCharacterColorPage::createGameModeButton(GameMode g
             Settings::sharedInstance()->m_button_ball = inner_button;
             break;
         case UFO:
-            Settings::sharedInstance()->m_button_bird = inner_button;
+            Settings::sharedInstance()->m_button_ufo = inner_button;
             break;
         case WAVE:
-            Settings::sharedInstance()->m_button_dart = inner_button;
+            Settings::sharedInstance()->m_button_wave = inner_button;
             break;
         case ROBOT:
             Settings::sharedInstance()->m_button_robot = inner_button;
@@ -244,11 +244,11 @@ bool CustomCharacterColorPage::loadSimpsAndSelectionSprites() {
                     break;
                 case 2:
                     //log::debug("found ufo");
-                    settings->m_player_bird = simple_player;
+                    settings->m_player_ufo = simple_player;
                     break;
                 case 3:
                     //log::debug("found wave");
-                    settings->m_player_dart = simple_player;
+                    settings->m_player_wave = simple_player;
                     break;
                 case 4:
                     //log::debug("found robot");
@@ -337,20 +337,20 @@ void CustomCharacterColorPage::updatePlayerColors() {
         settings->m_player_ball->setSecondColor(gameManager->colorForIdx(col2));
     }
 
-    if(settings->m_player_bird) {
-        int col1 = settings->m_override_bird ? settings->m_bird_override  : settings->m_defaultColor;
-        int col2 = settings->m_override_bird ? settings->m_bird_override2 : settings->m_defaultColor2;
+    if(settings->m_player_ufo) {
+        int col1 = settings->m_override_ufo ? settings->m_ufo_override  : settings->m_defaultColor;
+        int col2 = settings->m_override_ufo ? settings->m_ufo_override2 : settings->m_defaultColor2;
 
-        settings->m_player_bird->setColor(gameManager->colorForIdx(col1));
-        settings->m_player_bird->setSecondColor(gameManager->colorForIdx(col2));
+        settings->m_player_ufo->setColor(gameManager->colorForIdx(col1));
+        settings->m_player_ufo->setSecondColor(gameManager->colorForIdx(col2));
     }
 
-    if(settings->m_player_dart) {
-        int col1 = settings->m_override_dart ? settings->m_dart_override  : settings->m_defaultColor;
-        int col2 = settings->m_override_dart ? settings->m_dart_override2 : settings->m_defaultColor2;
+    if(settings->m_player_wave) {
+        int col1 = settings->m_override_wave ? settings->m_wave_override  : settings->m_defaultColor;
+        int col2 = settings->m_override_wave ? settings->m_wave_override2 : settings->m_defaultColor2;
 
-        settings->m_player_dart->setColor(gameManager->colorForIdx(col1));
-        settings->m_player_dart->setSecondColor(gameManager->colorForIdx(col2));
+        settings->m_player_wave->setColor(gameManager->colorForIdx(col1));
+        settings->m_player_wave->setSecondColor(gameManager->colorForIdx(col2));
     }
 
     if(settings->m_player_robot) {
@@ -407,11 +407,11 @@ void CustomCharacterColorPage::updatePlayerColors() {
     if (settings->m_button_ball) {
         settings->m_button_ball->updateBGImage(settings->m_override_ball ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
-    if (settings->m_button_bird) {
-        settings->m_button_bird->updateBGImage(settings->m_override_bird ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+    if (settings->m_button_ufo) {
+        settings->m_button_ufo->updateBGImage(settings->m_override_ufo ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
-    if (settings->m_button_dart) {
-        settings->m_button_dart->updateBGImage(settings->m_override_dart ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+    if (settings->m_button_wave) {
+        settings->m_button_wave->updateBGImage(settings->m_override_wave ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
     if (settings->m_button_robot) {
         settings->m_button_robot->updateBGImage(settings->m_override_robot ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
@@ -444,10 +444,10 @@ void CustomCharacterColorPage::updateColorSelectionSprite(CCSprite* sprite, Colo
             color = type == PRIMARY ? settings->m_ball_override : settings->m_ball_override2;
             break;
         case UFO:
-            color = type == PRIMARY ? settings->m_bird_override : settings->m_bird_override2;
+            color = type == PRIMARY ? settings->m_ufo_override : settings->m_ufo_override2;
             break;
         case WAVE:
-            color = type == PRIMARY ? settings->m_dart_override : settings->m_dart_override2;
+            color = type == PRIMARY ? settings->m_wave_override : settings->m_wave_override2;
             break;
         case ROBOT:
             color = type == PRIMARY ? settings->m_robot_override : settings->m_robot_override2;
@@ -497,10 +497,10 @@ void CustomCharacterColorPage::updateGameModeSelectionSprite() {
             player = settings->m_player_ball;
             break;
         case UFO:
-            player = settings->m_player_bird;
+            player = settings->m_player_ufo;
             break;
         case WAVE:
-            player = settings->m_player_dart;
+            player = settings->m_player_wave;
             break;
         case ROBOT:
             player = settings->m_player_robot;
@@ -646,9 +646,9 @@ std::string CustomCharacterColorPage::getGameModeName(GameMode mode) {
         case BALL:
             return "ball";
         case UFO:
-            return "bird";
+            return "ufo";
         case WAVE:
-            return "dart";
+            return "wave";
         case ROBOT:
             return "robot";
         case SPIDER:

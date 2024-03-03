@@ -27,11 +27,11 @@ enum ColorType : int {
 #define BALL_OVERRIDE_PRIMARY "ball_override"
 #define BALL_OVERRIDE_SECONDARY "ball_override2"
 
-#define UFO_OVERRIDE_PRIMARY "bird_override"
-#define UFO_OVERRIDE_SECONDARY "bird_override2"
+#define UFO_OVERRIDE_PRIMARY "ufo_override"
+#define UFO_OVERRIDE_SECONDARY "ufo_override2"
 
-#define WAVE_OVERRIDE_PRIMARY "dart_override"
-#define WAVE_OVERRIDE_SECONDARY "dart_override2"
+#define WAVE_OVERRIDE_PRIMARY "wave_override"
+#define WAVE_OVERRIDE_SECONDARY "wave_override2"
 
 #define ROBOT_OVERRIDE_PRIMARY "robot_override"
 #define ROBOT_OVERRIDE_SECONDARY "robot_override2"
@@ -45,8 +45,8 @@ enum ColorType : int {
 #define OVERRIDE_CUBE_ENABLED "override_cube"
 #define OVERRIDE_SHIP_ENABLED "override_ship"
 #define OVERRIDE_BALL_ENABLED "override_ball"
-#define OVERRIDE_UFO_ENABLED "override_bird"
-#define OVERRIDE_WAVE_ENABLED "override_dart"
+#define OVERRIDE_UFO_ENABLED "override_ufo"
+#define OVERRIDE_WAVE_ENABLED "override_wave"
 #define OVERRIDE_ROBOT_ENABLED "override_robot"
 #define OVERRIDE_SPIDER_ENABLED "override_spider"
 #define OVERRIDE_SWING_ENABLED "override_swing"

@@ -19,11 +19,11 @@ $execute {
 	settings->m_ball_override = mod->getSavedValue<int>(BALL_OVERRIDE_PRIMARY, 0);
 	settings->m_ball_override2 = mod->getSavedValue<int>(BALL_OVERRIDE_SECONDARY, 0);
 
-	settings->m_bird_override = mod->getSavedValue<int>(UFO_OVERRIDE_PRIMARY, 0);
-	settings->m_bird_override2 = mod->getSavedValue<int>(UFO_OVERRIDE_SECONDARY, 0);
+	settings->m_ufo_override = mod->getSavedValue<int>(UFO_OVERRIDE_PRIMARY, 0);
+	settings->m_ufo_override2 = mod->getSavedValue<int>(UFO_OVERRIDE_SECONDARY, 0);
 
-	settings->m_dart_override = mod->getSavedValue<int>(WAVE_OVERRIDE_PRIMARY, 0);
-	settings->m_dart_override2 = mod->getSavedValue<int>(WAVE_OVERRIDE_SECONDARY, 0);
+	settings->m_wave_override = mod->getSavedValue<int>(WAVE_OVERRIDE_PRIMARY, 0);
+	settings->m_wave_override2 = mod->getSavedValue<int>(WAVE_OVERRIDE_SECONDARY, 0);
 
 	settings->m_robot_override = mod->getSavedValue<int>(ROBOT_OVERRIDE_PRIMARY, 0);
 	settings->m_robot_override2 = mod->getSavedValue<int>(ROBOT_OVERRIDE_SECONDARY, 0);
@@ -37,8 +37,8 @@ $execute {
 	settings->m_override_cube = mod->getSavedValue<bool>(OVERRIDE_CUBE_ENABLED, false);
 	settings->m_override_ship = mod->getSavedValue<bool>(OVERRIDE_SHIP_ENABLED, false);
 	settings->m_override_ball = mod->getSavedValue<bool>(OVERRIDE_BALL_ENABLED, false);
-	settings->m_override_bird = mod->getSavedValue<bool>(OVERRIDE_UFO_ENABLED, false);
-	settings->m_override_dart = mod->getSavedValue<bool>(OVERRIDE_WAVE_ENABLED, false);
+	settings->m_override_ufo = mod->getSavedValue<bool>(OVERRIDE_UFO_ENABLED, false);
+	settings->m_override_wave = mod->getSavedValue<bool>(OVERRIDE_WAVE_ENABLED, false);
 	settings->m_override_robot = mod->getSavedValue<bool>(OVERRIDE_ROBOT_ENABLED, false);
 	settings->m_override_spider = mod->getSavedValue<bool>(OVERRIDE_SPIDER_ENABLED, false);
 	settings->m_override_swing = mod->getSavedValue<bool>(OVERRIDE_SWING_ENABLED, false);

@@ -136,9 +136,9 @@ class $modify(PlayerObject) {
         }
 
         if(this->m_isBird) {
-            log::debug("bird");
-            int col1 = settings->m_override_bird ? settings->m_bird_override  : settings->m_defaultColor;
-            int col2 = settings->m_override_bird ? settings->m_bird_override2 : settings->m_defaultColor2;
+            log::debug("ufo");
+            int col1 = settings->m_override_ufo ? settings->m_ufo_override  : settings->m_defaultColor;
+            int col2 = settings->m_override_ufo ? settings->m_ufo_override2 : settings->m_defaultColor2;
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));
@@ -147,9 +147,9 @@ class $modify(PlayerObject) {
         }
 
         if(this->m_isDart) {
-            log::debug("dart");
-            int col1 = settings->m_override_dart ? settings->m_dart_override  : settings->m_defaultColor;
-            int col2 = settings->m_override_dart ? settings->m_dart_override2 : settings->m_defaultColor2;
+            log::debug("wave");
+            int col1 = settings->m_override_wave ? settings->m_wave_override  : settings->m_defaultColor;
+            int col2 = settings->m_override_wave ? settings->m_wave_override2 : settings->m_defaultColor2;
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));

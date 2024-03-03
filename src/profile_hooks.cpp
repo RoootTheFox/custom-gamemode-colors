@@ -36,15 +36,15 @@ class $modify(ProfilePage) {
             player->setColor(gameManager->colorForIdx(settings->m_ball_override));
             player->setSecondColor(gameManager->colorForIdx(settings->m_ball_override2));            
         }
-        if (settings->m_override_bird) {
+        if (settings->m_override_ufo) {
             auto player = static_cast<SimplePlayer*>(player_menu->getChildByID("player-ufo")->getChildren()->objectAtIndex(0));
-            player->setColor(gameManager->colorForIdx(settings->m_bird_override));
-            player->setSecondColor(gameManager->colorForIdx(settings->m_bird_override2));            
+            player->setColor(gameManager->colorForIdx(settings->m_ufo_override));
+            player->setSecondColor(gameManager->colorForIdx(settings->m_ufo_override2));            
         }
-        if (settings->m_override_dart) {
+        if (settings->m_override_wave) {
             auto player = static_cast<SimplePlayer*>(player_menu->getChildByID("player-wave")->getChildren()->objectAtIndex(0));
-            player->setColor(gameManager->colorForIdx(settings->m_dart_override));
-            player->setSecondColor(gameManager->colorForIdx(settings->m_dart_override2));            
+            player->setColor(gameManager->colorForIdx(settings->m_wave_override));
+            player->setSecondColor(gameManager->colorForIdx(settings->m_wave_override2));            
         }
         if (settings->m_override_robot) {
             auto player = static_cast<SimplePlayer*>(player_menu->getChildByID("player-robot")->getChildren()->objectAtIndex(0));
