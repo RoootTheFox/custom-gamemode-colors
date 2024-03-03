@@ -17,3 +17,36 @@ enum ColorType : int {
     SECONDARY = 1,
     GLOW = 2, // will be supported in the future
 };
+
+#define CUBE_OVERRIDE_PRIMARY "cube_override"
+#define CUBE_OVERRIDE_SECONDARY "cube_override2"
+
+#define SHIP_OVERRIDE_PRIMARY "ship_override"
+#define SHIP_OVERRIDE_SECONDARY "ship_override2"
+
+#define BALL_OVERRIDE_PRIMARY "ball_override"
+#define BALL_OVERRIDE_SECONDARY "ball_override2"
+
+#define UFO_OVERRIDE_PRIMARY "bird_override"
+#define UFO_OVERRIDE_SECONDARY "bird_override2"
+
+#define WAVE_OVERRIDE_PRIMARY "dart_override"
+#define WAVE_OVERRIDE_SECONDARY "dart_override2"
+
+#define ROBOT_OVERRIDE_PRIMARY "robot_override"
+#define ROBOT_OVERRIDE_SECONDARY "robot_override2"
+
+#define SPIDER_OVERRIDE_PRIMARY "spider_override"
+#define SPIDER_OVERRIDE_SECONDARY "spider_override2"
+
+#define SWING_OVERRIDE_PRIMARY "swing_override"
+#define SWING_OVERRIDE_SECONDARY "swing_override2"
+
+#define OVERRIDE_CUBE_ENABLED "override_cube"
+#define OVERRIDE_SHIP_ENABLED "override_ship"
+#define OVERRIDE_BALL_ENABLED "override_ball"
+#define OVERRIDE_UFO_ENABLED "override_bird"
+#define OVERRIDE_WAVE_ENABLED "override_dart"
+#define OVERRIDE_ROBOT_ENABLED "override_robot"
+#define OVERRIDE_SPIDER_ENABLED "override_spider"
+#define OVERRIDE_SWING_ENABLED "override_swing"

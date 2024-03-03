@@ -15,11 +15,11 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
             switch (type) {
                 case PRIMARY:
                     this->m_cube_override = color;
-                    Mod::get()->setSavedValue("cube_override", color);
+                    Mod::get()->setSavedValue(CUBE_OVERRIDE_PRIMARY, color);
                     break;
                 case SECONDARY:
                     this->m_cube_override2 = color;
-                    Mod::get()->setSavedValue("cube_override2", color);
+                    Mod::get()->setSavedValue(CUBE_OVERRIDE_SECONDARY, color);
                     break;
                 default:
                     break;
@@ -29,11 +29,11 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
             switch (type) {
                 case PRIMARY:
                     this->m_ship_override = color;
-                    Mod::get()->setSavedValue("ship_override", color);
+                    Mod::get()->setSavedValue(SHIP_OVERRIDE_PRIMARY, color);
                     break;
                 case SECONDARY:
                     this->m_ship_override2 = color;
-                    Mod::get()->setSavedValue("ship_override2", color);
+                    Mod::get()->setSavedValue(SHIP_OVERRIDE_SECONDARY, color);
                     break;
                 default:
                     break;
@@ -43,11 +43,11 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
             switch (type) {
                 case PRIMARY:
                     this->m_ball_override = color;
-                    Mod::get()->setSavedValue("ball_override", color);
+                    Mod::get()->setSavedValue(BALL_OVERRIDE_PRIMARY, color);
                     break;
                 case SECONDARY:
                     this->m_ball_override2 = color;
-                    Mod::get()->setSavedValue("ball_override2", color);
+                    Mod::get()->setSavedValue(BALL_OVERRIDE_SECONDARY, color);
                     break;
                 default:
                     break;
@@ -57,11 +57,11 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
             switch (type) {
                 case PRIMARY:
                     this->m_bird_override = color;
-                    Mod::get()->setSavedValue("bird_override", color);
+                    Mod::get()->setSavedValue(UFO_OVERRIDE_PRIMARY, color);
                     break;
                 case SECONDARY:
                     this->m_bird_override2 = color;
-                    Mod::get()->setSavedValue("bird_override2", color);
+                    Mod::get()->setSavedValue(UFO_OVERRIDE_SECONDARY, color);
                     break;
                 default:
                     break;
@@ -71,11 +71,11 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
             switch (type) {
                 case PRIMARY:
                     this->m_dart_override = color;
-                    Mod::get()->setSavedValue("dart_override", color);
+                    Mod::get()->setSavedValue(WAVE_OVERRIDE_PRIMARY, color);
                     break;
                 case SECONDARY:
                     this->m_dart_override2 = color;
-                    Mod::get()->setSavedValue("dart_override2", color);
+                    Mod::get()->setSavedValue(WAVE_OVERRIDE_SECONDARY, color);
                     break;
                 default:
                     break;
@@ -85,11 +85,11 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
             switch (type) {
                 case PRIMARY:
                     this->m_robot_override = color;
-                    Mod::get()->setSavedValue("robot_override", color);
+                    Mod::get()->setSavedValue(ROBOT_OVERRIDE_PRIMARY, color);
                     break;
                 case SECONDARY:
                     this->m_robot_override2 = color;
-                    Mod::get()->setSavedValue("robot_override2", color);
+                    Mod::get()->setSavedValue(ROBOT_OVERRIDE_SECONDARY, color);
                     break;
                 default:
                     break;
@@ -99,11 +99,11 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
             switch (type) {
                 case PRIMARY:
                     this->m_spider_override = color;
-                    Mod::get()->setSavedValue("spider_override", color);
+                    Mod::get()->setSavedValue(SPIDER_OVERRIDE_PRIMARY, color);
                     break;
                 case SECONDARY:
                     this->m_spider_override2 = color;
-                    Mod::get()->setSavedValue("spider_override2", color);
+                    Mod::get()->setSavedValue(SPIDER_OVERRIDE_SECONDARY, color);
                     break;
                 default:
                     break;
@@ -113,11 +113,11 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
             switch (type) {
                 case PRIMARY:
                     this->m_swing_override = color;
-                    Mod::get()->setSavedValue("swing_override", color);
+                    Mod::get()->setSavedValue(SWING_OVERRIDE_PRIMARY, color);
                     break;
                 case SECONDARY:
                     this->m_swing_override2 = color;
-                    Mod::get()->setSavedValue("swing_override2", color);
+                    Mod::get()->setSavedValue(SWING_OVERRIDE_SECONDARY, color);
                     break;
                 default:
                     break;
