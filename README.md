@@ -1,3 +1,3 @@
-# iconthing
+# Custom Gamemode Colors
 
-This is where she makes a mod.
+Geometry Dash mod that allows you to set different icon colors for different gamemodes.

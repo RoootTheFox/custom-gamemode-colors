@@ -2,10 +2,10 @@
 	"geode": "2.0.0",
 	"gd": "2.204",
 	"version": "v0.1.0",
-	"id": "rooot.iconthing",
-	"name": "iconthing",
+	"id": "rooot.custom-gamemode-colors",
+	"name": "Custom Gamemode Colors",
 	"developer": "rooot",
-	"description": "",
+	"description": "Set custom player colors for each gamemode!",
 	"dependencies": [
 		{
 			"id": "geode.node-ids",
