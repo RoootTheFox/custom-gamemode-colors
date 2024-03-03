@@ -5,8 +5,6 @@ using namespace geode::prelude;
 CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
     auto settings = Settings::sharedInstance();
 
-    log::debug("CustomCharacterColorPage::customCreate");
-
     // i want to properly inherit but everything except this crashes, so: FUCK IT, WE BALL.
     auto self = static_cast<CustomCharacterColorPage*>(CharacterColorPage::create());
 
@@ -18,19 +16,12 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
         return nullptr;
     }
 
-    log::debug("CustomCharacterColorPage::customCreate aa");
-
-    // modify things
-    log::debug("CustomCharacterColorPage::create: children count: {}", self->getChildrenCount());
-
     CCMenu* menu = self->m_buttonMenu;
     
     if (menu == nullptr) {
         log::error("didn't find color menu");
         return self;
     }
-
-    log::debug("menu children count: {}", menu->getChildrenCount());
 
     // fix a crash that occurs when clicking the x button manually
     auto x_button = typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildren()->objectAtIndex(0));
@@ -44,7 +35,6 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
         auto child = menu->getChildren()->objectAtIndex(i);
         auto node = typeinfo_cast<CCMenuItemSpriteExtra*>(child);
         if (!node) {
-            log::debug("not a CCMenuItemSpriteExtra, ignoring");
             continue;
         }
 
@@ -60,15 +50,15 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
                 }
                 switch (buttons_found) {
                     case 0:
-                        log::debug("found primary button");
+                        //log::debug("found primary button");
                         settings->m_button_primary_color = node;
                         break;
                     case 1:
-                        log::debug("found secondary button");
+                        //log::debug("found secondary button");
                         settings->m_button_secondary_color = node;
                         break;
                     case 2:
-                        log::debug("found glow button");
+                        //log::debug("found glow button");
                         settings->m_button_glow_color = node;
                         break;
                     default:
@@ -86,8 +76,6 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
         log::error("DID NOT FIND ALL BUTTONS");
         return self;
     }
-
-    log::debug("CustomCharacterColorPage::create: finished creating, calling autorelease");
 
     // END
     // murder 2nd child from self if it exists (added by an icon hack mod, using it crashes the game)
@@ -134,7 +122,7 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
     }
 
     //self->autorelease();
-    log::debug("CustomCharacterColorPage::create returning self");
+    //log::debug("CustomCharacterColorPage::create returning self");
     return self;
 }
 
@@ -171,31 +159,31 @@ bool CustomCharacterColorPage::loadSimpsAndSelectionSprites() {
         if (simple_player) {
             switch (simps_found) {
                 case 0:
-                    log::debug("found cube");                   
+                    //log::debug("found cube");                   
                     settings->m_player_cube = simple_player;
                     break;
                 case 1: // this is ball, because ship is inside the menu and not in the layer directly
-                    log::debug("found balls");
+                    //log::debug("found balls");
                     settings->m_player_ball = simple_player;
                     break;
                 case 2:
-                    log::debug("found ufo");
+                    //log::debug("found ufo");
                     settings->m_player_bird = simple_player;
                     break;
                 case 3:
-                    log::debug("found wave");
+                    //log::debug("found wave");
                     settings->m_player_dart = simple_player;
                     break;
                 case 4:
-                    log::debug("found robot");
+                    //log::debug("found robot");
                     settings->m_player_robot = simple_player;
                     break;
                 case 5:
-                    log::debug("found spider");
+                    //log::debug("found spider");
                     settings->m_player_spider = simple_player;
                     break;
                 case 6:
-                    log::debug("found swing");
+                    //log::debug("found swing");
                     settings->m_player_swing = simple_player;
                     break;
                 default:
@@ -207,7 +195,7 @@ bool CustomCharacterColorPage::loadSimpsAndSelectionSprites() {
 
         // SimplePlayer is a subclass of CCSprite
         if (sprite && !simple_player) {
-            log::debug("found sprite");
+            //log::debug("found sprite");
 
             switch (sprites_found) {
                 case 0:
@@ -243,12 +231,9 @@ void CustomCharacterColorPage::close(CCObject* sender) {
     this->retain();
     
     this->removeFromParentAndCleanup(true);
-    
-    log::debug("real!! MEOW");
 }
 
 void CustomCharacterColorPage::updatePlayerColors() {
-    log::debug("CustomCharacterColorPage::updatePlayerColors");
     auto settings = Settings::sharedInstance();
     auto gameManager = GameManager::get();
 
@@ -372,7 +357,6 @@ void CustomCharacterColorPage::updateColorSelectionSprite(CCSprite* sprite, Colo
             break;
     }
 
-    log::debug("current color type: {} -- color type: {}", static_cast<int>(settings->m_current_color_type), static_cast<int>(type));
     if (type != settings->m_current_color_type) {
         sprite->setColor(ccc3(50, 50, 50));
     } else {
@@ -380,7 +364,6 @@ void CustomCharacterColorPage::updateColorSelectionSprite(CCSprite* sprite, Colo
     }
 
     auto target_pos = this->m_mainLayer->convertToNodeSpaceAR(this->getPositionOfColor(color));
-    log::debug("target pos: {}, {}", target_pos.x, target_pos.y);
     sprite->setPosition(target_pos);
     sprite->setVisible(true);
 }
@@ -398,7 +381,6 @@ CCPoint CustomCharacterColorPage::getPositionOfColor(int color_id) {
 }
 
 void CustomCharacterColorPage::onColorClicked(CCObject* sender) {
-    log::debug("CustomCharacterColorPage::onColorClicked");
     auto node = typeinfo_cast<CCMenuItemSpriteExtra*>(sender);
     if (!node) {
         log::error("sender is not a CCMenuItemSpriteExtra");
@@ -410,112 +392,12 @@ void CustomCharacterColorPage::onColorClicked(CCObject* sender) {
 
     auto settings = Settings::sharedInstance();
 
-    switch (settings->m_current_mode) {
-        case CUBE:
-            switch (settings->m_current_color_type) {
-                case PRIMARY:
-                    settings->m_cube_override = tag;
-                    break;
-                case SECONDARY:
-                    settings->m_cube_override2 = tag;
-                    break;
-                default:
-                    break;
-            }
-            break;
-        case SHIP:
-            switch (settings->m_current_color_type) {
-                case PRIMARY:
-                    settings->m_ship_override = tag;
-                    break;
-                case SECONDARY:
-                    settings->m_ship_override2 = tag;
-                    break;
-                default:
-                    break;
-            }
-            break;
-        case BALL:
-            switch (settings->m_current_color_type) {
-                case PRIMARY:
-                    settings->m_ball_override = tag;
-                    break;
-                case SECONDARY:
-                    settings->m_ball_override2 = tag;
-                    break;
-                default:
-                    break;
-            }
-            break;
-        case UFO:
-            switch (settings->m_current_color_type) {
-                case PRIMARY:
-                    settings->m_bird_override = tag;
-                    break;
-                case SECONDARY:
-                    settings->m_bird_override2 = tag;
-                    break;
-                default:
-                    break;
-            }
-            break;
-        case WAVE:
-            switch (settings->m_current_color_type) {
-                case PRIMARY:
-                    settings->m_dart_override = tag;
-                    break;
-                case SECONDARY:
-                    settings->m_dart_override2 = tag;
-                    break;
-                default:
-                    break;
-            }
-            break;
-        case ROBOT:
-            switch (settings->m_current_color_type) {
-                case PRIMARY:
-                    settings->m_robot_override = tag;
-                    break;
-                case SECONDARY:
-                    settings->m_robot_override2 = tag;
-                    break;
-                default:
-                    break;
-            }
-            break;
-        case SPIDER:
-            switch (settings->m_current_color_type) {
-                case PRIMARY:
-                    settings->m_spider_override = tag;
-                    break;
-                case SECONDARY:
-                    settings->m_spider_override2 = tag;
-                    break;
-                default:
-                    break;
-            }
-            break;
-        case SWING:
-            switch (settings->m_current_color_type) {
-                case PRIMARY:
-                    settings->m_swing_override = tag;
-                    break;
-                case SECONDARY:
-                    settings->m_swing_override2 = tag;
-                    break;
-                default:
-                    break;
-            }
-            break;
-        default:
-            break;
-    }
+    settings->setOverrideColor(settings->m_current_mode, tag, settings->m_current_color_type);
 
     this->updatePlayerColors();
 }
 
 void CustomCharacterColorPage::onPlayerClicked(CCObject* sender) {
-    log::debug("CustomCharacterColorPage::onPlayerClicked");
     auto node = typeinfo_cast<CCMenuItemSpriteExtra*>(sender);
     if (!node) {
         log::error("sender is not a CCMenuItemSpriteExtra");
@@ -530,7 +412,6 @@ void CustomCharacterColorPage::onPlayerClicked(CCObject* sender) {
 
     Settings::sharedInstance()->m_current_mode = static_cast<GameMode>(tag);
 
-    log::debug("player clicked: {}", tag);
     this->updatePlayerColors();
 }
 

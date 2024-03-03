@@ -8,7 +8,6 @@ using namespace geode::prelude;
 class $modify(GJGarageLayerModify, GJGarageLayer) {
     virtual bool init() {
         if (!GJGarageLayer::init()) return false;
-        log::debug("GJGarageLayer::init");
 
         auto menu = static_cast<CCMenu*>(this->getChildByID("shards-menu"));
 
@@ -28,14 +27,5 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
         auto custom_color_page = CustomCharacterColorPage::customCreate();
         log::debug("custom_color_page CREATED meow");
         dynamic_cast<FLAlertLayer*>(custom_color_page)->show();
-    }
-};
-
-class $modify(CharacterColorPage) {
-    bool init() {
-        if (!CharacterColorPage::init()) return false;
-        log::debug("CharacterColorPage::init");
-
-        return true;
     }
 };
