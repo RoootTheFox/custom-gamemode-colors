@@ -314,7 +314,7 @@ void CustomCharacterColorPage::onPlayerClicked(CCObject* sender) {
     }
     int tag = node->getTag();
 
-    if (tag < 0 || tag > 7) {
+    if (tag < 1 || tag > 8) {
         log::error("invalid tag: {}", tag);
         return;
     }
