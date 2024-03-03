@@ -93,6 +93,12 @@ class $modify(PlayerObject) {
         return true;
     }
 
+    void flashPlayer(float p0, float p1, cocos2d::ccColor3B mainColor, cocos2d::ccColor3B secondColor) {
+        // make flashPlayer do nothing.
+        // flashPlayer sets the players color back to the original color. TODO: RE flashPlayer
+        // to figure out how to fix this.
+    }
+
     TodoReturn flipGravity(bool p0, bool p1) {
         meow();
         return PlayerObject::flipGravity(p0, p1);
