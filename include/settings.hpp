@@ -44,6 +44,17 @@ class Settings {
         SimplePlayer* m_player_spider;
         SimplePlayer* m_player_swing;
 
+        GameMode m_current_mode = NONE;
+        ColorType m_current_color_type = PRIMARY;
+
+        geode::prelude::CCSprite* m_current_color_primary_sprite = nullptr;
+        geode::prelude::CCSprite* m_current_color_secondary_sprite = nullptr;
+        geode::prelude::CCSprite* m_current_color_glow_sprite = nullptr;
+
+        CCMenuItemSpriteExtra* m_button_primary_color = nullptr;
+        CCMenuItemSpriteExtra* m_button_secondary_color = nullptr;
+        CCMenuItemSpriteExtra* m_button_glow_color = nullptr;
+
         void setOverrideEnabled(GameMode mode, bool value);
         void setOverrideColor(GameMode mode, int color, ColorType type);
 

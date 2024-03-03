@@ -38,6 +38,8 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
         x_button->m_pfnSelector = menu_selector(CustomCharacterColorPage::close);
     }
 
+    int buttons_found = 0;
+
     for (int i = 0; i < menu->getChildrenCount(); i++) {
         auto child = menu->getChildren()->objectAtIndex(i);
         auto node = typeinfo_cast<CCMenuItemSpriteExtra*>(child);
@@ -47,10 +49,42 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
         }
 
         for (int j = 0; j < node->getChildrenCount(); j++) {
-            if (typeinfo_cast<ColorChannelSprite*>(node->getChildren()->objectAtIndex(j))) {
+            auto node_child = node->getChildren()->objectAtIndex(j);
+            if (typeinfo_cast<ColorChannelSprite*>(node_child)) {
                 node->m_pfnSelector = menu_selector(CustomCharacterColorPage::onColorClicked);
             }
+            if (typeinfo_cast<ButtonSprite*>(node_child)) {
+                if (buttons_found > 2) {
+                    log::error("found too many buttons, ignoring");
+                    continue;
+                }
+                switch (buttons_found) {
+                    case 0:
+                        log::debug("found primary button");
+                        settings->m_button_primary_color = node;
+                        break;
+                    case 1:
+                        log::debug("found secondary button");
+                        settings->m_button_secondary_color = node;
+                        break;
+                    case 2:
+                        log::debug("found glow button");
+                        settings->m_button_glow_color = node;
+                        break;
+                    default:
+                        break;
+                }
+
+                buttons_found++;
+
+                node->m_pfnSelector = menu_selector(CustomCharacterColorPage::onColorTypeButtonClicked);
+            }
         }
+    }
+
+    if (buttons_found < 3) {
+        log::error("DID NOT FIND ALL BUTTONS");
+        return self;
     }
 
     log::debug("CustomCharacterColorPage::create: finished creating, calling autorelease");
@@ -61,10 +95,8 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
         self->removeChild(static_cast<CCNode*>(self->getChildren()->objectAtIndex(1)));
     }
 
-    auto layer = self->m_mainLayer;
-
     // gotta catch 'em all!
-    if (self->loadSimpsIn(self->m_mainLayer)) {
+    if (self->loadSimpsAndSelectionSprites()) {
         // find the ship button BEFORE all other player buttons are added
         auto ship_player = findFirstChildRecursive<SimplePlayer>(menu, [](auto node) {
             return typeinfo_cast<SimplePlayer*>(node) != nullptr;
@@ -96,11 +128,9 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
         auto swing_button = self->createPlayerButton(settings->m_player_swing, SWING);
         menu->addChild(swing_button);
 
-        //handleTouchPriority(self, true);
-
         self->updatePlayerColors();
     } else {
-        log::error("failed to load icons (this should never happen)");
+        log::error("failed to load icons and selection sprites (this should never happen)");
     }
 
     //self->autorelease();
@@ -126,13 +156,17 @@ CCMenuItemSpriteExtra* CustomCharacterColorPage::createPlayerButton(SimplePlayer
     return button;
 }
 
-bool CustomCharacterColorPage::loadSimpsIn(CCNode* meow) {
+bool CustomCharacterColorPage::loadSimpsAndSelectionSprites() {
+    auto meow = this->m_mainLayer;
     int simps_found = 0;
+    int sprites_found = 0;
+    bool found_all = false;
 
     auto settings = Settings::sharedInstance();
 
     for (int i = 0; i < meow->getChildrenCount(); i++) {
         auto simple_player = typeinfo_cast<SimplePlayer*>(meow->getChildren()->objectAtIndex(i));
+        auto sprite = typeinfo_cast<CCSprite*>(meow->getChildren()->objectAtIndex(i));
 
         if (simple_player) {
             switch (simps_found) {
@@ -171,12 +205,35 @@ bool CustomCharacterColorPage::loadSimpsIn(CCNode* meow) {
             simps_found++;
         }
 
-        if (simps_found == 7) {
+        // SimplePlayer is a subclass of CCSprite
+        if (sprite && !simple_player) {
+            log::debug("found sprite");
+
+            switch (sprites_found) {
+                case 0:
+                    settings->m_current_color_primary_sprite = sprite;
+                    break;
+                case 1:
+                    settings->m_current_color_secondary_sprite = sprite;
+                    break;
+                case 2:
+                    settings->m_current_color_glow_sprite = sprite;
+                    break;
+                default:
+                    break;
+            }
+
+            sprites_found++;
+        }
+
+        found_all = simps_found == 7 && sprites_found == 3;
+
+        if (found_all) {
             break;
         }
     }
 
-    return simps_found == 7;
+    return found_all;
 }
 
 void CustomCharacterColorPage::close(CCObject* sender) {
@@ -258,6 +315,86 @@ void CustomCharacterColorPage::updatePlayerColors() {
         settings->m_player_swing->setColor(gameManager->colorForIdx(col1));
         settings->m_player_swing->setSecondColor(gameManager->colorForIdx(col2));
     }
+
+    if(settings->m_current_color_primary_sprite) {
+        if (settings->m_current_mode == NONE) {
+            settings->m_current_color_primary_sprite->setVisible(false);
+        } else {
+            this->updateColorSelectionSprite(settings->m_current_color_primary_sprite, PRIMARY);
+        }
+    }
+
+    if(settings->m_current_color_secondary_sprite) {
+        if (settings->m_current_mode == NONE) {
+            settings->m_current_color_secondary_sprite->setVisible(false);
+        } else {
+            this->updateColorSelectionSprite(settings->m_current_color_secondary_sprite, SECONDARY);
+        }
+    }
+
+    if(settings->m_current_color_glow_sprite) {
+        // not supported yet
+        settings->m_current_color_glow_sprite->setVisible(false);
+    }
+}
+
+void CustomCharacterColorPage::updateColorSelectionSprite(CCSprite* sprite, ColorType type) {
+    auto settings = Settings::sharedInstance();
+
+    int color = 0;
+
+    switch (settings->m_current_mode) {
+        case CUBE:
+            color = type == PRIMARY ? settings->m_cube_override : settings->m_cube_override2;
+            break;
+        case SHIP:
+            color = type == PRIMARY ? settings->m_ship_override : settings->m_ship_override2;
+            break;
+        case BALL:
+            color = type == PRIMARY ? settings->m_ball_override : settings->m_ball_override2;
+            break;
+        case UFO:
+            color = type == PRIMARY ? settings->m_bird_override : settings->m_bird_override2;
+            break;
+        case WAVE:
+            color = type == PRIMARY ? settings->m_dart_override : settings->m_dart_override2;
+            break;
+        case ROBOT:
+            color = type == PRIMARY ? settings->m_robot_override : settings->m_robot_override2;
+            break;
+        case SPIDER:
+            color = type == PRIMARY ? settings->m_spider_override : settings->m_spider_override2;
+            break;
+        case SWING:
+            color = type == PRIMARY ? settings->m_swing_override : settings->m_swing_override2;
+            break;
+        default:
+            break;
+    }
+
+    log::debug("current color type: {} -- color type: {}", static_cast<int>(settings->m_current_color_type), static_cast<int>(type));
+    if (type != settings->m_current_color_type) {
+        sprite->setColor(ccc3(50, 50, 50));
+    } else {
+        sprite->setColor(ccc3(255, 255, 255));
+    }
+
+    auto target_pos = this->m_mainLayer->convertToNodeSpaceAR(this->getPositionOfColor(color));
+    log::debug("target pos: {}, {}", target_pos.x, target_pos.y);
+    sprite->setPosition(target_pos);
+    sprite->setVisible(true);
+}
+
+CCPoint CustomCharacterColorPage::getPositionOfColor(int color_id) {
+    auto child = findFirstChildRecursive<CCMenuItemSpriteExtra>(this->m_buttonMenu, [color_id](auto node) {
+        return typeinfo_cast<ColorChannelSprite*>(node->getChildren()->objectAtIndex(0)) && node->getTag() == color_id;
+    });
+    if (!child) {
+        log::error("failed to find child with tag: {}", color_id);
+        return {0, 0};
+    } else {
+        return this->m_buttonMenu->convertToWorldSpaceAR(child->getPosition());
+    }
 }
 
 void CustomCharacterColorPage::onColorClicked(CCObject* sender) {
@@ -273,30 +410,102 @@ void CustomCharacterColorPage::onColorClicked(CCObject* sender) {
 
     auto settings = Settings::sharedInstance();
 
-    switch (this->m_current_mode) {
+    switch (settings->m_current_mode) {
         case CUBE:
-            settings->m_cube_override = tag;
+            switch (settings->m_current_color_type) {
+                case PRIMARY:
+                    settings->m_cube_override = tag;
+                    break;
+                case SECONDARY:
+                    settings->m_cube_override2 = tag;
+                    break;
+                default:
+                    break;
+            }
             break;
         case SHIP:
-            settings->m_ship_override = tag;
+            switch (settings->m_current_color_type) {
+                case PRIMARY:
+                    settings->m_ship_override = tag;
+                    break;
+                case SECONDARY:
+                    settings->m_ship_override2 = tag;
+                    break;
+                default:
+                    break;
+            }
             break;
         case BALL:
-            settings->m_ball_override = tag;
+            switch (settings->m_current_color_type) {
+                case PRIMARY:
+                    settings->m_ball_override = tag;
+                    break;
+                case SECONDARY:
+                    settings->m_ball_override2 = tag;
+                    break;
+                default:
+                    break;
+            }
             break;
         case UFO:
-            settings->m_bird_override = tag;
+            switch (settings->m_current_color_type) {
+                case PRIMARY:
+                    settings->m_bird_override = tag;
+                    break;
+                case SECONDARY:
+                    settings->m_bird_override2 = tag;
+                    break;
+                default:
+                    break;
+            }
             break;
         case WAVE:
-            settings->m_dart_override = tag;
+            switch (settings->m_current_color_type) {
+                case PRIMARY:
+                    settings->m_dart_override = tag;
+                    break;
+                case SECONDARY:
+                    settings->m_dart_override2 = tag;
+                    break;
+                default:
+                    break;
+            }
             break;
         case ROBOT:
-            settings->m_robot_override = tag;
+            switch (settings->m_current_color_type) {
+                case PRIMARY:
+                    settings->m_robot_override = tag;
+                    break;
+                case SECONDARY:
+                    settings->m_robot_override2 = tag;
+                    break;
+                default:
+                    break;
+            }
             break;
         case SPIDER:
-            settings->m_spider_override = tag;
+            switch (settings->m_current_color_type) {
+                case PRIMARY:
+                    settings->m_spider_override = tag;
+                    break;
+                case SECONDARY:
+                    settings->m_spider_override2 = tag;
+                    break;
+                default:
+                    break;
+            }
             break;
         case SWING:
-            settings->m_swing_override = tag;
+            switch (settings->m_current_color_type) {
+                case PRIMARY:
+                    settings->m_swing_override = tag;
+                    break;
+                case SECONDARY:
+                    settings->m_swing_override2 = tag;
+                    break;
+                default:
+                    break;
+            }
             break;
         default:
             break;
@@ -319,8 +528,51 @@ void CustomCharacterColorPage::onPlayerClicked(CCObject* sender) {
         return;
     }
 
-    this->m_current_mode = static_cast<GameMode>(tag);
+    Settings::sharedInstance()->m_current_mode = static_cast<GameMode>(tag);
 
     log::debug("player clicked: {}", tag);
+    this->updatePlayerColors();
+}
+
+void CustomCharacterColorPage::onColorTypeButtonClicked(CCObject* sender) {
+    auto node = typeinfo_cast<CCMenuItemSpriteExtra*>(sender);
+    if (!node) {
+        log::error("sender is not a CCMenuItemSpriteExtra");
+        return;
+    }
+    int tag = node->getTag();
+
+    if (tag < 0 || tag > 2) {
+        log::error("invalid tag: {}", tag);
+        return;
+    }
+
+    auto settings = Settings::sharedInstance();
+
+    settings->m_current_color_type = static_cast<ColorType>(tag);
+
+    // set buttons
+    auto primary_button = settings->m_button_primary_color;
+    auto secondary_button = settings->m_button_secondary_color;
+    auto glow_button = settings->m_button_glow_color;
+
+    switch (settings->m_current_color_type) {
+        case PRIMARY:
+            static_cast<ButtonSprite*>(primary_button->getChildren()->objectAtIndex(0))->updateBGImage("GJ_button_01.png");
+            static_cast<ButtonSprite*>(secondary_button->getChildren()->objectAtIndex(0))->updateBGImage("GJ_button_04.png");
+            static_cast<ButtonSprite*>(glow_button->getChildren()->objectAtIndex(0))->updateBGImage("GJ_button_04.png");
+            break;
+        case SECONDARY:
+            static_cast<ButtonSprite*>(primary_button->getChildren()->objectAtIndex(0))->updateBGImage("GJ_button_04.png");
+            static_cast<ButtonSprite*>(secondary_button->getChildren()->objectAtIndex(0))->updateBGImage("GJ_button_01.png");
+            static_cast<ButtonSprite*>(glow_button->getChildren()->objectAtIndex(0))->updateBGImage("GJ_button_04.png");
+            break;
+        case GLOW:
+            static_cast<ButtonSprite*>(primary_button->getChildren()->objectAtIndex(0))->updateBGImage("GJ_button_04.png");
+            static_cast<ButtonSprite*>(secondary_button->getChildren()->objectAtIndex(0))->updateBGImage("GJ_button_04.png");
+            static_cast<ButtonSprite*>(glow_button->getChildren()->objectAtIndex(0))->updateBGImage("GJ_button_01.png");
+            break;
+    }
+
     this->updatePlayerColors();
 }
