@@ -129,3 +129,44 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
             break;
     }
 }
+
+void Settings::toggleOverride(GameMode mode) {
+    auto mod = Mod::get();
+
+    switch (mode) {
+        case CUBE:
+            this->m_override_cube = !this->m_override_cube;
+            mod->setSavedValue(OVERRIDE_CUBE_ENABLED, this->m_override_cube);
+            break;
+        case SHIP:
+            this->m_override_ship = !this->m_override_ship;
+            mod->setSavedValue(OVERRIDE_SHIP_ENABLED, this->m_override_ship);
+            break;
+        case BALL:
+            this->m_override_ball = !this->m_override_ball;
+            mod->setSavedValue(OVERRIDE_BALL_ENABLED, this->m_override_ball);
+            break;
+        case UFO:
+            this->m_override_bird = !this->m_override_bird;
+            mod->setSavedValue(OVERRIDE_UFO_ENABLED, this->m_override_bird);
+            break;
+        case WAVE:
+            this->m_override_dart = !this->m_override_dart;
+            mod->setSavedValue(OVERRIDE_WAVE_ENABLED, this->m_override_dart);
+            break;
+        case ROBOT:
+            this->m_override_robot = !this->m_override_robot;
+            mod->setSavedValue(OVERRIDE_ROBOT_ENABLED, this->m_override_robot);
+            break;
+        case SPIDER:
+            this->m_override_spider = !this->m_override_spider;
+            mod->setSavedValue(OVERRIDE_SPIDER_ENABLED, this->m_override_spider);
+            break;
+        case SWING:
+            this->m_override_swing = !this->m_override_swing;
+            mod->setSavedValue(OVERRIDE_SWING_ENABLED, this->m_override_swing);
+            break;
+        default:
+            break;
+    }
+}

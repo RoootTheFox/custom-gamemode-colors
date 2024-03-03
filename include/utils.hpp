@@ -50,3 +50,6 @@ enum ColorType : int {
 #define OVERRIDE_ROBOT_ENABLED "override_robot"
 #define OVERRIDE_SPIDER_ENABLED "override_spider"
 #define OVERRIDE_SWING_ENABLED "override_swing"
+
+#define TEXtURE_BUTTON_ENABLED "GJ_button_01.png"
+#define TEXTURE_BUTTON_DISABLED "GJ_button_04.png"

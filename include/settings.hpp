@@ -44,6 +44,15 @@ class Settings {
         SimplePlayer* m_player_spider;
         SimplePlayer* m_player_swing;
 
+        ButtonSprite* m_button_cube = nullptr;
+        ButtonSprite* m_button_ship = nullptr;
+        ButtonSprite* m_button_ball = nullptr;
+        ButtonSprite* m_button_bird = nullptr;
+        ButtonSprite* m_button_dart = nullptr;
+        ButtonSprite* m_button_robot = nullptr;
+        ButtonSprite* m_button_spider = nullptr;
+        ButtonSprite* m_button_swing = nullptr;
+
         GameMode m_current_mode = NONE;
         ColorType m_current_color_type = PRIMARY;
 
@@ -55,7 +64,7 @@ class Settings {
         CCMenuItemSpriteExtra* m_button_secondary_color = nullptr;
         CCMenuItemSpriteExtra* m_button_glow_color = nullptr;
 
-        void setOverrideEnabled(GameMode mode, bool value);
+        void toggleOverride(GameMode mode);
         void setOverrideColor(GameMode mode, int color, ColorType type);
 
         static Settings* sharedInstance();

@@ -116,6 +116,31 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
         auto swing_button = self->createPlayerButton(settings->m_player_swing, SWING);
         menu->addChild(swing_button);
 
+        float button_width = 33.0f;
+        auto cube_toggle_button = self->createGameModeButton(CUBE, {button_width, -7});
+        menu->addChild(cube_toggle_button);
+
+        auto ship_toggle_button = self->createGameModeButton(SHIP, {button_width * 2, -7});
+        menu->addChild(ship_toggle_button);
+
+        auto ball_toggle_button = self->createGameModeButton(BALL, {button_width * 3, -7});
+        menu->addChild(ball_toggle_button);
+
+        auto ufo_toggle_button = self->createGameModeButton(UFO, {button_width * 4, -7});
+        menu->addChild(ufo_toggle_button);
+
+        auto wave_toggle_button = self->createGameModeButton(WAVE, {button_width * 5, -7});
+        menu->addChild(wave_toggle_button);
+
+        auto robot_toggle_button = self->createGameModeButton(ROBOT, {button_width * 6, -7});
+        menu->addChild(robot_toggle_button);
+
+        auto spider_toggle_button = self->createGameModeButton(SPIDER, {button_width * 7, -7});
+        menu->addChild(spider_toggle_button);
+
+        auto swing_toggle_button = self->createGameModeButton(SWING, {button_width * 8, -7});
+        menu->addChild(swing_toggle_button);
+
         self->updatePlayerColors();
     } else {
         log::error("failed to load icons and selection sprites (this should never happen)");
@@ -141,6 +166,50 @@ CCMenuItemSpriteExtra* CustomCharacterColorPage::createPlayerButton(SimplePlayer
     button->setPosition(this->m_buttonMenu->convertToNodeSpaceAR(player_pos));
     button->setTag(game_mode);
 
+    return button;
+}
+
+CCMenuItemSpriteExtra* CustomCharacterColorPage::createGameModeButton(GameMode game_mode, CCPoint position) {
+    auto inner_button = ButtonSprite::create(this->getGameModeName(game_mode).c_str(), 16, true, "bigFont.fnt", TEXtURE_BUTTON_ENABLED, 20.0f, 2.0f);
+    auto button = CCMenuItemSpriteExtra::create(
+        inner_button,
+        this,
+        menu_selector(CustomCharacterColorPage::onGameModeToggleButtonClicked)
+    );
+
+    switch (game_mode) {
+        case CUBE:
+            Settings::sharedInstance()->m_button_cube = inner_button;
+            break;
+        case SHIP:
+            Settings::sharedInstance()->m_button_ship = inner_button;
+            break;
+        case BALL:
+            Settings::sharedInstance()->m_button_ball = inner_button;
+            break;
+        case UFO:
+            Settings::sharedInstance()->m_button_bird = inner_button;
+            break;
+        case WAVE:
+            Settings::sharedInstance()->m_button_dart = inner_button;
+            break;
+        case ROBOT:
+            Settings::sharedInstance()->m_button_robot = inner_button;
+            break;
+        case SPIDER:
+            Settings::sharedInstance()->m_button_spider = inner_button;
+            break;
+        case SWING:
+            Settings::sharedInstance()->m_button_swing = inner_button;
+            break;
+        default:
+            break;
+    }
+
+    auto settings = Settings::sharedInstance();
+
+    button->setTag(game_mode);
+    button->setPosition(position);
     return button;
 }
 
@@ -321,6 +390,31 @@ void CustomCharacterColorPage::updatePlayerColors() {
         // not supported yet
         settings->m_current_color_glow_sprite->setVisible(false);
     }
+
+    if (settings->m_button_cube) {
+        settings->m_button_cube->updateBGImage(settings->m_override_cube ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+    }
+    if (settings->m_button_ship) {
+        settings->m_button_ship->updateBGImage(settings->m_override_ship ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+    }
+    if (settings->m_button_ball) {
+        settings->m_button_ball->updateBGImage(settings->m_override_ball ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+    }
+    if (settings->m_button_bird) {
+        settings->m_button_bird->updateBGImage(settings->m_override_bird ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+    }
+    if (settings->m_button_dart) {
+        settings->m_button_dart->updateBGImage(settings->m_override_dart ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+    }
+    if (settings->m_button_robot) {
+        settings->m_button_robot->updateBGImage(settings->m_override_robot ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+    }
+    if (settings->m_button_spider) {
+        settings->m_button_spider->updateBGImage(settings->m_override_spider ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+    }
+    if (settings->m_button_swing) {
+        settings->m_button_swing->updateBGImage(settings->m_override_swing ? TEXtURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+    }
 }
 
 void CustomCharacterColorPage::updateColorSelectionSprite(CCSprite* sprite, ColorType type) {
@@ -456,4 +550,44 @@ void CustomCharacterColorPage::onColorTypeButtonClicked(CCObject* sender) {
     }
 
     this->updatePlayerColors();
+}
+
+void CustomCharacterColorPage::onGameModeToggleButtonClicked(CCObject* sender) {
+    log::debug("onGameModeToggleButtonClicked");
+
+    int tag = sender->getTag();
+
+    if (tag < 1 || tag > 8) {
+        log::error("invalid tag: {}", tag);
+        return;
+    }
+
+    auto game_mode = static_cast<GameMode>(tag);
+
+    Settings::sharedInstance()->toggleOverride(game_mode);
+    updatePlayerColors();
+}
+
+// todo: move this to a utils class
+std::string CustomCharacterColorPage::getGameModeName(GameMode mode) {
+    switch (mode) {
+        case CUBE:
+            return "cube";
+        case SHIP:
+            return "ship";
+        case BALL:
+            return "ball";
+        case UFO:
+            return "bird";
+        case WAVE:
+            return "dart";
+        case ROBOT:
+            return "robot";
+        case SPIDER:
+            return "spider";
+        case SWING:
+            return "swing";
+        default:
+            return "none";
+    }
 }
