@@ -3,8 +3,6 @@
 using namespace geode::prelude;
 
 $execute {
-	fmt::print("nya !\n");
-
 	auto mod = Mod::get();
 
 	// initialize settings (please don't stab me)
