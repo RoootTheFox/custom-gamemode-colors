@@ -93,6 +93,11 @@ class $modify(PlayerObject) {
         return true;
     }
 
+    TodoReturn flipGravity(bool p0, bool p1) {
+        meow();
+        return PlayerObject::flipGravity(p0, p1);
+    }
+
     void meow() {
         auto gameManager = GameManager::get();
         auto settings = Settings::sharedInstance();
