@@ -1,9 +1,9 @@
 {
 	"geode": "2.0.0",
 	"gd": {
-        "win": "2.204",
-        "android": "2.205"
-    },
+		"win": "2.204",
+		"android": "2.205"
+	},
 	"version": "v0.1.1",
 	"id": "rooot.custom-gamemode-colors",
 	"name": "Custom Gamemode Colors",
@@ -13,8 +13,7 @@
 	"tags": [
 		"customization",
 		"gameplay",
-		"icon",
-		"cosmetic"
+		"interface"
 	],
 	"dependencies": [
 		{
