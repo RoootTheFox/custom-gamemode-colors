@@ -28,3 +28,16 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
         dynamic_cast<FLAlertLayer*>(custom_color_page)->show();
     }
 };
+
+class $modify(CharacterColorPage) {
+    void onPlayerColor(cocos2d::CCObject* sender) {
+        auto game_manager = GameManager::sharedState();
+        auto settings = Settings::sharedInstance();
+
+        CharacterColorPage::onPlayerColor(sender);
+
+        // the player colors in gamemanager are updated after onPlayerColor is called
+        settings->m_defaultColor = game_manager->m_playerColor;
+        settings->m_defaultColor2 = game_manager->m_playerColor2;
+    }
+};
