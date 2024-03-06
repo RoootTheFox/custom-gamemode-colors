@@ -108,8 +108,19 @@ class $modify(PlayerObject) {
         auto gameManager = GameManager::get();
         auto settings = Settings::sharedInstance();
 
+        auto play_layer = gameManager->m_playLayer;
+
         // only run on playlayer
-        if (gameManager->m_playLayer == nullptr) return;
+        if (play_layer == nullptr) return;
+
+        // this will also be used for proper dual color support later
+        bool is_p1 = this == play_layer->m_player1;
+        bool is_p2 = this == play_layer->m_player2;
+
+        // fix issues with globed
+        if (!(is_p1 || is_p2)) {
+            return;
+        }
 
         bool isCube = !this->m_isShip && !this->m_isBall && !this->m_isBird && !this->m_isDart && !this->m_isRobot && !this->m_isSpider && !this->m_isSwing;
 
