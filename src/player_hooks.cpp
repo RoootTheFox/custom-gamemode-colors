@@ -185,11 +185,8 @@ class $modify(PlayerObject) {
         }
 
         if(this->m_isSpider) {
-            log::debug("spider");
             int col1 = settings->m_override_spider ? settings->m_spider_override  : settings->m_defaultColor;
             int col2 = settings->m_override_spider ? settings->m_spider_override2 : settings->m_defaultColor2;
-
-            log::debug("colors: {} {}", col1, col2);
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));
@@ -198,7 +195,6 @@ class $modify(PlayerObject) {
         }
 
         if(this->m_isSwing) {
-            log::debug("swing");
             int col1 = settings->m_override_swing ? settings->m_swing_override  : settings->m_defaultColor;
             int col2 = settings->m_override_swing ? settings->m_swing_override2 : settings->m_defaultColor2;
 
