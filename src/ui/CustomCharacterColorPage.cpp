@@ -8,10 +8,7 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
     // i want to properly inherit but everything except this crashes, so: FUCK IT, WE BALL.
     auto self = static_cast<CustomCharacterColorPage*>(CharacterColorPage::create());
 
-    // kill all children brutally, no mercy
-    self->removeAllChildrenWithCleanup(true);
-
-    if (!self || !self->init()) {
+    if (!self) {
         log::error("failed to create CustomCharacterColorPage");
         return nullptr;
     }
