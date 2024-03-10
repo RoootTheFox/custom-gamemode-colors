@@ -24,6 +24,12 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
     }
 
     void onColorOverrideButton(CCObject* pSender) {
+        if (Loader::get()->isModLoaded("weebify.separate_dual_icons")) {
+            if (getChildByIDRecursive("arrow-2")->isVisible()) {
+                FLAlertLayer::create("Be careful!", "You have Weebify's \"Separate Dual Icons\" mod installed, and it looks like you're trying to edit Player 2's colors. This is currently not supported at this time.", "OK")->show();
+                return;
+            }
+        }
         auto custom_color_page = CustomCharacterColorPage::customCreate();
         dynamic_cast<FLAlertLayer*>(custom_color_page)->show();
     }
