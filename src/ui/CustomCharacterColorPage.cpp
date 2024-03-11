@@ -21,8 +21,9 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
     }
 
     // fix a crash that occurs when clicking the x button manually
-    auto x_button = typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildren()->objectAtIndex(0));
+    auto x_button = typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildByID("close-button"));
     if (x_button) {
+        log::debug("found close button ! :3");
         x_button->m_pfnSelector = menu_selector(CustomCharacterColorPage::close);
     }
 
@@ -47,33 +48,24 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
                     node->removeFromParentAndCleanup(true);
                     continue;
                 }
-                switch (buttons_found) {
-                    case 0:
-                        //log::debug("found primary button");
-                        settings->m_button_primary_color = node;
-                        break;
-                    case 1:
-                        //log::debug("found secondary button");
-                        settings->m_button_secondary_color = node;
-                        break;
-                    case 2:
-                        //log::debug("found glow button");
-                        settings->m_button_glow_color = node;
-                        break;
-                    default:
-                        break;
-                }
 
                 buttons_found++;
-
-                node->m_pfnSelector = menu_selector(CustomCharacterColorPage::onColorTypeButtonClicked);
             }
         }
     }
 
-    if (buttons_found < 3) {
+    settings->m_button_primary_color = typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildByID("col1-button"));
+    settings->m_button_secondary_color = typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildByID("col2-button"));
+    settings->m_button_glow_color = typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildByID("glow-button"));
+
+    // what an ugly if statement
+    if (settings->m_button_primary_color == nullptr || settings->m_button_secondary_color == nullptr || settings->m_button_glow_color == nullptr) {
         log::error("DID NOT FIND ALL BUTTONS");
         return self;
+    } else {
+        settings->m_button_primary_color->m_pfnSelector = menu_selector(CustomCharacterColorPage::onColorTypeButtonClicked);
+        settings->m_button_secondary_color->m_pfnSelector = menu_selector(CustomCharacterColorPage::onColorTypeButtonClicked);
+        settings->m_button_glow_color->m_pfnSelector = menu_selector(CustomCharacterColorPage::onColorTypeButtonClicked);
     }
 
     // END
@@ -221,82 +213,33 @@ CCMenuItemSpriteExtra* CustomCharacterColorPage::createGameModeButton(GameMode g
 
 bool CustomCharacterColorPage::loadSimpsAndSelectionSprites() {
     auto meow = this->m_mainLayer;
-    int simps_found = 0;
-    int sprites_found = 0;
-    bool found_all = false;
-
     auto settings = Settings::sharedInstance();
 
-    for (int i = 0; i < meow->getChildrenCount(); i++) {
-        auto simple_player = typeinfo_cast<SimplePlayer*>(meow->getChildren()->objectAtIndex(i));
-        auto sprite = typeinfo_cast<CCSprite*>(meow->getChildren()->objectAtIndex(i));
+    settings->m_player_cube = typeinfo_cast<SimplePlayer*>(meow->getChildByID("cube-icon"));
+    settings->m_player_ball = typeinfo_cast<SimplePlayer*>(meow->getChildByID("ball-icon"));
+    settings->m_player_ufo = typeinfo_cast<SimplePlayer*>(meow->getChildByID("ufo-icon"));
+    settings->m_player_wave = typeinfo_cast<SimplePlayer*>(meow->getChildByID("wave-icon"));
+    settings->m_player_robot = typeinfo_cast<SimplePlayer*>(meow->getChildByID("robot-icon"));
+    settings->m_player_spider = typeinfo_cast<SimplePlayer*>(meow->getChildByID("spider-icon"));
+    settings->m_player_swing = typeinfo_cast<SimplePlayer*>(meow->getChildByID("swing-icon"));
 
-        if (simple_player) {
-            switch (simps_found) {
-                case 0:
-                    //log::debug("found cube");                   
-                    settings->m_player_cube = simple_player;
-                    break;
-                case 1: // this is ball, because ship is inside the menu and not in the layer directly
-                    //log::debug("found balls");
-                    settings->m_player_ball = simple_player;
-                    break;
-                case 2:
-                    //log::debug("found ufo");
-                    settings->m_player_ufo = simple_player;
-                    break;
-                case 3:
-                    //log::debug("found wave");
-                    settings->m_player_wave = simple_player;
-                    break;
-                case 4:
-                    //log::debug("found robot");
-                    settings->m_player_robot = simple_player;
-                    break;
-                case 5:
-                    //log::debug("found spider");
-                    settings->m_player_spider = simple_player;
-                    break;
-                case 6:
-                    //log::debug("found swing");
-                    settings->m_player_swing = simple_player;
-                    break;
-                default:
-                    break;
-            }
+    settings->m_current_color_primary_sprite = typeinfo_cast<CCSprite*>(meow->getChildByID("cursor-col1"));
+    settings->m_current_color_secondary_sprite = typeinfo_cast<CCSprite*>(meow->getChildByID("cursor-col2"));
+    settings->m_current_color_glow_sprite = typeinfo_cast<CCSprite*>(meow->getChildByID("cursor-glow"));
 
-            simps_found++;
-        }
-
-        // SimplePlayer is a subclass of CCSprite
-        if (sprite && !simple_player) {
-            //log::debug("found sprite");
-
-            switch (sprites_found) {
-                case 0:
-                    settings->m_current_color_primary_sprite = sprite;
-                    break;
-                case 1:
-                    settings->m_current_color_secondary_sprite = sprite;
-                    break;
-                case 2:
-                    settings->m_current_color_glow_sprite = sprite;
-                    break;
-                default:
-                    break;
-            }
-
-            sprites_found++;
-        }
-
-        found_all = simps_found == 7 && sprites_found == 3;
-
-        if (found_all) {
-            break;
-        }
+    // yeah this is ugly
+    if (!settings->m_player_cube || !settings->m_player_ball || !settings->m_player_ufo || !settings->m_player_wave
+            || !settings->m_player_robot || !settings->m_player_spider || !settings->m_player_swing) {
+        log::error("failed to find all simps");
+        return false;
     }
 
-    return found_all;
+    if (!settings->m_current_color_primary_sprite || !settings->m_current_color_secondary_sprite || !settings->m_current_color_glow_sprite) {
+        log::error("failed to find all selection sprites");
+        return false;
+    }
+
+    return true;
 }
 
 void CustomCharacterColorPage::close(CCObject* sender) {
