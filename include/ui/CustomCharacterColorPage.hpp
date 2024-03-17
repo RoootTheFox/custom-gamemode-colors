@@ -34,5 +34,5 @@ protected:
 public:
     static CustomCharacterColorPage* customCreate();
 
-    std::string getGameModeName(GameMode game_mode);
+    static std::string getGameModeName(GameMode game_mode);
 };

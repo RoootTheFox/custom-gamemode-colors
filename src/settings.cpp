@@ -12,6 +12,8 @@ Settings* Settings::sharedInstance() {
 void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
     auto mod = Mod::get();
 
+    bool valid_gamemode = true;
+
     switch (mode) {
         case CUBE:
             switch (type) {
@@ -142,7 +144,41 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
             mod->setSavedValue(SWING_OVERRIDE, this->m_swing_override);
             break;
         default:
+            // there's no gamemode set yet because the user didn't select one
+            valid_gamemode = false;
+            Notification::create("You didn't select a gamemode (click a sprite!)", NotificationIcon::Warning)->show();
+
             break;
+    }
+
+    if (valid_gamemode && !isOverrideEnabled(mode)) {
+        Notification::create(
+            fmt::format(" enable overrides for {} using\n the small buttons at the top!", CustomCharacterColorPage::getGameModeName(mode)),
+            NotificationIcon::Warning
+        )->show();
+    }
+}
+
+bool Settings::isOverrideEnabled(GameMode mode) {
+    switch (mode) {
+        case CUBE:
+            return this->m_override_cube;
+        case SHIP:
+            return this->m_override_ship;
+        case BALL:
+            return this->m_override_ball;
+        case UFO:
+            return this->m_override_ufo;
+        case WAVE:
+            return this->m_override_wave;
+        case ROBOT:
+            return this->m_override_robot;
+        case SPIDER:
+            return this->m_override_spider;
+        case SWING:
+            return this->m_override_swing;
+        default:
+            return false;
     }
 }
 

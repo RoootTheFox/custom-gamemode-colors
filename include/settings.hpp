@@ -1,6 +1,7 @@
 #pragma once
 
 #include "include.hpp"
+#include "ui/CustomCharacterColorPage.hpp"
 
 class Settings {
     public:
@@ -56,6 +57,8 @@ class Settings {
         CCMenuItemSpriteExtra* m_button_primary_color = nullptr;
         CCMenuItemSpriteExtra* m_button_secondary_color = nullptr;
         CCMenuItemSpriteExtra* m_button_glow_color = nullptr;
+
+        bool isOverrideEnabled(GameMode mode);
 
         void toggleOverride(GameMode mode);
         void setOverrideColor(GameMode mode, int color, ColorType type);
