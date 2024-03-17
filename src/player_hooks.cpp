@@ -14,66 +14,10 @@ class $modify(PlayerObject) {
         meow();
     }
 
+    // this technically isn't needed either but i'm keeping it just to be safe
     void updatePlayerFrame(int p0) {
         PlayerObject::updatePlayerFrame(p0);
         //log::info("updatePlayerFrame {}", p0);
-
-        meow();
-    }
-
-    void updatePlayerBirdFrame(int p0) {
-        PlayerObject::updatePlayerBirdFrame(p0);
-        //log::info("updatePlayerBirdFrame {}", p0);
-
-        meow();
-    }
-
-    void updatePlayerDartFrame(int p0) {
-        PlayerObject::updatePlayerDartFrame(p0);
-        //log::info("updatePlayerDartFrame {}", p0);
-
-        meow();
-    }
-
-    void updatePlayerShipFrame(int p0) {
-        PlayerObject::updatePlayerShipFrame(p0);
-        //log::info("updatePlayerShipFrame {}", p0);
-
-        meow();
-    }
-
-    void updatePlayerRollFrame(int p0) {
-        PlayerObject::updatePlayerRollFrame(p0);
-        //log::info("updatePlayerRollFrame {}", p0);
-
-        meow();
-    }
-
-    // this doesn't get called for some reason lmao
-    void updatePlayerRobotFrame(int p0) {
-        PlayerObject::updatePlayerRobotFrame(p0);
-        //log::info("updatePlayerRobotFrame {}", p0);
-
-        meow();
-    }
-
-    void updatePlayerSwingFrame(int p0) {
-        PlayerObject::updatePlayerSwingFrame(p0);
-        //log::info("updatePlayerSwingFrame {}", p0);
-
-        meow();
-    }
-
-    void updatePlayerJetpackFrame(int p0) {
-        PlayerObject::updatePlayerJetpackFrame(p0);
-        //log::info("updatePlayerJetpackFrame {}", p0);
-
-        meow();
-    }
-
-    void updatePlayerSpiderFrame(int p0) {
-        PlayerObject::updatePlayerSpiderFrame(p0);
-        //log::info("updatePlayerSpiderFrame {}", p0);
 
         meow();
     }
