@@ -16,114 +16,106 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
         case CUBE:
             switch (type) {
                 case PRIMARY:
-                    this->m_cube_override = color;
-                    mod->setSavedValue(CUBE_OVERRIDE_PRIMARY, color);
+                    this->m_cube_override.primary = color;
                     break;
                 case SECONDARY:
-                    this->m_cube_override2 = color;
-                    mod->setSavedValue(CUBE_OVERRIDE_SECONDARY, color);
+                    this->m_cube_override.secondary = color;
                     break;
                 default:
                     break;
             }
+            mod->setSavedValue(CUBE_OVERRIDE, this->m_cube_override);
             break;
         case SHIP:
             switch (type) {
                 case PRIMARY:
-                    this->m_ship_override = color;
-                    mod->setSavedValue(SHIP_OVERRIDE_PRIMARY, color);
+                    this->m_ship_override.primary = color;
                     break;
                 case SECONDARY:
-                    this->m_ship_override2 = color;
-                    mod->setSavedValue(SHIP_OVERRIDE_SECONDARY, color);
+                    this->m_ship_override.secondary = color;
                     break;
                 default:
                     break;
             }
+            mod->setSavedValue(SHIP_OVERRIDE, this->m_ship_override);
             break;
         case BALL:
             switch (type) {
                 case PRIMARY:
-                    this->m_ball_override = color;
-                    mod->setSavedValue(BALL_OVERRIDE_PRIMARY, color);
+                    this->m_ball_override.primary = color;
                     break;
                 case SECONDARY:
-                    this->m_ball_override2 = color;
-                    mod->setSavedValue(BALL_OVERRIDE_SECONDARY, color);
+                    this->m_ball_override.secondary = color;
                     break;
                 default:
                     break;
             }
+            mod->setSavedValue(BALL_OVERRIDE, this->m_ball_override);
             break;
         case UFO:
             switch (type) {
                 case PRIMARY:
-                    this->m_ufo_override = color;
-                    mod->setSavedValue(UFO_OVERRIDE_PRIMARY, color);
+                    this->m_ufo_override.primary = color;
                     break;
                 case SECONDARY:
-                    this->m_ufo_override2 = color;
-                    mod->setSavedValue(UFO_OVERRIDE_SECONDARY, color);
+                    this->m_ufo_override.secondary = color;
                     break;
                 default:
                     break;
             }
+            mod->setSavedValue(UFO_OVERRIDE, this->m_ufo_override);
             break;
         case WAVE:
             switch (type) {
                 case PRIMARY:
-                    this->m_wave_override = color;
-                    mod->setSavedValue(WAVE_OVERRIDE_PRIMARY, color);
+                    this->m_wave_override.primary = color;
                     break;
                 case SECONDARY:
-                    this->m_wave_override2 = color;
-                    mod->setSavedValue(WAVE_OVERRIDE_SECONDARY, color);
+                    this->m_wave_override.secondary = color;
                     break;
                 default:
                     break;
             }
+            mod->setSavedValue(WAVE_OVERRIDE, this->m_wave_override);
             break;
         case ROBOT:
             switch (type) {
                 case PRIMARY:
-                    this->m_robot_override = color;
-                    mod->setSavedValue(ROBOT_OVERRIDE_PRIMARY, color);
+                    this->m_robot_override.primary = color;
                     break;
                 case SECONDARY:
-                    this->m_robot_override2 = color;
-                    mod->setSavedValue(ROBOT_OVERRIDE_SECONDARY, color);
+                    this->m_robot_override.secondary = color;
                     break;
                 default:
                     break;
             }
+            mod->setSavedValue(ROBOT_OVERRIDE, this->m_robot_override);
             break;
         case SPIDER:
             switch (type) {
                 case PRIMARY:
-                    this->m_spider_override = color;
-                    mod->setSavedValue(SPIDER_OVERRIDE_PRIMARY, color);
+                    this->m_spider_override.primary = color;
                     break;
                 case SECONDARY:
-                    this->m_spider_override2 = color;
-                    mod->setSavedValue(SPIDER_OVERRIDE_SECONDARY, color);
+                    this->m_spider_override.secondary = color;
                     break;
                 default:
                     break;
             }
+            mod->setSavedValue(SPIDER_OVERRIDE, this->m_spider_override);
             break;
         case SWING:
             switch (type) {
                 case PRIMARY:
-                    this->m_swing_override = color;
-                    mod->setSavedValue(SWING_OVERRIDE_PRIMARY, color);
+                    this->m_swing_override.primary = color;
                     break;
                 case SECONDARY:
-                    this->m_swing_override2 = color;
-                    mod->setSavedValue(SWING_OVERRIDE_SECONDARY, color);
+                    this->m_swing_override.secondary = color;
                     break;
                 default:
                     break;
             }
+            mod->setSavedValue(SWING_OVERRIDE, this->m_swing_override);
             break;
         default:
             break;

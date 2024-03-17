@@ -69,8 +69,8 @@ class $modify(PlayerObject) {
         bool isCube = !this->m_isShip && !this->m_isBall && !this->m_isBird && !this->m_isDart && !this->m_isRobot && !this->m_isSpider && !this->m_isSwing;
 
         if(isCube) {
-            int col1 = settings->m_override_cube ? settings->m_cube_override  : settings->m_defaultColor;
-            int col2 = settings->m_override_cube ? settings->m_cube_override2 : settings->m_defaultColor2;
+            int col1 = settings->m_override_cube ? settings->m_cube_override.primary  : settings->m_defaultColor;
+            int col2 = settings->m_override_cube ? settings->m_cube_override.secondary : settings->m_defaultColor2;
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));
@@ -79,8 +79,8 @@ class $modify(PlayerObject) {
         }
         
         if(this->m_isShip) {
-            int col1 = settings->m_override_ship ? settings->m_ship_override  : settings->m_defaultColor;
-            int col2 = settings->m_override_ship ? settings->m_ship_override2 : settings->m_defaultColor2;
+            int col1 = settings->m_override_ship ? settings->m_ship_override.primary  : settings->m_defaultColor;
+            int col2 = settings->m_override_ship ? settings->m_ship_override.secondary : settings->m_defaultColor2;
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));
@@ -89,8 +89,8 @@ class $modify(PlayerObject) {
         }
 
         if(this->m_isBall) {
-            int col1 = settings->m_override_ball ? settings->m_ball_override  : settings->m_defaultColor;
-            int col2 = settings->m_override_ball ? settings->m_ball_override2 : settings->m_defaultColor2;
+            int col1 = settings->m_override_ball ? settings->m_ball_override.primary  : settings->m_defaultColor;
+            int col2 = settings->m_override_ball ? settings->m_ball_override.secondary : settings->m_defaultColor2;
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));
@@ -99,8 +99,8 @@ class $modify(PlayerObject) {
         }
 
         if(this->m_isBird) {
-            int col1 = settings->m_override_ufo ? settings->m_ufo_override  : settings->m_defaultColor;
-            int col2 = settings->m_override_ufo ? settings->m_ufo_override2 : settings->m_defaultColor2;
+            int col1 = settings->m_override_ufo ? settings->m_ufo_override.primary  : settings->m_defaultColor;
+            int col2 = settings->m_override_ufo ? settings->m_ufo_override.secondary : settings->m_defaultColor2;
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));
@@ -109,8 +109,8 @@ class $modify(PlayerObject) {
         }
 
         if(this->m_isDart) {
-            int col1 = settings->m_override_wave ? settings->m_wave_override  : settings->m_defaultColor;
-            int col2 = settings->m_override_wave ? settings->m_wave_override2 : settings->m_defaultColor2;
+            int col1 = settings->m_override_wave ? settings->m_wave_override.primary  : settings->m_defaultColor;
+            int col2 = settings->m_override_wave ? settings->m_wave_override.secondary : settings->m_defaultColor2;
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));
@@ -119,8 +119,8 @@ class $modify(PlayerObject) {
         }
 
         if(this->m_isRobot) {
-            int col1 = settings->m_override_robot ? settings->m_robot_override  : settings->m_defaultColor;
-            int col2 = settings->m_override_robot ? settings->m_robot_override2 : settings->m_defaultColor2;
+            int col1 = settings->m_override_robot ? settings->m_robot_override.primary  : settings->m_defaultColor;
+            int col2 = settings->m_override_robot ? settings->m_robot_override.secondary : settings->m_defaultColor2;
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));
@@ -129,8 +129,8 @@ class $modify(PlayerObject) {
         }
 
         if(this->m_isSpider) {
-            int col1 = settings->m_override_spider ? settings->m_spider_override  : settings->m_defaultColor;
-            int col2 = settings->m_override_spider ? settings->m_spider_override2 : settings->m_defaultColor2;
+            int col1 = settings->m_override_spider ? settings->m_spider_override.primary  : settings->m_defaultColor;
+            int col2 = settings->m_override_spider ? settings->m_spider_override.secondary : settings->m_defaultColor2;
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));
@@ -139,8 +139,8 @@ class $modify(PlayerObject) {
         }
 
         if(this->m_isSwing) {
-            int col1 = settings->m_override_swing ? settings->m_swing_override  : settings->m_defaultColor;
-            int col2 = settings->m_override_swing ? settings->m_swing_override2 : settings->m_defaultColor2;
+            int col1 = settings->m_override_swing ? settings->m_swing_override.primary  : settings->m_defaultColor;
+            int col2 = settings->m_override_swing ? settings->m_swing_override.secondary : settings->m_defaultColor2;
 
             this->setColor(gameManager->colorForIdx(col1));
             this->setSecondColor(gameManager->colorForIdx(col2));
@@ -150,8 +150,8 @@ class $modify(PlayerObject) {
 
         // change the tiny cube color inside the ship and ufo
         if ((this->m_isBird || this->m_isShip) && settings->m_override_cube) {
-            this->m_iconSprite->setColor(gameManager->colorForIdx(settings->m_cube_override));
-            this->m_iconSpriteSecondary->setColor(gameManager->colorForIdx(settings->m_cube_override2));
+            this->m_iconSprite->setColor(gameManager->colorForIdx(settings->m_cube_override.primary));
+            this->m_iconSpriteSecondary->setColor(gameManager->colorForIdx(settings->m_cube_override.secondary));
         }
     }
 };

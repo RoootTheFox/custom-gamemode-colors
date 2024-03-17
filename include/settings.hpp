@@ -7,23 +7,14 @@ class Settings {
         int m_defaultColor;
         int m_defaultColor2;
 
-        int m_cube_override;
-        int m_ship_override;
-        int m_ball_override;
-        int m_ufo_override;
-        int m_wave_override;
-        int m_robot_override;
-        int m_spider_override;
-        int m_swing_override;
-
-        int m_cube_override2;
-        int m_ship_override2;
-        int m_ball_override2;
-        int m_ufo_override2;
-        int m_wave_override2;
-        int m_robot_override2;
-        int m_spider_override2;
-        int m_swing_override2;
+        ColorOverride m_cube_override;
+        ColorOverride m_ship_override;
+        ColorOverride m_ball_override;
+        ColorOverride m_ufo_override;
+        ColorOverride m_wave_override;
+        ColorOverride m_robot_override;
+        ColorOverride m_spider_override;
+        ColorOverride m_swing_override;
 
         bool m_override_cube;
         bool m_override_ship;

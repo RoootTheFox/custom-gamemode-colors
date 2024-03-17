@@ -18,28 +18,59 @@ enum ColorType : int {
     GLOW = 2, // will be supported in the future
 };
 
-#define CUBE_OVERRIDE_PRIMARY "cube_override"
+struct ColorOverride {
+    int primary = 0;
+    int secondary = 0;
+    int glow = 0;
+};
+
+template<>
+struct matjson::Serialize<ColorOverride> {
+    static ColorOverride from_json(matjson::Value const& value) {
+        return ColorOverride {
+            .primary = value["primary"].as_int(),
+            .secondary = value["secondary"].as_int(),
+            .glow = value["glow"].as_int(),
+        };
+    }
+
+    static matjson::Value to_json(ColorOverride const& value) {
+        auto obj = matjson::Object();
+        obj["primary"] = value.primary;
+        obj["secondary"] = value.secondary;
+        obj["glow"] = value.glow;
+        return obj;
+    }
+
+    // this is needed, else it'll just get ignored
+    static bool is_json(const matjson::Value& value) {
+        return true;
+    }
+};
+
+// the _SECONDARY ones are deprecated and only exist to migrate old values
+#define CUBE_OVERRIDE "cube_override"
 #define CUBE_OVERRIDE_SECONDARY "cube_override2"
 
-#define SHIP_OVERRIDE_PRIMARY "ship_override"
+#define SHIP_OVERRIDE "ship_override"
 #define SHIP_OVERRIDE_SECONDARY "ship_override2"
 
-#define BALL_OVERRIDE_PRIMARY "ball_override"
+#define BALL_OVERRIDE "ball_override"
 #define BALL_OVERRIDE_SECONDARY "ball_override2"
 
-#define UFO_OVERRIDE_PRIMARY "ufo_override"
+#define UFO_OVERRIDE "ufo_override"
 #define UFO_OVERRIDE_SECONDARY "ufo_override2"
 
-#define WAVE_OVERRIDE_PRIMARY "wave_override"
+#define WAVE_OVERRIDE "wave_override"
 #define WAVE_OVERRIDE_SECONDARY "wave_override2"
 
-#define ROBOT_OVERRIDE_PRIMARY "robot_override"
+#define ROBOT_OVERRIDE "robot_override"
 #define ROBOT_OVERRIDE_SECONDARY "robot_override2"
 
-#define SPIDER_OVERRIDE_PRIMARY "spider_override"
+#define SPIDER_OVERRIDE "spider_override"
 #define SPIDER_OVERRIDE_SECONDARY "spider_override2"
 
-#define SWING_OVERRIDE_PRIMARY "swing_override"
+#define SWING_OVERRIDE "swing_override"
 #define SWING_OVERRIDE_SECONDARY "swing_override2"
 
 #define OVERRIDE_CUBE_ENABLED "override_cube"
