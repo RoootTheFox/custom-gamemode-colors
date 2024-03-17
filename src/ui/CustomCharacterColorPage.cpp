@@ -530,6 +530,12 @@ void CustomCharacterColorPage::onColorTypeButtonClicked(CCObject* sender) {
         return;
     }
 
+    if (tag == 2) {
+        log::warn("changing glow isn't supported yet");
+        Notification::create("changing glow isn't supported yet", NotificationIcon::Error)->show();
+        return;
+    }
+
     auto settings = Settings::sharedInstance();
 
     settings->m_current_color_type = static_cast<ColorType>(tag);
