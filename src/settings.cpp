@@ -21,6 +21,9 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
                 case SECONDARY:
                     this->m_cube_override.secondary = color;
                     break;
+                case GLOW:
+                    this->m_cube_override.glow = color;
+                    break;
                 default:
                     break;
             }
@@ -33,6 +36,9 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
                     break;
                 case SECONDARY:
                     this->m_ship_override.secondary = color;
+                    break;
+                case GLOW:
+                    this->m_ship_override.glow = color;
                     break;
                 default:
                     break;
@@ -47,6 +53,9 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
                 case SECONDARY:
                     this->m_ball_override.secondary = color;
                     break;
+                case GLOW:
+                    this->m_ball_override.glow = color;
+                    break;
                 default:
                     break;
             }
@@ -59,6 +68,9 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
                     break;
                 case SECONDARY:
                     this->m_ufo_override.secondary = color;
+                    break;
+                case GLOW:
+                    this->m_ufo_override.glow = color;
                     break;
                 default:
                     break;
@@ -73,6 +85,9 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
                 case SECONDARY:
                     this->m_wave_override.secondary = color;
                     break;
+                case GLOW:
+                    this->m_wave_override.glow = color;
+                    break;
                 default:
                     break;
             }
@@ -85,6 +100,9 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
                     break;
                 case SECONDARY:
                     this->m_robot_override.secondary = color;
+                    break;
+                case GLOW:
+                    this->m_robot_override.glow = color;
                     break;
                 default:
                     break;
@@ -99,6 +117,9 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
                 case SECONDARY:
                     this->m_spider_override.secondary = color;
                     break;
+                case GLOW:
+                    this->m_spider_override.glow = color;
+                    break;
                 default:
                     break;
             }
@@ -111,6 +132,9 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
                     break;
                 case SECONDARY:
                     this->m_swing_override.secondary = color;
+                    break;
+                case GLOW:
+                    this->m_swing_override.glow = color;
                     break;
                 default:
                     break;
