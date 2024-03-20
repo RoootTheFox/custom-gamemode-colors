@@ -10,6 +10,8 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp src/*.c)
 
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
 
+set(GEODE_BINDINGS_REPO_PATH ./bindings)
+
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
 if (NOT DEFINED ENV{GEODE_SDK})
