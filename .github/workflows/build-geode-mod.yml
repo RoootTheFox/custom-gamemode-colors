@@ -37,6 +37,8 @@ jobs:
         with:
           combine: true
           target: ${{ matrix.config.target }}
+          bindings: 'RoootTheFox/geode-bindings'
+          bindings-ref: 'mac'
 
   package:
     name: Package builds
