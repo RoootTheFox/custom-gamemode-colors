@@ -22,6 +22,12 @@ class $modify(PlayerObject) {
         meow();
     }
 
+    void updatePlayerSpiderFrame(int p0) {
+        PlayerObject::updatePlayerSpiderFrame(p0);
+
+        meow();
+    }
+
     void updatePlayerArt() {
         PlayerObject::updatePlayerArt();
         //log::info("updatePlayerArt");
