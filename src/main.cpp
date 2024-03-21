@@ -132,6 +132,6 @@ $on_mod(Loaded) {
 #ifdef GEODE_MACOS
 	log::info("patching playSpiderEffect !");
 	auto mod = Mod::get();
-	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa14), {0x66, 0xe9, 0xb2, 0x00});
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa14), {0x66, 0xe9, 0xaa, 0x00});
 #endif
 }
