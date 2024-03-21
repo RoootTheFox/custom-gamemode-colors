@@ -33,7 +33,7 @@ class $modify(PlayerObject) {
 
     void updatePlayerArt() {
         PlayerObject::updatePlayerArt();
-        //log::info("updatePlayerArt");
+        log::info("updatePlayerArt");
 
         meow();
     }
