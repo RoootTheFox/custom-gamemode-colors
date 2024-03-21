@@ -128,4 +128,60 @@ $on_mod(Loaded) {
 	Settings* settings = Settings::sharedInstance();
 	settings->m_defaultColor = gameManager->m_playerColor;
 	settings->m_defaultColor2 = gameManager->m_playerColor2;
+#ifdef GEODE_IS_MACOS
+	static_assert(GEODE_COMP_GD_VERSION == 22000, "Mod needs to target 2.200 on mac"); // thanks to cvolton for this (misc bugfixes) <3
+
+	// thank you dankmeme for telling me what function flashPlayer is inlined in <3
+	log::info("running on macOS ~ patching out inlined flashPlayer calls !");
+
+	auto mod = Mod::get();
+
+	// --- playSpiderEffect patch ---
+	// MOV        byte ptr [RBX + 0x7e2],0xff
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa1b), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
+	// MOV        word ptr [RBX + 0x7e0],0xffff
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa22), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
+	// MOV        byte ptr [RBX + 0x7e5],0xff
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa32), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
+	// MOV        word ptr [RBX + 0x7e3],0xffff
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa39), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
+	// CALL       qword ptr [RAX + 0x3b0]
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa48), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
+	// CALL       qword ptr [RAX + 0x3b0]
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa5b), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
+	// CALL       qword ptr [RAX + 0x3b0]
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa6e), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
+	// CALL       GJRobotSprite::updateColor02
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa8e), {0x90, 0x90, 0x90, 0x90, 0x90});
+	// CALL       GJRobotSprite::updateColor02
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efaad), {0x90, 0x90, 0x90, 0x90, 0x90});
+	// MOVSD      qword ptr [RBX + 0x7d0],XMM0
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efaba), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
+	// MOVSD      qword ptr [RBX + 0x7d8],XMM0
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efaca), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
+	// --- end of playSpiderEffect patch ---
+	// --- startDashing patch ---
+	// MOV        byte ptr [RBX + 0x7e2],0xff
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2b9a), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
+	// MOV        word ptr [RBX + 0x7e0],0xffff
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2ba1), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
+	// MOV        byte ptr [RBX + 0x7e5],0xff
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2bb1), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
+	// MOV        word ptr [RBX + 0x7e3],0xffff
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2bb8), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
+	// CALL       qword ptr [RAX + 0x3b0]
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2bc7), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
+	// CALL       qword ptr [RAX + 0x3b0]
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2bda), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
+	// CALL       qword ptr [RAX + 0x3b0]
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2bed), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
+	// CALL       GJRobotSprite::updateColor02
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2c0d), {0x90, 0x90, 0x90, 0x90, 0x90});
+	// CALL       GJRobotSprite::updateColor02
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2c2c), {0x90, 0x90, 0x90, 0x90, 0x90});
+	// MOVSD      qword ptr [RBX + 0x7d0],XMM0
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2c39), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
+	// MOVSD      qword ptr [RBX + 0x7d8],XMM0
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2c49), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
+#endif
 }
