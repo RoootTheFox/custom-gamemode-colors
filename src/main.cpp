@@ -132,7 +132,7 @@ $on_mod(Loaded) {
 	static_assert(GEODE_COMP_GD_VERSION == 22000, "Mod needs to target 2.200 on mac"); // ty cvolton for this (misc bugfixes)
 
 	// thank you dankmeme for telling me what function flashPlayer is inlined in <3
-	log::info("patching out inlined flashPlayer calls !");
+	log::info("running on macOS ~ patching out inlined flashPlayer calls !");
 
 	auto mod = Mod::get();
 

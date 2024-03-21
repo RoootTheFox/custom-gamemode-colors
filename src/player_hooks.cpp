@@ -22,15 +22,6 @@ class $modify(PlayerObject) {
         meow();
     }
 
-#ifdef GEODE_MACOS
-    void updatePlayerSpiderFrame(int p0) {
-        PlayerObject::updatePlayerSpiderFrame(p0);
-        //log::info("updatePlayerSpiderFrame {}", p0);
-
-        meow();
-    }
-#endif
-
     void updatePlayerArt() {
         PlayerObject::updatePlayerArt();
         //log::info("updatePlayerArt");
