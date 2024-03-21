@@ -25,6 +25,7 @@ class $modify(PlayerObject) {
 #ifdef GEODE_MACOS
     void updatePlayerSpiderFrame(int p0) {
         PlayerObject::updatePlayerSpiderFrame(p0);
+        log::info("updatePlayerSpiderFrame {}", p0);
 
         meow();
     }
@@ -49,6 +50,7 @@ class $modify(PlayerObject) {
         // make flashPlayer do nothing.
         // flashPlayer sets the players color back to the original color. TODO: RE flashPlayer
         // to figure out how to fix this.
+        log::info("flashPlayer called !");
     }
 
     TodoReturn flipGravity(bool p0, bool p1) {
