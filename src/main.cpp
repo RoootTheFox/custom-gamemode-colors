@@ -128,4 +128,10 @@ $on_mod(Loaded) {
 	Settings* settings = Settings::sharedInstance();
 	settings->m_defaultColor = gameManager->m_playerColor;
 	settings->m_defaultColor2 = gameManager->m_playerColor2;
+
+#ifdef GEODE_MACOS
+	log::info("patching playSpiderEffect !");
+	auto mod = Mod::get();
+	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa14), {0x66, 0xe9, 0xba, 0x00});
+#endif
 }
