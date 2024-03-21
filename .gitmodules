@@ -1,4 +1,0 @@
-[submodule "bindings"]
-	path = bindings
-	url = https://github.com/RoootTheFox/geode-bindings
-	branch = mac
