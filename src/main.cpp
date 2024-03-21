@@ -131,7 +131,7 @@ $on_mod(Loaded) {
 #ifdef GEODE_IS_MACOS
 	static_assert(GEODE_COMP_GD_VERSION == 22000, "Mod needs to target 2.200 on mac"); // ty cvolton for this (misc bugfixes)
 
-	// thank you dankmeme for telling me where flashPlayer is inlined <3
+	// thank you dankmeme for telling me what function flashPlayer is inlined in <3
 	log::info("patching out inlined flashPlayer calls !");
 
 	auto mod = Mod::get();
@@ -141,57 +141,44 @@ $on_mod(Loaded) {
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa1b), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
 	// MOV        word ptr [RBX + 0x7e0],0xffff
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa22), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
-
 	// MOV        byte ptr [RBX + 0x7e5],0xff
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa32), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
 	// MOV        word ptr [RBX + 0x7e3],0xffff
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa39), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
-
-	// some CALLs at the top of the inlined func
 	// CALL       qword ptr [RAX + 0x3b0]
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa48), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
 	// CALL       qword ptr [RAX + 0x3b0]
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa5b), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
 	// CALL       qword ptr [RAX + 0x3b0]
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa6e), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
-
-	// set color calls
 	// CALL       GJRobotSprite::updateColor02
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efa8e), {0x90, 0x90, 0x90, 0x90, 0x90});
 	// CALL       GJRobotSprite::updateColor02
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efaad), {0x90, 0x90, 0x90, 0x90, 0x90});
-
 	// MOVSD      qword ptr [RBX + 0x7d0],XMM0
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efaba), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
 	// MOVSD      qword ptr [RBX + 0x7d8],XMM0
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3efaca), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
-
 	// --- end of playSpiderEffect patch ---
 	// --- startDashing patch ---
 	// MOV        byte ptr [RBX + 0x7e2],0xff
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2b9a), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
 	// MOV        word ptr [RBX + 0x7e0],0xffff
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2ba1), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
-
 	// MOV        byte ptr [RBX + 0x7e5],0xff
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2bb1), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
 	// MOV        word ptr [RBX + 0x7e3],0xffff
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2bb8), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
-
-	// some CALLs at the top of the inlined func
 	// CALL       qword ptr [RAX + 0x3b0]
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2bc7), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
 	// CALL       qword ptr [RAX + 0x3b0]
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2bda), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
 	// CALL       qword ptr [RAX + 0x3b0]
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2bed), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
-
-	// set color calls
 	// CALL       GJRobotSprite::updateColor02
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2c0d), {0x90, 0x90, 0x90, 0x90, 0x90});
 	// CALL       GJRobotSprite::updateColor02
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2c2c), {0x90, 0x90, 0x90, 0x90, 0x90});
-
 	// MOVSD      qword ptr [RBX + 0x7d0],XMM0
 	mod->patch(reinterpret_cast<void*>(geode::base::get() + 0x3f2c39), {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90});
 	// MOVSD      qword ptr [RBX + 0x7d8],XMM0
