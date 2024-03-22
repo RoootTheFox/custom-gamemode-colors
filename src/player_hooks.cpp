@@ -149,7 +149,7 @@ class $modify(PlayerObject) {
         }
 
         // change the tiny cube color inside the ship and ufo
-        if ((this->m_isBird || this->m_isShip) && settings->m_override_cube) {
+        if ((this->m_isBird || this->m_isShip) && settings->m_override_cube && settings->m_override_inner_cube) {
             this->m_iconSprite->setColor(gameManager->colorForIdx(settings->m_cube_override.primary));
             this->m_iconSpriteSecondary->setColor(gameManager->colorForIdx(settings->m_cube_override.secondary));
         }

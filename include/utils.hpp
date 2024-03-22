@@ -82,6 +82,8 @@ struct matjson::Serialize<ColorOverride> {
 #define OVERRIDE_SPIDER_ENABLED "override_spider"
 #define OVERRIDE_SWING_ENABLED "override_swing"
 
+#define OVERRIDE_INNER_CUBE_ENABLED "override_inner_cube"
+
 #define TEXTURE_BUTTON_ENABLED "GJ_button_01.png"
 #define TEXTURE_BUTTON_DISABLED "GJ_button_04.png"
 #define TEXTURE_SELECTED_FRAME "GJ_select_001.png"

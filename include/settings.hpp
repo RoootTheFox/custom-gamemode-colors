@@ -26,6 +26,8 @@ class Settings {
         bool m_override_spider;
         bool m_override_swing;
 
+        bool m_override_inner_cube;
+
         // not actual settings, but they're still needed
         SimplePlayer* m_player_cube;
         SimplePlayer* m_player_ship;

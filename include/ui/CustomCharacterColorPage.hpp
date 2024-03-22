@@ -16,6 +16,8 @@ protected:
 
     void onGameModeToggleButtonClicked(CCObject*);
 
+    void onCubeInShipUfoToggleButtonClicked(CCObject*);
+
     bool loadSimpsAndSelectionSprites();
 
     void close(CCObject*);

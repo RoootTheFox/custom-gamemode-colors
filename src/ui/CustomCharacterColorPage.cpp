@@ -144,6 +144,16 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
         log::error("failed to load icons and selection sprites (this should never happen)");
     }
 
+    auto inner_button = ButtonSprite::create("color cube in ship/ufo", 77, true, "bigFont.fnt",
+            settings->m_override_inner_cube ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED, 20.0f, 4.0f);
+    auto button = CCMenuItemSpriteExtra::create(
+        inner_button,
+        self,
+        menu_selector(CustomCharacterColorPage::onCubeInShipUfoToggleButtonClicked)
+    );
+    self->m_buttonMenu->addChild(button);
+    button->setPosition({53.5f, -265});
+
     //self->autorelease();
     //log::debug("CustomCharacterColorPage::create returning self");
     return self;
@@ -598,6 +608,27 @@ void CustomCharacterColorPage::onGameModeToggleButtonClicked(CCObject* sender) {
 
     Settings::sharedInstance()->toggleOverride(game_mode);
     updateUI();
+}
+
+void CustomCharacterColorPage::onCubeInShipUfoToggleButtonClicked(CCObject* sender) {
+    auto node = typeinfo_cast<CCMenuItemSpriteExtra*>(sender);
+    if (!node) {
+        log::error("sender is not a CCMenuItemSpriteExtra");
+        return;
+    }
+
+    auto settings = Settings::sharedInstance();
+    settings->m_override_inner_cube = !settings->m_override_inner_cube;
+
+    if (auto button = typeinfo_cast<ButtonSprite*>(node->getChildren()->objectAtIndex(0))) {
+        button->updateBGImage(settings->m_override_inner_cube ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+    }
+
+    if (settings->m_override_inner_cube) {
+        Notification::create("cube in ship/ufo enabled", NotificationIcon::Success)->show();
+    } else {
+        Notification::create("cube in ship/ufo disabled", NotificationIcon::Success)->show();
+    }
 }
 
 // todo: move this to a utils class

@@ -119,6 +119,8 @@ $execute {
 	settings->m_override_robot = mod->getSavedValue<bool>(OVERRIDE_ROBOT_ENABLED, false);
 	settings->m_override_spider = mod->getSavedValue<bool>(OVERRIDE_SPIDER_ENABLED, false);
 	settings->m_override_swing = mod->getSavedValue<bool>(OVERRIDE_SWING_ENABLED, false);
+
+	settings->m_override_inner_cube = mod->getSavedValue<bool>(OVERRIDE_INNER_CUBE_ENABLED, true);
 }
 
 $on_mod(Loaded) {
