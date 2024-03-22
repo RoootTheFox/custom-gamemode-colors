@@ -619,6 +619,7 @@ void CustomCharacterColorPage::onCubeInShipUfoToggleButtonClicked(CCObject* send
 
     auto settings = Settings::sharedInstance();
     settings->m_override_inner_cube = !settings->m_override_inner_cube;
+    Mod::get()->setSavedValue(OVERRIDE_INNER_CUBE_ENABLED, settings->m_override_inner_cube);
 
     if (auto button = typeinfo_cast<ButtonSprite*>(node->getChildren()->objectAtIndex(0))) {
         button->updateBGImage(settings->m_override_inner_cube ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
