@@ -1,10 +1,10 @@
-using namespace geode::prelude;
-
 #include <Geode/modify/PlayerObject.hpp>
 #include <Geode/modify/GameManager.hpp>
 #include <Geode/modify/PlayLayer.hpp>
 
 #include "settings.hpp"
+
+using namespace geode::prelude;
 
 class $modify(PlayerObject) {
     void switchedToMode(GameObjectType p0) {       
@@ -36,6 +36,12 @@ class $modify(PlayerObject) {
         meow();
         return true;
     }
+#ifdef GEODE_IS_IOS // TEMPORARY; REMOVE THIS WHEN FLASHPLAYER IS SORTED OUT !!
+    void update(float p0) {
+        PlayerObject::update(p0);
+        meow();
+    }
+#endif
 
     void flashPlayer(float p0, float p1, cocos2d::ccColor3B mainColor, cocos2d::ccColor3B secondColor) {
         // make flashPlayer do nothing.
@@ -43,7 +49,7 @@ class $modify(PlayerObject) {
         // to figure out how to fix this.
     }
 
-    TodoReturn flipGravity(bool p0, bool p1) {
+    void flipGravity(bool p0, bool p1) {
         meow();
         return PlayerObject::flipGravity(p0, p1);
     }

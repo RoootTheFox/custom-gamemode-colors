@@ -1,5 +1,5 @@
 #include "ui/CustomCharacterColorPage.hpp"
-
+#include <Geode/platform/ItaniumCast.hpp>
 using namespace geode::prelude;
 
 CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
@@ -160,10 +160,10 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
 }
 
 CCMenuItemSpriteExtra* CustomCharacterColorPage::createPlayerButton(SimplePlayer* player, GameMode game_mode) {
-    #ifndef GEODE_IS_MACOS
-    auto player_pos = player->getParent()->convertToWorldSpaceAR(player->getPosition());
-    #else
+    #if defined(GEODE_IS_MACOS) || defined(GEODE_IS_IOS)
     auto player_pos = player->getParent()->convertToWorldSpace(player->getPosition()) + player->getParent()->getAnchorPointInPoints();
+    #else
+    auto player_pos = player->getParent()->convertToWorldSpaceAR(player->getPosition());
     #endif
     player->removeFromParent();
 
@@ -175,10 +175,10 @@ CCMenuItemSpriteExtra* CustomCharacterColorPage::createPlayerButton(SimplePlayer
     button->setContentSize({30, 30});
     player->setPosition({15, 15});
 
-    #ifndef GEODE_IS_MACOS
-    button->setPosition(this->m_buttonMenu->convertToNodeSpaceAR(player_pos));
-    #else
+    #if defined(GEODE_IS_MACOS) || defined(GEODE_IS_IOS)
     button->setPosition(this->m_buttonMenu->convertToNodeSpace(player_pos) - this->m_buttonMenu->getAnchorPointInPoints());
+    #else
+    button->setPosition(this->m_buttonMenu->convertToNodeSpaceAR(player_pos));
     #endif
     button->setTag(game_mode);
 
@@ -428,10 +428,10 @@ void CustomCharacterColorPage::updateColorSelectionSprite(CCSprite* sprite, Colo
         sprite->setColor(ccc3(255, 255, 255));
     }
 
-    #ifndef GEODE_IS_MACOS
-    auto target_pos = this->m_mainLayer->convertToNodeSpaceAR(this->getPositionOfColor(color));
-    #else
+    #if defined(GEODE_IS_MACOS) || defined(GEODE_IS_IOS)
     auto target_pos = this->m_mainLayer->convertToNodeSpace(this->getPositionOfColor(color)) - this->m_mainLayer->getAnchorPointInPoints();
+    #else
+    auto target_pos = this->m_mainLayer->convertToNodeSpaceAR(this->getPositionOfColor(color));
     #endif
     sprite->setPosition(target_pos);
     sprite->setVisible(true);
@@ -486,10 +486,10 @@ void CustomCharacterColorPage::updateGameModeSelectionSprite() {
 
     // all simpleplayers (except ship) are initially children of m_mainLayer,
     // but since we moved them to buttons inside the menu, we need to convert the position
-    #ifndef GEODE_IS_MACOS
-    auto pos = this->m_mainLayer->convertToNodeSpaceAR(this->m_buttonMenu->convertToWorldSpaceAR(player->getParent()->getPosition()));
-    #else
+    #if defined(GEODE_IS_MACOS) || defined(GEODE_IS_IOS)
     auto pos = this->m_mainLayer->convertToNodeSpace(this->m_buttonMenu->convertToWorldSpace(player->getParent()->getPosition() + this->m_buttonMenu->getAnchorPointInPoints())) - this->m_mainLayer->getAnchorPointInPoints();
+    #else
+    auto pos = this->m_mainLayer->convertToNodeSpaceAR(this->m_buttonMenu->convertToWorldSpaceAR(player->getParent()->getPosition()));
     #endif
     
     // pos is slightly off, so we need to fix it
@@ -506,10 +506,10 @@ CCPoint CustomCharacterColorPage::getPositionOfColor(int color_id) {
         log::error("failed to find child with tag: {}", color_id);
         return {0, 0};
     } else {
-        #ifndef GEODE_IS_MACOS
-        return this->m_buttonMenu->convertToWorldSpaceAR(child->getPosition());
-        #else
+        #if defined(GEODE_IS_MACOS) || defined(GEODE_IS_IOS)
         return this->m_buttonMenu->convertToWorldSpace(child->getPosition()) + this->m_buttonMenu->getAnchorPointInPoints();
+        #else
+        return this->m_buttonMenu->convertToWorldSpaceAR(child->getPosition());
         #endif
     }
 }

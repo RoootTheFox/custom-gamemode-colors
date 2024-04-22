@@ -1,9 +1,9 @@
-using namespace geode::prelude;
-
 #include <Geode/modify/GJGarageLayer.hpp>
 #include <Geode/modify/CharacterColorPage.hpp>
 
 #include <ui/CustomCharacterColorPage.hpp>
+
+using namespace geode::prelude;
 
 class $modify(GJGarageLayerModify, GJGarageLayer) {
     virtual bool init() {

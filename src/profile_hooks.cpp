@@ -1,8 +1,8 @@
-using namespace geode::prelude;
-
 #include <Geode/modify/ProfilePage.hpp>
-
+#include <Geode/Geode.hpp>
 #include "settings.hpp"
+
+using namespace geode::prelude;
 
 class $modify(ProfilePage) {
     virtual void loadPageFromUserInfo(GJUserScore* score) {
