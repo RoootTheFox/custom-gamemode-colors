@@ -59,13 +59,14 @@ class $modify(PlayerObject) {
         auto settings = Settings::sharedInstance();
 
         auto play_layer = gameManager->m_playLayer;
+        auto edit_layer = gameManager->m_levelEditorLayer;
 
         // only run on playlayer
-        if (play_layer == nullptr) return;
+        if (play_layer == nullptr && edit_layer == nullptr) return;
 
         // this will also be used for proper dual color support later
-        bool is_p1 = this == play_layer->m_player1;
-        bool is_p2 = this == play_layer->m_player2;
+        bool is_p1 = this == gameManager->m_gameLayer->m_player1;
+        bool is_p2 = this == gameManager->m_gameLayer->m_player2;
 
         // fix issues with globed
         if (!(is_p1 || is_p2)) {
