@@ -1,5 +1,8 @@
 #include "ui/CustomCharacterColorPage.hpp"
+
+#ifdef GEODE_IS_IOS
 #include <Geode/platform/ItaniumCast.hpp>
+#endif
 using namespace geode::prelude;
 
 CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
