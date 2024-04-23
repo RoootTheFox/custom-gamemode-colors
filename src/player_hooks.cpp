@@ -51,7 +51,7 @@ class $modify(PlayerObject) {
 
     void flipGravity(bool p0, bool p1) {
         meow();
-        return PlayerObject::flipGravity(p0, p1);
+        PlayerObject::flipGravity(p0, p1);
     }
 
     void meow() {
