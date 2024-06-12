@@ -6,7 +6,7 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 project(custom-gamemode-colors VERSION 1.0.0)
 
-if(${GEODE_TARGET_PLATFORM} STREQUAL "iOS")
+if("${GEODE_TARGET_PLATFORM}" STREQUAL "iOS")
   message(STATUS "building for ios :3")
   unset(CMAKE_OSX_ARCHITECTURES)
   set(CMAKE_OSX_ARCHITECTURES arm64)
