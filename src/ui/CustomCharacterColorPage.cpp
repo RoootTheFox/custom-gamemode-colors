@@ -10,14 +10,15 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
 
     // i want to properly inherit but everything except this crashes, so: FUCK IT, WE BALL.
     #ifdef GEODE_IS_WINDOWS
-    /*auto _fuck = (CharacterColorPage*)operator new(0x2c0);
-    if (!_fuck && !static_cast<CustomCharacterColorPage*>(_fuck)->init()) return nullptr;
-    auto self = static_cast<CustomCharacterColorPage*>(_fuck);*/
     auto _sex = new CharacterColorPage();
     auto self = static_cast<CustomCharacterColorPage*>(_sex);
     if (!_sex || !_sex->init()) return nullptr;
     #else
+    #ifdef GEODE_IS_ANDROID
+    auto self = static_cast<CustomCharacterColorPage*>(CharacterColorPage::create());
+    #else
     auto self = static_cast<CustomCharacterColorPage*>(new CharacterColorPage());
+    #endif
     #endif
 
     if (!self) {
