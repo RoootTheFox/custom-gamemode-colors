@@ -25,7 +25,7 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
 
     void onColorOverrideButton(CCObject* pSender) {
         auto custom_color_page = CustomCharacterColorPage::customCreate();
-        dynamic_cast<FLAlertLayer*>(custom_color_page)->show();
+        custom_color_page->FLAlertLayer::show();
     }
 };
 

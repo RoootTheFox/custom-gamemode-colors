@@ -9,7 +9,16 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
     auto settings = Settings::sharedInstance();
 
     // i want to properly inherit but everything except this crashes, so: FUCK IT, WE BALL.
-    auto self = static_cast<CustomCharacterColorPage*>(CharacterColorPage::create());
+    #ifdef GEODE_IS_WINDOWS
+    /*auto _fuck = (CharacterColorPage*)operator new(0x2c0);
+    if (!_fuck && !static_cast<CustomCharacterColorPage*>(_fuck)->init()) return nullptr;
+    auto self = static_cast<CustomCharacterColorPage*>(_fuck);*/
+    auto _sex = new CharacterColorPage();
+    auto self = static_cast<CustomCharacterColorPage*>(_sex);
+    if (!_sex || !_sex->init()) return nullptr;
+    #else
+    //auto self = static_cast<CustomCharacterColorPage*>(new CharacterColorPage());
+    #endif
 
     if (!self) {
         log::error("failed to create CustomCharacterColorPage");
@@ -23,12 +32,12 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
         return self;
     }
 
-    // fix a crash that occurs when clicking the x button manually
-    auto x_button = typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildByID("close-button"));
+    // fix a crash that occurs when clicking the x button manually - doesn't happen in 2.206 anymore??
+    /*auto x_button = typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildByID("close-button"));
     if (x_button) {
         log::debug("found close button ! :3");
         x_button->m_pfnSelector = menu_selector(CustomCharacterColorPage::close);
-    }
+    }*/
 
     int buttons_found = 0;
 

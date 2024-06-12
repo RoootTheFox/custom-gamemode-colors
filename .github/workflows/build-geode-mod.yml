@@ -40,7 +40,7 @@ jobs:
         uses: RoootTheFox/build-geode-mod@main
         with:
           bindings: 'RoootTheFox/geode-bindings'
-          bindings-ref: 'ios'
+          bindings-ref: 'uhhmmuhhhh'
           combine: true
           target: ${{ matrix.config.target }}
 

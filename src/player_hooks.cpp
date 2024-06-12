@@ -36,7 +36,7 @@ class $modify(PlayerObject) {
         meow();
         return true;
     }
-#ifdef GEODE_IS_IOS // TEMPORARY; REMOVE THIS WHEN FLASHPLAYER IS SORTED OUT !!
+#if defined(GEODE_IS_IOS) || defined(GEODE_IS_WINDOWS) // TEMPORARY; REMOVE THIS WHEN FLASHPLAYER IS SORTED OUT !!
     void update(float p0) {
         PlayerObject::update(p0);
         meow();
