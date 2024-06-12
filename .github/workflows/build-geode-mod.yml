@@ -43,7 +43,7 @@ jobs:
           bindings-ref: 'uhhmmuhhhh'
           combine: true
           target: ${{ matrix.config.target }}
-          sdk: 'v3.0.0-alpha.2'
+          cli: 'v3.0.0-beta.1'
 
   package:
     name: Package builds
