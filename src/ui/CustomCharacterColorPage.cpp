@@ -17,7 +17,7 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
     auto self = static_cast<CustomCharacterColorPage*>(_sex);
     if (!_sex || !_sex->init()) return nullptr;
     #else
-    //auto self = static_cast<CustomCharacterColorPage*>(new CharacterColorPage());
+    auto self = static_cast<CustomCharacterColorPage*>(new CharacterColorPage());
     #endif
 
     if (!self) {
