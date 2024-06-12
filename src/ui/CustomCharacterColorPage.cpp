@@ -14,11 +14,7 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
     auto self = static_cast<CustomCharacterColorPage*>(_sex);
     if (!_sex || !_sex->init()) return nullptr;
     #else
-    #ifdef GEODE_IS_ANDROID
     auto self = static_cast<CustomCharacterColorPage*>(CharacterColorPage::create());
-    #else
-    auto self = static_cast<CustomCharacterColorPage*>(new CharacterColorPage());
-    #endif
     #endif
 
     if (!self) {
