@@ -1,3 +1,9 @@
+# v0.1.7
+
+* initial update to 2.206
+* removed some performance improvements stuff due to aggressive compiler inlining (will be back)
+* temporarily removed macos support (will be back)
+
 # v0.1.6
 
 * also show custom colors in the editor

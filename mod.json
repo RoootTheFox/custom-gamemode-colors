@@ -1,5 +1,5 @@
 {
-	"geode": "3.0.0-alpha.2",
+	"geode": "3.0.0-beta.1",
 	"gd": {
 		"win": "2.206",
 		"android": "2.206"
@@ -13,12 +13,13 @@
 	"tags": [
 		"customization",
 		"gameplay",
-		"interface"
+		"interface",
+		"enhancement"
 	],
 	"dependencies": [
 		{
 			"id": "geode.node-ids",
-			"version": ">=v1.8.0",
+			"version": ">=v1.12.0-beta.4",
 			"importance": "required"
 		}
 	]
