@@ -130,7 +130,7 @@ $on_mod(Loaded) {
 	Settings* settings = Settings::sharedInstance();
 	settings->m_defaultColor = gameManager->m_playerColor;
 	settings->m_defaultColor2 = gameManager->m_playerColor2;
-#ifdef GEODE_IS_MACOS
+#if defined(GEODE_IS_MACOS) && false
 	static_assert(GEODE_COMP_GD_VERSION == 22000, "Mod needs to target 2.200 on mac"); // thanks to cvolton for this (misc bugfixes) <3
 
 	// thank you dankmeme for telling me what function flashPlayer is inlined in <3
