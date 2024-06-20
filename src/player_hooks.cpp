@@ -22,12 +22,15 @@ class $modify(PlayerObject) {
         meow();
     }
 
+// lazy
+#if !defined(GEODE_IS_IOS) && !defined(GEODE_IS_MACOS)
     void updatePlayerArt() {
         PlayerObject::updatePlayerArt();
         //log::info("updatePlayerArt");
 
         meow();
     }
+#endif
 
     bool init(int p0, int p1, GJBaseGameLayer* p2, cocos2d::CCLayer* p3, bool p4) {
         if(!PlayerObject::init(p0, p1, p2, p3, p4)) return false;
