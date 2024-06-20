@@ -1,3 +1,8 @@
+# v0.1.8
+
+* bumped geode to 3.0.0-beta.4
+* macos support is back
+
 # v0.1.7
 
 * initial update to 2.206
