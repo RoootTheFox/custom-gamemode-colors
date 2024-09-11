@@ -44,13 +44,13 @@ class $modify(PlayerObject) {
         PlayerObject::update(p0);
         meow();
     }
-#endif
-
+#else
     void flashPlayer(float p0, float p1, cocos2d::ccColor3B mainColor, cocos2d::ccColor3B secondColor) {
         // make flashPlayer do nothing.
         // flashPlayer sets the players color back to the original color. TODO: RE flashPlayer
         // to figure out how to fix this.
     }
+#endif
 
     void flipGravity(bool p0, bool p1) {
         meow();
@@ -178,9 +178,12 @@ class $modify(PlayLayer) {
     }
 };
 
+// TODO: fixme (this is inlined everywhere?)
+/*
 class $modify(GameManager) {
     void setPlayerColor(int id) {
         Settings::sharedInstance()->m_defaultColor = id;
         GameManager::setPlayerColor(id);
     }
 };
+*/
