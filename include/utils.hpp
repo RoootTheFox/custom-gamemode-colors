@@ -19,6 +19,7 @@ enum ColorType : int {
 };
 
 struct ColorOverride {
+    bool enabled = false;
     int primary = 0;
     int secondary = 0;
     int glow = 0;
@@ -28,6 +29,7 @@ template<>
 struct matjson::Serialize<ColorOverride> {
     static ColorOverride from_json(matjson::Value const& value) {
         return ColorOverride {
+            .enabled = value.contains("enabled") ? value["enabled"].as_bool() : false,
             .primary = value["primary"].as_int(),
             .secondary = value["secondary"].as_int(),
             .glow = value["glow"].as_int(),
@@ -36,6 +38,7 @@ struct matjson::Serialize<ColorOverride> {
 
     static matjson::Value to_json(ColorOverride const& value) {
         auto obj = matjson::Object();
+        obj["enabled"] = value.enabled;
         obj["primary"] = value.primary;
         obj["secondary"] = value.secondary;
         obj["glow"] = value.glow;
@@ -84,7 +87,14 @@ struct matjson::Serialize<ColorOverride> {
 
 #define OVERRIDE_INNER_CUBE_ENABLED "override_inner_cube"
 
+#define P1_OVERRIDE "player1_override"
+#define P2_OVERRIDE "player2_override"
+
 #define TEXTURE_BUTTON_ENABLED "GJ_button_01.png"
 #define TEXTURE_BUTTON_DISABLED "GJ_button_04.png"
 #define TEXTURE_SELECTED_FRAME "GJ_select_001.png"
 #define TEXTURE_PAINT_BUTTON "GJ_paintBtn_001.png"
+
+// funny macro hell :3
+#define CGC_PLAYER_INDEX p2 ? 1 : 0
+#define CGC_OVERRIDE_ENABLED(...) settings->m_overrides[CGC_PLAYER_INDEX].m_##__VA_ARGS__.enabled

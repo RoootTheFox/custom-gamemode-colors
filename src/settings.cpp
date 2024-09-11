@@ -9,7 +9,7 @@ Settings* Settings::sharedInstance() {
 }
 
 // if someone knows a way to make this less ugly and repetitive, please tell me i will love you forever
-void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
+void Settings::setOverrideColor(GameMode mode, int color, ColorType type, bool p2) {
     auto mod = Mod::get();
 
     bool valid_gamemode = true;
@@ -18,130 +18,122 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
         case CUBE:
             switch (type) {
                 case PRIMARY:
-                    this->m_cube_override.primary = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_cube.primary = color;
                     break;
                 case SECONDARY:
-                    this->m_cube_override.secondary = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_cube.secondary = color;
                     break;
                 case GLOW:
-                    this->m_cube_override.glow = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_cube.glow = color;
                     break;
                 default:
                     break;
             }
-            mod->setSavedValue(CUBE_OVERRIDE, this->m_cube_override);
             break;
         case SHIP:
             switch (type) {
                 case PRIMARY:
-                    this->m_ship_override.primary = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_ship.primary = color;
                     break;
                 case SECONDARY:
-                    this->m_ship_override.secondary = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_ship.secondary = color;
                     break;
                 case GLOW:
-                    this->m_ship_override.glow = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_ship.glow = color;
                     break;
                 default:
                     break;
             }
-            mod->setSavedValue(SHIP_OVERRIDE, this->m_ship_override);
             break;
         case BALL:
             switch (type) {
                 case PRIMARY:
-                    this->m_ball_override.primary = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_ball.primary = color;
                     break;
                 case SECONDARY:
-                    this->m_ball_override.secondary = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_ball.secondary = color;
                     break;
                 case GLOW:
-                    this->m_ball_override.glow = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_ball.glow = color;
                     break;
                 default:
                     break;
             }
-            mod->setSavedValue(BALL_OVERRIDE, this->m_ball_override);
             break;
         case UFO:
             switch (type) {
                 case PRIMARY:
-                    this->m_ufo_override.primary = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_ufo.primary = color;
                     break;
                 case SECONDARY:
-                    this->m_ufo_override.secondary = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_ufo.secondary = color;
                     break;
                 case GLOW:
-                    this->m_ufo_override.glow = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_ufo.glow = color;
                     break;
                 default:
                     break;
             }
-            mod->setSavedValue(UFO_OVERRIDE, this->m_ufo_override);
             break;
         case WAVE:
             switch (type) {
                 case PRIMARY:
-                    this->m_wave_override.primary = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_wave.primary = color;
                     break;
                 case SECONDARY:
-                    this->m_wave_override.secondary = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_wave.secondary = color;
                     break;
                 case GLOW:
-                    this->m_wave_override.glow = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_wave.glow = color;
                     break;
                 default:
                     break;
             }
-            mod->setSavedValue(WAVE_OVERRIDE, this->m_wave_override);
             break;
         case ROBOT:
             switch (type) {
                 case PRIMARY:
-                    this->m_robot_override.primary = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_robot.primary = color;
                     break;
                 case SECONDARY:
-                    this->m_robot_override.secondary = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_robot.secondary = color;
                     break;
                 case GLOW:
-                    this->m_robot_override.glow = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_robot.glow = color;
                     break;
                 default:
                     break;
             }
-            mod->setSavedValue(ROBOT_OVERRIDE, this->m_robot_override);
             break;
         case SPIDER:
             switch (type) {
                 case PRIMARY:
-                    this->m_spider_override.primary = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_spider.primary = color;
                     break;
                 case SECONDARY:
-                    this->m_spider_override.secondary = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_spider.secondary = color;
                     break;
                 case GLOW:
-                    this->m_spider_override.glow = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_spider.glow = color;
                     break;
                 default:
                     break;
             }
-            mod->setSavedValue(SPIDER_OVERRIDE, this->m_spider_override);
             break;
         case SWING:
             switch (type) {
                 case PRIMARY:
-                    this->m_swing_override.primary = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_swing.primary = color;
                     break;
                 case SECONDARY:
-                    this->m_swing_override.secondary = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_swing.secondary = color;
                     break;
                 case GLOW:
-                    this->m_swing_override.glow = color;
+                    this->m_overrides[CGC_PLAYER_INDEX].m_swing.glow = color;
                     break;
                 default:
                     break;
             }
-            mod->setSavedValue(SWING_OVERRIDE, this->m_swing_override);
             break;
         default:
             // there's no gamemode set yet because the user didn't select one
@@ -151,6 +143,8 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
             break;
     }
 
+    this->save();
+
     if (valid_gamemode && !isOverrideEnabled(mode)) {
         Notification::create(
             fmt::format(" enable overrides for {} using\n the small buttons at the top!", CustomCharacterColorPage::getGameModeName(mode)),
@@ -159,66 +153,67 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type) {
     }
 }
 
-bool Settings::isOverrideEnabled(GameMode mode) {
+bool Settings::isOverrideEnabled(GameMode mode, bool p2) {
     switch (mode) {
         case CUBE:
-            return this->m_override_cube;
+            return this->m_overrides[CGC_PLAYER_INDEX].m_cube.enabled;
         case SHIP:
-            return this->m_override_ship;
+            return this->m_overrides[CGC_PLAYER_INDEX].m_ship.enabled;
         case BALL:
-            return this->m_override_ball;
+            return this->m_overrides[CGC_PLAYER_INDEX].m_ball.enabled;
         case UFO:
-            return this->m_override_ufo;
+            return this->m_overrides[CGC_PLAYER_INDEX].m_ufo.enabled;
         case WAVE:
-            return this->m_override_wave;
+            return this->m_overrides[CGC_PLAYER_INDEX].m_wave.enabled;
         case ROBOT:
-            return this->m_override_robot;
+            return this->m_overrides[CGC_PLAYER_INDEX].m_robot.enabled;
         case SPIDER:
-            return this->m_override_spider;
+            return this->m_overrides[CGC_PLAYER_INDEX].m_spider.enabled;
         case SWING:
-            return this->m_override_swing;
+            return this->m_overrides[CGC_PLAYER_INDEX].m_swing.enabled;
         default:
             return false;
     }
 }
 
-void Settings::toggleOverride(GameMode mode) {
+void Settings::toggleOverride(GameMode mode, bool p2) {
     auto mod = Mod::get();
 
     switch (mode) {
         case CUBE:
-            this->m_override_cube = !this->m_override_cube;
-            mod->setSavedValue(OVERRIDE_CUBE_ENABLED, this->m_override_cube);
+            this->m_overrides[CGC_PLAYER_INDEX].m_cube.enabled = !this->m_overrides[CGC_PLAYER_INDEX].m_cube.enabled;
             break;
         case SHIP:
-            this->m_override_ship = !this->m_override_ship;
-            mod->setSavedValue(OVERRIDE_SHIP_ENABLED, this->m_override_ship);
+            this->m_overrides[CGC_PLAYER_INDEX].m_ship.enabled = !this->m_overrides[CGC_PLAYER_INDEX].m_ship.enabled;
             break;
         case BALL:
-            this->m_override_ball = !this->m_override_ball;
-            mod->setSavedValue(OVERRIDE_BALL_ENABLED, this->m_override_ball);
+            this->m_overrides[CGC_PLAYER_INDEX].m_ball.enabled = !this->m_overrides[CGC_PLAYER_INDEX].m_ball.enabled;
             break;
         case UFO:
-            this->m_override_ufo = !this->m_override_ufo;
-            mod->setSavedValue(OVERRIDE_UFO_ENABLED, this->m_override_ufo);
+            this->m_overrides[CGC_PLAYER_INDEX].m_ufo.enabled = !this->m_overrides[CGC_PLAYER_INDEX].m_ufo.enabled;
             break;
         case WAVE:
-            this->m_override_wave = !this->m_override_wave;
-            mod->setSavedValue(OVERRIDE_WAVE_ENABLED, this->m_override_wave);
+            this->m_overrides[CGC_PLAYER_INDEX].m_wave.enabled = !this->m_overrides[CGC_PLAYER_INDEX].m_wave.enabled;
             break;
         case ROBOT:
-            this->m_override_robot = !this->m_override_robot;
-            mod->setSavedValue(OVERRIDE_ROBOT_ENABLED, this->m_override_robot);
+            this->m_overrides[CGC_PLAYER_INDEX].m_robot.enabled = !this->m_overrides[CGC_PLAYER_INDEX].m_robot.enabled;
             break;
         case SPIDER:
-            this->m_override_spider = !this->m_override_spider;
-            mod->setSavedValue(OVERRIDE_SPIDER_ENABLED, this->m_override_spider);
+            this->m_overrides[CGC_PLAYER_INDEX].m_spider.enabled = !this->m_overrides[CGC_PLAYER_INDEX].m_spider.enabled;
             break;
         case SWING:
-            this->m_override_swing = !this->m_override_swing;
-            mod->setSavedValue(OVERRIDE_SWING_ENABLED, this->m_override_swing);
+            this->m_overrides[CGC_PLAYER_INDEX].m_swing.enabled = !this->m_overrides[CGC_PLAYER_INDEX].m_swing.enabled;
             break;
         default:
             break;
     }
+
+    this->save();
+}
+
+void Settings::save() {
+    auto mod = Mod::get();
+
+    mod->setSavedValue<OverridePlayer>(P1_OVERRIDE, this->m_overrides[0]);
+    mod->setSavedValue<OverridePlayer>(P2_OVERRIDE, this->m_overrides[1]);
 }

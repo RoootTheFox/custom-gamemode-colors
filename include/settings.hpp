@@ -3,30 +3,62 @@
 #include "include.hpp"
 #include "ui/CustomCharacterColorPage.hpp"
 
+struct OverridePlayer {
+    ColorOverride m_cube;
+    ColorOverride m_ship;
+    ColorOverride m_ball;
+    ColorOverride m_ufo;
+    ColorOverride m_wave;
+    ColorOverride m_robot;
+    ColorOverride m_spider;
+    ColorOverride m_swing;
+
+    bool m_override_inner_cube;
+};
+
+template<>
+struct matjson::Serialize<OverridePlayer> {
+    static OverridePlayer from_json(matjson::Value const& value) {
+        return OverridePlayer {
+            .m_cube = value["cube"].as<ColorOverride>(),
+            .m_ship = value["ship"].as<ColorOverride>(),
+            .m_ball = value["ball"].as<ColorOverride>(),
+            .m_ufo = value["ufo"].as<ColorOverride>(),
+            .m_wave = value["wave"].as<ColorOverride>(),
+            .m_robot = value["robot"].as<ColorOverride>(),
+            .m_spider = value["spider"].as<ColorOverride>(),
+            .m_swing = value["swing"].as<ColorOverride>(),
+            .m_override_inner_cube = value["override_inner_cube"].as_bool(),
+        };
+    }
+
+    static matjson::Value to_json(OverridePlayer const& value) {
+        auto obj = matjson::Object();
+        obj["cube"] = value.m_cube;
+        obj["ship"] = value.m_ship;
+        obj["ball"] = value.m_ball;
+        obj["ufo"] = value.m_ufo;
+        obj["wave"] = value.m_wave;
+        obj["robot"] = value.m_robot;
+        obj["spider"] = value.m_spider;
+        obj["swing"] = value.m_swing;
+        obj["override_inner_cube"] = value.m_override_inner_cube;
+        return obj;
+    }
+
+    // this is needed, else it'll just get ignored
+    static bool is_json(const matjson::Value& value) {
+        return true;
+    }
+};
+
 class Settings {
     public:
         int m_defaultColor;
         int m_defaultColor2;
 
-        ColorOverride m_cube_override;
-        ColorOverride m_ship_override;
-        ColorOverride m_ball_override;
-        ColorOverride m_ufo_override;
-        ColorOverride m_wave_override;
-        ColorOverride m_robot_override;
-        ColorOverride m_spider_override;
-        ColorOverride m_swing_override;
-
-        bool m_override_cube;
-        bool m_override_ship;
-        bool m_override_ball;
-        bool m_override_ufo;
-        bool m_override_wave;
-        bool m_override_robot;
-        bool m_override_spider;
-        bool m_override_swing;
-
-        bool m_override_inner_cube;
+        // overrides for each player
+        OverridePlayer m_overrides[2] = {};
 
         // not actual settings, but they're still needed
         SimplePlayer* m_player_cube;
@@ -60,10 +92,12 @@ class Settings {
         CCMenuItemSpriteExtra* m_button_secondary_color = nullptr;
         CCMenuItemSpriteExtra* m_button_glow_color = nullptr;
 
-        bool isOverrideEnabled(GameMode mode);
+        bool isOverrideEnabled(GameMode mode, bool p2 = false);
 
-        void toggleOverride(GameMode mode);
-        void setOverrideColor(GameMode mode, int color, ColorType type);
+        void toggleOverride(GameMode mode, bool p2 = false);
+        void setOverrideColor(GameMode mode, int color, ColorType type, bool p2 = false);
+
+        void save();
 
         static Settings* sharedInstance();
 };
