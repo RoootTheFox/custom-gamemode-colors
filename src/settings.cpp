@@ -16,124 +16,28 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type, bool p
 
     switch (mode) {
         case CUBE:
-            switch (type) {
-                case PRIMARY:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_cube.primary = color;
-                    break;
-                case SECONDARY:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_cube.secondary = color;
-                    break;
-                case GLOW:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_cube.glow = color;
-                    break;
-                default:
-                    break;
-            }
+            CGC_SETTINGS_SET_OVERRIDE(cube, type, color);
             break;
         case SHIP:
-            switch (type) {
-                case PRIMARY:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_ship.primary = color;
-                    break;
-                case SECONDARY:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_ship.secondary = color;
-                    break;
-                case GLOW:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_ship.glow = color;
-                    break;
-                default:
-                    break;
-            }
+            CGC_SETTINGS_SET_OVERRIDE(ship, type, color);
             break;
         case BALL:
-            switch (type) {
-                case PRIMARY:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_ball.primary = color;
-                    break;
-                case SECONDARY:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_ball.secondary = color;
-                    break;
-                case GLOW:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_ball.glow = color;
-                    break;
-                default:
-                    break;
-            }
+            CGC_SETTINGS_SET_OVERRIDE(ball, type, color);
             break;
         case UFO:
-            switch (type) {
-                case PRIMARY:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_ufo.primary = color;
-                    break;
-                case SECONDARY:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_ufo.secondary = color;
-                    break;
-                case GLOW:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_ufo.glow = color;
-                    break;
-                default:
-                    break;
-            }
+            CGC_SETTINGS_SET_OVERRIDE(ufo, type, color);
             break;
         case WAVE:
-            switch (type) {
-                case PRIMARY:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_wave.primary = color;
-                    break;
-                case SECONDARY:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_wave.secondary = color;
-                    break;
-                case GLOW:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_wave.glow = color;
-                    break;
-                default:
-                    break;
-            }
+            CGC_SETTINGS_SET_OVERRIDE(wave, type, color);
             break;
         case ROBOT:
-            switch (type) {
-                case PRIMARY:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_robot.primary = color;
-                    break;
-                case SECONDARY:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_robot.secondary = color;
-                    break;
-                case GLOW:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_robot.glow = color;
-                    break;
-                default:
-                    break;
-            }
+            CGC_SETTINGS_SET_OVERRIDE(robot, type, color);
             break;
         case SPIDER:
-            switch (type) {
-                case PRIMARY:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_spider.primary = color;
-                    break;
-                case SECONDARY:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_spider.secondary = color;
-                    break;
-                case GLOW:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_spider.glow = color;
-                    break;
-                default:
-                    break;
-            }
+            CGC_SETTINGS_SET_OVERRIDE(spider, type, color);
             break;
         case SWING:
-            switch (type) {
-                case PRIMARY:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_swing.primary = color;
-                    break;
-                case SECONDARY:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_swing.secondary = color;
-                    break;
-                case GLOW:
-                    this->m_overrides[CGC_PLAYER_INDEX].m_swing.glow = color;
-                    break;
-                default:
-                    break;
-            }
+            CGC_SETTINGS_SET_OVERRIDE(swing, type, color);
             break;
         default:
             // there's no gamemode set yet because the user didn't select one
@@ -156,21 +60,21 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type, bool p
 bool Settings::isOverrideEnabled(GameMode mode, bool p2) {
     switch (mode) {
         case CUBE:
-            return this->m_overrides[CGC_PLAYER_INDEX].m_cube.enabled;
+            return CGC_OVERRIDE_THIS(cube).enabled;
         case SHIP:
-            return this->m_overrides[CGC_PLAYER_INDEX].m_ship.enabled;
+            return CGC_OVERRIDE_THIS(ship).enabled;
         case BALL:
-            return this->m_overrides[CGC_PLAYER_INDEX].m_ball.enabled;
+            return CGC_OVERRIDE_THIS(ball).enabled;
         case UFO:
-            return this->m_overrides[CGC_PLAYER_INDEX].m_ufo.enabled;
+            return CGC_OVERRIDE_THIS(ufo).enabled;
         case WAVE:
-            return this->m_overrides[CGC_PLAYER_INDEX].m_wave.enabled;
+            return CGC_OVERRIDE_THIS(wave).enabled;
         case ROBOT:
-            return this->m_overrides[CGC_PLAYER_INDEX].m_robot.enabled;
+            return CGC_OVERRIDE_THIS(robot).enabled;
         case SPIDER:
-            return this->m_overrides[CGC_PLAYER_INDEX].m_spider.enabled;
+            return CGC_OVERRIDE_THIS(spider).enabled;
         case SWING:
-            return this->m_overrides[CGC_PLAYER_INDEX].m_swing.enabled;
+            return CGC_OVERRIDE_THIS(swing).enabled;
         default:
             return false;
     }
@@ -181,28 +85,28 @@ void Settings::toggleOverride(GameMode mode, bool p2) {
 
     switch (mode) {
         case CUBE:
-            this->m_overrides[CGC_PLAYER_INDEX].m_cube.enabled = !this->m_overrides[CGC_PLAYER_INDEX].m_cube.enabled;
+            CGC_OVERRIDE_THIS(cube).enabled = !CGC_OVERRIDE_THIS(cube).enabled;
             break;
         case SHIP:
-            this->m_overrides[CGC_PLAYER_INDEX].m_ship.enabled = !this->m_overrides[CGC_PLAYER_INDEX].m_ship.enabled;
+            CGC_OVERRIDE_THIS(ship).enabled = !CGC_OVERRIDE_THIS(ship).enabled;
             break;
         case BALL:
-            this->m_overrides[CGC_PLAYER_INDEX].m_ball.enabled = !this->m_overrides[CGC_PLAYER_INDEX].m_ball.enabled;
+            CGC_OVERRIDE_THIS(ball).enabled = !CGC_OVERRIDE_THIS(ball).enabled;
             break;
         case UFO:
-            this->m_overrides[CGC_PLAYER_INDEX].m_ufo.enabled = !this->m_overrides[CGC_PLAYER_INDEX].m_ufo.enabled;
+            CGC_OVERRIDE_THIS(ufo).enabled = !CGC_OVERRIDE_THIS(ufo).enabled;
             break;
         case WAVE:
-            this->m_overrides[CGC_PLAYER_INDEX].m_wave.enabled = !this->m_overrides[CGC_PLAYER_INDEX].m_wave.enabled;
+            CGC_OVERRIDE_THIS(wave).enabled = !CGC_OVERRIDE_THIS(wave).enabled;
             break;
         case ROBOT:
-            this->m_overrides[CGC_PLAYER_INDEX].m_robot.enabled = !this->m_overrides[CGC_PLAYER_INDEX].m_robot.enabled;
+            CGC_OVERRIDE_THIS(robot).enabled = !CGC_OVERRIDE_THIS(robot).enabled;
             break;
         case SPIDER:
-            this->m_overrides[CGC_PLAYER_INDEX].m_spider.enabled = !this->m_overrides[CGC_PLAYER_INDEX].m_spider.enabled;
+            CGC_OVERRIDE_THIS(spider).enabled = !CGC_OVERRIDE_THIS(spider).enabled;
             break;
         case SWING:
-            this->m_overrides[CGC_PLAYER_INDEX].m_swing.enabled = !this->m_overrides[CGC_PLAYER_INDEX].m_swing.enabled;
+            CGC_OVERRIDE_THIS(swing).enabled = !CGC_OVERRIDE_THIS(swing).enabled;
             break;
         default:
             break;

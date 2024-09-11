@@ -24,45 +24,45 @@ class $modify(ProfilePage) {
         // todo !!
         bool p2 = false;
 
-        if (CGC_OVERRIDE_ENABLED(cube)) {
+        if (CGC_OVERRIDE(cube).enabled) {
             auto player = static_cast<SimplePlayer*>(player_menu->getChildByID("player-icon")->getChildren()->objectAtIndex(0));
-            player->setColor(gameManager->colorForIdx(settings->m_overrides[CGC_PLAYER_INDEX].m_cube.primary));
-            player->setSecondColor(gameManager->colorForIdx(settings->m_overrides[CGC_PLAYER_INDEX].m_cube.secondary));
+            player->setColor(gameManager->colorForIdx(CGC_OVERRIDE(cube).primary));
+            player->setSecondColor(gameManager->colorForIdx(CGC_OVERRIDE(cube).secondary));
         }
-        if (CGC_OVERRIDE_ENABLED(ship)) {
+        if (CGC_OVERRIDE(ship).enabled) {
             auto player = static_cast<SimplePlayer*>(player_menu->getChildByID("player-ship")->getChildren()->objectAtIndex(0));
-            player->setColor(gameManager->colorForIdx(settings->m_overrides[CGC_PLAYER_INDEX].m_ship.primary));
-            player->setSecondColor(gameManager->colorForIdx(settings->m_overrides[CGC_PLAYER_INDEX].m_ship.secondary));            
+            player->setColor(gameManager->colorForIdx(CGC_OVERRIDE(ship).primary));
+            player->setSecondColor(gameManager->colorForIdx(CGC_OVERRIDE(ship).secondary));            
         }
-        if (CGC_OVERRIDE_ENABLED(ball)) {
+        if (CGC_OVERRIDE(ball).enabled) {
             auto player = static_cast<SimplePlayer*>(player_menu->getChildByID("player-ball")->getChildren()->objectAtIndex(0));
-            player->setColor(gameManager->colorForIdx(settings->m_overrides[CGC_PLAYER_INDEX].m_ball.primary));
-            player->setSecondColor(gameManager->colorForIdx(settings->m_overrides[CGC_PLAYER_INDEX].m_ball.secondary));            
+            player->setColor(gameManager->colorForIdx(CGC_OVERRIDE(ball).primary));
+            player->setSecondColor(gameManager->colorForIdx(CGC_OVERRIDE(ball).secondary));            
         }
-        if (CGC_OVERRIDE_ENABLED(ufo)) {
+        if (CGC_OVERRIDE(ufo).enabled) {
             auto player = static_cast<SimplePlayer*>(player_menu->getChildByID("player-ufo")->getChildren()->objectAtIndex(0));
-            player->setColor(gameManager->colorForIdx(settings->m_overrides[CGC_PLAYER_INDEX].m_ufo.primary));
-            player->setSecondColor(gameManager->colorForIdx(settings->m_overrides[CGC_PLAYER_INDEX].m_ufo.secondary));            
+            player->setColor(gameManager->colorForIdx(CGC_OVERRIDE(ufo).primary));
+            player->setSecondColor(gameManager->colorForIdx(CGC_OVERRIDE(ufo).secondary));            
         }
-        if (CGC_OVERRIDE_ENABLED(wave)) {
+        if (CGC_OVERRIDE(wave).enabled) {
             auto player = static_cast<SimplePlayer*>(player_menu->getChildByID("player-wave")->getChildren()->objectAtIndex(0));
-            player->setColor(gameManager->colorForIdx(settings->m_overrides[CGC_PLAYER_INDEX].m_wave.primary));
-            player->setSecondColor(gameManager->colorForIdx(settings->m_overrides[CGC_PLAYER_INDEX].m_wave.secondary));            
+            player->setColor(gameManager->colorForIdx(CGC_OVERRIDE(wave).primary));
+            player->setSecondColor(gameManager->colorForIdx(CGC_OVERRIDE(wave).secondary));            
         }
-        if (CGC_OVERRIDE_ENABLED(robot)) {
+        if (CGC_OVERRIDE(robot).enabled) {
             auto player = static_cast<SimplePlayer*>(player_menu->getChildByID("player-robot")->getChildren()->objectAtIndex(0));
-            player->setColor(gameManager->colorForIdx(settings->m_overrides[CGC_PLAYER_INDEX].m_robot.primary));
-            player->setSecondColor(gameManager->colorForIdx(settings->m_overrides[CGC_PLAYER_INDEX].m_robot.secondary));            
+            player->setColor(gameManager->colorForIdx(CGC_OVERRIDE(robot).primary));
+            player->setSecondColor(gameManager->colorForIdx(CGC_OVERRIDE(robot).secondary));            
         }
-        if (CGC_OVERRIDE_ENABLED(spider)) {
+        if (CGC_OVERRIDE(spider).enabled) {
             auto player = static_cast<SimplePlayer*>(player_menu->getChildByID("player-spider")->getChildren()->objectAtIndex(0));
-            player->setColor(gameManager->colorForIdx(settings->m_overrides[CGC_PLAYER_INDEX].m_spider.primary));
-            player->setSecondColor(gameManager->colorForIdx(settings->m_overrides[CGC_PLAYER_INDEX].m_spider.secondary));            
+            player->setColor(gameManager->colorForIdx(CGC_OVERRIDE(spider).primary));
+            player->setSecondColor(gameManager->colorForIdx(CGC_OVERRIDE(spider).secondary));            
         }
-        if (CGC_OVERRIDE_ENABLED(swing)) {
+        if (CGC_OVERRIDE(swing).enabled) {
             auto player = static_cast<SimplePlayer*>(player_menu->getChildByID("player-swing")->getChildren()->objectAtIndex(0));
-            player->setColor(gameManager->colorForIdx(settings->m_overrides[CGC_PLAYER_INDEX].m_swing.primary));
-            player->setSecondColor(gameManager->colorForIdx(settings->m_overrides[CGC_PLAYER_INDEX].m_swing.secondary));            
+            player->setColor(gameManager->colorForIdx(CGC_OVERRIDE(swing).primary));
+            player->setSecondColor(gameManager->colorForIdx(CGC_OVERRIDE(swing).secondary));            
         }
     }
 };

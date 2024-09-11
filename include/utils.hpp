@@ -97,4 +97,21 @@ struct matjson::Serialize<ColorOverride> {
 
 // funny macro hell :3
 #define CGC_PLAYER_INDEX p2 ? 1 : 0
-#define CGC_OVERRIDE_ENABLED(...) settings->m_overrides[CGC_PLAYER_INDEX].m_##__VA_ARGS__.enabled
+
+#define CGC_OVERRIDE(...) settings->m_overrides[CGC_PLAYER_INDEX].m_##__VA_ARGS__
+#define CGC_OVERRIDE_THIS(...) this->m_overrides[CGC_PLAYER_INDEX].m_##__VA_ARGS__
+
+#define CGC_SETTINGS_SET_OVERRIDE(mode, type, color) \
+    switch (type) { \
+        case PRIMARY: \
+            CGC_OVERRIDE_THIS(mode).primary = color; \
+            break; \
+        case SECONDARY: \
+            CGC_OVERRIDE_THIS(mode).secondary = color; \
+            break; \
+        case GLOW: \
+            CGC_OVERRIDE_THIS(mode).glow = color; \
+            break; \
+        default: \
+            break; \
+    }

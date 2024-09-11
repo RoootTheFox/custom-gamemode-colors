@@ -289,64 +289,64 @@ void CustomCharacterColorPage::updateUI() {
     bool p2 = false;
 
     if(settings->m_player_cube) {
-        int col1 = settings->m_overrides[CGC_PLAYER_INDEX].m_cube.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_cube.primary  : settings->m_defaultColor;
-        int col2 = settings->m_overrides[CGC_PLAYER_INDEX].m_cube.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_cube.secondary : settings->m_defaultColor2;
+        int col1 = CGC_OVERRIDE(cube).enabled ? CGC_OVERRIDE(cube).primary   : settings->m_defaultColor;
+        int col2 = CGC_OVERRIDE(cube).enabled ? CGC_OVERRIDE(cube).secondary : settings->m_defaultColor2;
 
         settings->m_player_cube->setColor(gameManager->colorForIdx(col1));
         settings->m_player_cube->setSecondColor(gameManager->colorForIdx(col2));
     }
 
     if(settings->m_player_ship) {
-        int col1 = settings->m_overrides[CGC_PLAYER_INDEX].m_ship.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_ship.primary  : settings->m_defaultColor;
-        int col2 = settings->m_overrides[CGC_PLAYER_INDEX].m_ship.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_ship.secondary : settings->m_defaultColor2;
+        int col1 = CGC_OVERRIDE(ship).enabled ? CGC_OVERRIDE(ship).primary   : settings->m_defaultColor;
+        int col2 = CGC_OVERRIDE(ship).enabled ? CGC_OVERRIDE(ship).secondary : settings->m_defaultColor2;
 
         settings->m_player_ship->setColor(gameManager->colorForIdx(col1));
         settings->m_player_ship->setSecondColor(gameManager->colorForIdx(col2));
     }
 
     if(settings->m_player_ball) {
-        int col1 = settings->m_overrides[CGC_PLAYER_INDEX].m_ball.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_ball.primary  : settings->m_defaultColor;
-        int col2 = settings->m_overrides[CGC_PLAYER_INDEX].m_ball.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_ball.secondary : settings->m_defaultColor2;
+        int col1 = CGC_OVERRIDE(ball).enabled ? CGC_OVERRIDE(ball).primary   : settings->m_defaultColor;
+        int col2 = CGC_OVERRIDE(ball).enabled ? CGC_OVERRIDE(ball).secondary : settings->m_defaultColor2;
 
         settings->m_player_ball->setColor(gameManager->colorForIdx(col1));
         settings->m_player_ball->setSecondColor(gameManager->colorForIdx(col2));
     }
 
     if(settings->m_player_ufo) {
-        int col1 = settings->m_overrides[CGC_PLAYER_INDEX].m_ufo.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_ufo.primary  : settings->m_defaultColor;
-        int col2 = settings->m_overrides[CGC_PLAYER_INDEX].m_ufo.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_ufo.secondary : settings->m_defaultColor2;
+        int col1 = CGC_OVERRIDE(ufo).enabled ? CGC_OVERRIDE(ufo).primary   : settings->m_defaultColor;
+        int col2 = CGC_OVERRIDE(ufo).enabled ? CGC_OVERRIDE(ufo).secondary : settings->m_defaultColor2;
 
         settings->m_player_ufo->setColor(gameManager->colorForIdx(col1));
         settings->m_player_ufo->setSecondColor(gameManager->colorForIdx(col2));
     }
 
     if(settings->m_player_wave) {
-        int col1 = settings->m_overrides[CGC_PLAYER_INDEX].m_wave.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_wave.primary  : settings->m_defaultColor;
-        int col2 = settings->m_overrides[CGC_PLAYER_INDEX].m_wave.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_wave.secondary : settings->m_defaultColor2;
+        int col1 = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).primary   : settings->m_defaultColor;
+        int col2 = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).secondary : settings->m_defaultColor2;
 
         settings->m_player_wave->setColor(gameManager->colorForIdx(col1));
         settings->m_player_wave->setSecondColor(gameManager->colorForIdx(col2));
     }
 
     if(settings->m_player_robot) {
-        int col1 = settings->m_overrides[CGC_PLAYER_INDEX].m_robot.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_robot.primary  : settings->m_defaultColor;
-        int col2 = settings->m_overrides[CGC_PLAYER_INDEX].m_robot.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_robot.secondary : settings->m_defaultColor2;
+        int col1 = CGC_OVERRIDE(robot).enabled ? CGC_OVERRIDE(robot).primary   : settings->m_defaultColor;
+        int col2 = CGC_OVERRIDE(robot).enabled ? CGC_OVERRIDE(robot).secondary : settings->m_defaultColor2;
 
         settings->m_player_robot->setColor(gameManager->colorForIdx(col1));
         settings->m_player_robot->setSecondColor(gameManager->colorForIdx(col2));
     }
 
     if(settings->m_player_spider) {
-        int col1 = settings->m_overrides[CGC_PLAYER_INDEX].m_spider.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_spider.primary  : settings->m_defaultColor;
-        int col2 = settings->m_overrides[CGC_PLAYER_INDEX].m_spider.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_spider.secondary : settings->m_defaultColor2;
+        int col1 = CGC_OVERRIDE(spider).enabled ? CGC_OVERRIDE(spider).primary   : settings->m_defaultColor;
+        int col2 = CGC_OVERRIDE(spider).enabled ? CGC_OVERRIDE(spider).secondary : settings->m_defaultColor2;
 
         settings->m_player_spider->setColor(gameManager->colorForIdx(col1));
         settings->m_player_spider->setSecondColor(gameManager->colorForIdx(col2));
     }
 
     if(settings->m_player_swing) {
-        int col1 = settings->m_overrides[CGC_PLAYER_INDEX].m_swing.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_swing.primary  : settings->m_defaultColor;
-        int col2 = settings->m_overrides[CGC_PLAYER_INDEX].m_swing.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_swing.secondary : settings->m_defaultColor2;
+        int col1 = CGC_OVERRIDE(swing).enabled ? CGC_OVERRIDE(swing).primary   : settings->m_defaultColor;
+        int col2 = CGC_OVERRIDE(swing).enabled ? CGC_OVERRIDE(swing).secondary : settings->m_defaultColor2;
 
         settings->m_player_swing->setColor(gameManager->colorForIdx(col1));
         settings->m_player_swing->setSecondColor(gameManager->colorForIdx(col2));
@@ -374,28 +374,28 @@ void CustomCharacterColorPage::updateUI() {
     }
 
     if (settings->m_button_cube) {
-        settings->m_button_cube->updateBGImage(settings->m_overrides[CGC_PLAYER_INDEX].m_cube.enabled ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+        settings->m_button_cube->updateBGImage(CGC_OVERRIDE(cube).enabled ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
     if (settings->m_button_ship) {
-        settings->m_button_ship->updateBGImage(settings->m_overrides[CGC_PLAYER_INDEX].m_ship.enabled ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+        settings->m_button_ship->updateBGImage(CGC_OVERRIDE(ship).enabled ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
     if (settings->m_button_ball) {
-        settings->m_button_ball->updateBGImage(settings->m_overrides[CGC_PLAYER_INDEX].m_ball.enabled ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+        settings->m_button_ball->updateBGImage(CGC_OVERRIDE(ball).enabled ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
     if (settings->m_button_ufo) {
-        settings->m_button_ufo->updateBGImage(settings->m_overrides[CGC_PLAYER_INDEX].m_ufo.enabled ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+        settings->m_button_ufo->updateBGImage(CGC_OVERRIDE(ufo).enabled ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
     if (settings->m_button_wave) {
-        settings->m_button_wave->updateBGImage(settings->m_overrides[CGC_PLAYER_INDEX].m_wave.enabled ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+        settings->m_button_wave->updateBGImage(CGC_OVERRIDE(wave).enabled ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
     if (settings->m_button_robot) {
-        settings->m_button_robot->updateBGImage(settings->m_overrides[CGC_PLAYER_INDEX].m_robot.enabled ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+        settings->m_button_robot->updateBGImage(CGC_OVERRIDE(robot).enabled ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
     if (settings->m_button_spider) {
-        settings->m_button_spider->updateBGImage(settings->m_overrides[CGC_PLAYER_INDEX].m_spider.enabled ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+        settings->m_button_spider->updateBGImage(CGC_OVERRIDE(spider).enabled ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
     if (settings->m_button_swing) {
-        settings->m_button_swing->updateBGImage(settings->m_overrides[CGC_PLAYER_INDEX].m_swing.enabled ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+        settings->m_button_swing->updateBGImage(CGC_OVERRIDE(swing).enabled ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
     }
 
     if (settings->m_current_gamemode_sprite) {
@@ -413,28 +413,28 @@ void CustomCharacterColorPage::updateColorSelectionSprite(CCSprite* sprite, Colo
 
     switch (settings->m_current_mode) {
         case CUBE:
-            color = type == PRIMARY ? settings->m_overrides[CGC_PLAYER_INDEX].m_cube.primary : settings->m_overrides[CGC_PLAYER_INDEX].m_cube.secondary;
+            color = type == PRIMARY ? CGC_OVERRIDE(cube).primary : CGC_OVERRIDE(cube).secondary;
             break;
         case SHIP:
-            color = type == PRIMARY ? settings->m_overrides[CGC_PLAYER_INDEX].m_ship.primary : settings->m_overrides[CGC_PLAYER_INDEX].m_ship.secondary;
+            color = type == PRIMARY ? CGC_OVERRIDE(ship).primary : CGC_OVERRIDE(ship).secondary;
             break;
         case BALL:
-            color = type == PRIMARY ? settings->m_overrides[CGC_PLAYER_INDEX].m_ball.primary : settings->m_overrides[CGC_PLAYER_INDEX].m_ball.secondary;
+            color = type == PRIMARY ? CGC_OVERRIDE(ball).primary : CGC_OVERRIDE(ball).secondary;
             break;
         case UFO:
-            color = type == PRIMARY ? settings->m_overrides[CGC_PLAYER_INDEX].m_ufo.primary : settings->m_overrides[CGC_PLAYER_INDEX].m_ufo.secondary;
+            color = type == PRIMARY ? CGC_OVERRIDE(ufo).primary : CGC_OVERRIDE(ufo).secondary;
             break;
         case WAVE:
-            color = type == PRIMARY ? settings->m_overrides[CGC_PLAYER_INDEX].m_wave.primary : settings->m_overrides[CGC_PLAYER_INDEX].m_wave.secondary;
+            color = type == PRIMARY ? CGC_OVERRIDE(wave).primary : CGC_OVERRIDE(wave).secondary;
             break;
         case ROBOT:
-            color = type == PRIMARY ? settings->m_overrides[CGC_PLAYER_INDEX].m_robot.primary : settings->m_overrides[CGC_PLAYER_INDEX].m_robot.secondary;
+            color = type == PRIMARY ? CGC_OVERRIDE(robot).primary : CGC_OVERRIDE(robot).secondary;
             break;
         case SPIDER:
-            color = type == PRIMARY ? settings->m_overrides[CGC_PLAYER_INDEX].m_spider.primary : settings->m_overrides[CGC_PLAYER_INDEX].m_spider.secondary;
+            color = type == PRIMARY ? CGC_OVERRIDE(spider).primary : CGC_OVERRIDE(spider).secondary;
             break;
         case SWING:
-            color = type == PRIMARY ? settings->m_overrides[CGC_PLAYER_INDEX].m_swing.primary : settings->m_overrides[CGC_PLAYER_INDEX].m_swing.secondary;
+            color = type == PRIMARY ? CGC_OVERRIDE(swing).primary : CGC_OVERRIDE(swing).secondary;
             break;
         default:
             break;
@@ -589,27 +589,10 @@ void CustomCharacterColorPage::onColorTypeButtonClicked(CCObject* sender) {
     settings->m_current_color_type = static_cast<ColorType>(tag);
 
     // set buttons
-    auto primary_button = settings->m_button_primary_color;
-    auto secondary_button = settings->m_button_secondary_color;
-    auto glow_button = settings->m_button_glow_color;
-
-    switch (settings->m_current_color_type) {
-        case PRIMARY:
-            static_cast<ButtonSprite*>(primary_button->getChildren()->objectAtIndex(0))->updateBGImage(TEXTURE_BUTTON_ENABLED);
-            static_cast<ButtonSprite*>(secondary_button->getChildren()->objectAtIndex(0))->updateBGImage(TEXTURE_BUTTON_DISABLED);
-            static_cast<ButtonSprite*>(glow_button->getChildren()->objectAtIndex(0))->updateBGImage(TEXTURE_BUTTON_DISABLED);
-            break;
-        case SECONDARY:
-            static_cast<ButtonSprite*>(primary_button->getChildren()->objectAtIndex(0))->updateBGImage(TEXTURE_BUTTON_DISABLED);
-            static_cast<ButtonSprite*>(secondary_button->getChildren()->objectAtIndex(0))->updateBGImage(TEXTURE_BUTTON_ENABLED);
-            static_cast<ButtonSprite*>(glow_button->getChildren()->objectAtIndex(0))->updateBGImage(TEXTURE_BUTTON_DISABLED);
-            break;
-        case GLOW:
-            static_cast<ButtonSprite*>(primary_button->getChildren()->objectAtIndex(0))->updateBGImage(TEXTURE_BUTTON_DISABLED);
-            static_cast<ButtonSprite*>(secondary_button->getChildren()->objectAtIndex(0))->updateBGImage(TEXTURE_BUTTON_DISABLED);
-            static_cast<ButtonSprite*>(glow_button->getChildren()->objectAtIndex(0))->updateBGImage(TEXTURE_BUTTON_ENABLED);
-            break;
-    }
+    auto type = settings->m_current_color_type;
+    static_cast<ButtonSprite*>(settings->m_button_primary_color->getChildren()->objectAtIndex(0))->updateBGImage(type == PRIMARY ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+    static_cast<ButtonSprite*>(settings->m_button_secondary_color->getChildren()->objectAtIndex(0))->updateBGImage(type == SECONDARY ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
+    static_cast<ButtonSprite*>(settings->m_button_glow_color->getChildren()->objectAtIndex(0))->updateBGImage(type == GLOW ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED);
 
     this->updateUI();
 }

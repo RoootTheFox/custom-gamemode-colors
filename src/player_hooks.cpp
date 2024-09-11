@@ -78,90 +78,58 @@ class $modify(PlayerObject) {
 
         bool isCube = !this->m_isShip && !this->m_isBall && !this->m_isBird && !this->m_isDart && !this->m_isRobot && !this->m_isSpider && !this->m_isSwing;
 
+        int col1 = settings->m_defaultColor;
+        int col2 = settings->m_defaultColor2;
+
         if(isCube) {
-            int col1 = settings->m_overrides[CGC_PLAYER_INDEX].m_cube.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_cube.primary  : settings->m_defaultColor;
-            int col2 = settings->m_overrides[CGC_PLAYER_INDEX].m_cube.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_cube.secondary : settings->m_defaultColor2;
-
-            this->setColor(gameManager->colorForIdx(col1));
-            this->setSecondColor(gameManager->colorForIdx(col2));
-            gameManager->m_playerColor = col1;
-            gameManager->m_playerColor2 = col2;
+            col1 = CGC_OVERRIDE(cube).enabled ? CGC_OVERRIDE(cube).primary   : settings->m_defaultColor;
+            col2 = CGC_OVERRIDE(cube).enabled ? CGC_OVERRIDE(cube).secondary : settings->m_defaultColor2;
         }
-        
-        if(this->m_isShip) {
-            int col1 = settings->m_overrides[CGC_PLAYER_INDEX].m_ship.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_ship.primary  : settings->m_defaultColor;
-            int col2 = settings->m_overrides[CGC_PLAYER_INDEX].m_ship.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_ship.secondary : settings->m_defaultColor2;
 
-            this->setColor(gameManager->colorForIdx(col1));
-            this->setSecondColor(gameManager->colorForIdx(col2));
-            gameManager->m_playerColor = col1;
-            gameManager->m_playerColor2 = col2;
+        if(this->m_isShip) {
+            col1 = CGC_OVERRIDE(ship).enabled ? CGC_OVERRIDE(ship).primary   : settings->m_defaultColor;
+            col2 = CGC_OVERRIDE(ship).enabled ? CGC_OVERRIDE(ship).secondary : settings->m_defaultColor2;
         }
 
         if(this->m_isBall) {
-            int col1 = settings->m_overrides[CGC_PLAYER_INDEX].m_ball.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_ball.primary  : settings->m_defaultColor;
-            int col2 = settings->m_overrides[CGC_PLAYER_INDEX].m_ball.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_ball.secondary : settings->m_defaultColor2;
-
-            this->setColor(gameManager->colorForIdx(col1));
-            this->setSecondColor(gameManager->colorForIdx(col2));
-            gameManager->m_playerColor = col1;
-            gameManager->m_playerColor2 = col2;
+            col1 = CGC_OVERRIDE(ball).enabled ? CGC_OVERRIDE(ball).primary   : settings->m_defaultColor;
+            col2 = CGC_OVERRIDE(ball).enabled ? CGC_OVERRIDE(ball).secondary : settings->m_defaultColor2;
         }
 
         if(this->m_isBird) {
-            int col1 = settings->m_overrides[CGC_PLAYER_INDEX].m_ufo.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_ufo.primary  : settings->m_defaultColor;
-            int col2 = settings->m_overrides[CGC_PLAYER_INDEX].m_ufo.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_ufo.secondary : settings->m_defaultColor2;
-
-            this->setColor(gameManager->colorForIdx(col1));
-            this->setSecondColor(gameManager->colorForIdx(col2));
-            gameManager->m_playerColor = col1;
-            gameManager->m_playerColor2 = col2;
+            col1 = CGC_OVERRIDE(ufo).enabled ? CGC_OVERRIDE(ufo).primary   : settings->m_defaultColor;
+            col2 = CGC_OVERRIDE(ufo).enabled ? CGC_OVERRIDE(ufo).secondary : settings->m_defaultColor2;
         }
 
         if(this->m_isDart) {
-            int col1 = settings->m_overrides[CGC_PLAYER_INDEX].m_wave.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_wave.primary  : settings->m_defaultColor;
-            int col2 = settings->m_overrides[CGC_PLAYER_INDEX].m_wave.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_wave.secondary : settings->m_defaultColor2;
-
-            this->setColor(gameManager->colorForIdx(col1));
-            this->setSecondColor(gameManager->colorForIdx(col2));
-            gameManager->m_playerColor = col1;
-            gameManager->m_playerColor2 = col2;
+            col1 = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).primary   : settings->m_defaultColor;
+            col2 = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).secondary : settings->m_defaultColor2;
         }
 
         if(this->m_isRobot) {
-            int col1 = settings->m_overrides[CGC_PLAYER_INDEX].m_robot.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_robot.primary  : settings->m_defaultColor;
-            int col2 = settings->m_overrides[CGC_PLAYER_INDEX].m_robot.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_robot.secondary : settings->m_defaultColor2;
-
-            this->setColor(gameManager->colorForIdx(col1));
-            this->setSecondColor(gameManager->colorForIdx(col2));
-            gameManager->m_playerColor = col1;
-            gameManager->m_playerColor2 = col2;
+            col1 = CGC_OVERRIDE(robot).enabled ? CGC_OVERRIDE(robot).primary  : settings->m_defaultColor;
+            col2 = CGC_OVERRIDE(robot).enabled ? CGC_OVERRIDE(robot).secondary : settings->m_defaultColor2;
         }
 
         if(this->m_isSpider) {
-            int col1 = settings->m_overrides[CGC_PLAYER_INDEX].m_spider.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_spider.primary  : settings->m_defaultColor;
-            int col2 = settings->m_overrides[CGC_PLAYER_INDEX].m_spider.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_spider.secondary : settings->m_defaultColor2;
-
-            this->setColor(gameManager->colorForIdx(col1));
-            this->setSecondColor(gameManager->colorForIdx(col2));
-            gameManager->m_playerColor = col1;
-            gameManager->m_playerColor2 = col2;
+            col1 = CGC_OVERRIDE(spider).enabled ? CGC_OVERRIDE(spider).primary  : settings->m_defaultColor;
+            col2 = CGC_OVERRIDE(spider).enabled ? CGC_OVERRIDE(spider).secondary : settings->m_defaultColor2;
         }
 
         if(this->m_isSwing) {
-            int col1 = settings->m_overrides[CGC_PLAYER_INDEX].m_swing.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_swing.primary  : settings->m_defaultColor;
-            int col2 = settings->m_overrides[CGC_PLAYER_INDEX].m_swing.enabled ? settings->m_overrides[CGC_PLAYER_INDEX].m_swing.secondary : settings->m_defaultColor2;
-
-            this->setColor(gameManager->colorForIdx(col1));
-            this->setSecondColor(gameManager->colorForIdx(col2));
-            gameManager->m_playerColor = col1;
-            gameManager->m_playerColor2 = col2;
+            col1 = CGC_OVERRIDE(swing).enabled ? CGC_OVERRIDE(swing).primary  : settings->m_defaultColor;
+            col2 = CGC_OVERRIDE(swing).enabled ? CGC_OVERRIDE(swing).secondary : settings->m_defaultColor2;
         }
 
+        this->setColor(gameManager->colorForIdx(col1));
+        this->setSecondColor(gameManager->colorForIdx(col2));
+        gameManager->m_playerColor = col1;
+        gameManager->m_playerColor2 = col2;
+
         // change the tiny cube color inside the ship and ufo
-        if ((this->m_isBird || this->m_isShip) && settings->m_overrides[CGC_PLAYER_INDEX].m_cube.enabled && settings->m_overrides[CGC_PLAYER_INDEX].m_override_inner_cube) {
-            this->m_iconSprite->setColor(gameManager->colorForIdx(settings->m_overrides[CGC_PLAYER_INDEX].m_cube.primary));
-            this->m_iconSpriteSecondary->setColor(gameManager->colorForIdx(settings->m_overrides[CGC_PLAYER_INDEX].m_cube.secondary));
+        if ((this->m_isBird || this->m_isShip) && CGC_OVERRIDE(cube).enabled && settings->m_overrides[CGC_PLAYER_INDEX].m_override_inner_cube) {
+            this->m_iconSprite->setColor(gameManager->colorForIdx(CGC_OVERRIDE(cube).primary));
+            this->m_iconSpriteSecondary->setColor(gameManager->colorForIdx(CGC_OVERRIDE(cube).secondary));
         }
     }
 };
