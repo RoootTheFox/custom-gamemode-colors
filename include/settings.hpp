@@ -81,6 +81,7 @@ class Settings {
 
         GameMode m_current_mode = NONE;
         ColorType m_current_color_type = PRIMARY;
+        bool m_current_p2 = false;
 
         geode::prelude::CCSprite* m_current_gamemode_sprite = nullptr;
 
@@ -92,10 +93,10 @@ class Settings {
         CCMenuItemSpriteExtra* m_button_secondary_color = nullptr;
         CCMenuItemSpriteExtra* m_button_glow_color = nullptr;
 
-        bool isOverrideEnabled(GameMode mode, bool p2 = false);
+        bool isOverrideEnabled(GameMode mode, bool p2);
 
-        void toggleOverride(GameMode mode, bool p2 = false);
-        void setOverrideColor(GameMode mode, int color, ColorType type, bool p2 = false);
+        void toggleOverride(GameMode mode, bool p2);
+        void setOverrideColor(GameMode mode, int color, ColorType type, bool p2);
 
         void save();
 

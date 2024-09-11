@@ -5,7 +5,7 @@
 #endif
 using namespace geode::prelude;
 
-CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
+CustomCharacterColorPage* CustomCharacterColorPage::customCreate(bool p2) {
     auto settings = Settings::sharedInstance();
 
     // i want to properly inherit but everything except this crashes, so: FUCK IT, WE BALL.
@@ -28,6 +28,8 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
         log::error("didn't find color menu");
         return self;
     }
+
+    settings->m_current_p2 = p2;
 
     // fix a crash that occurs when clicking the x button manually - doesn't happen in 2.206 anymore??
     /*auto x_button = typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildByID("close-button"));
@@ -152,9 +154,6 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate() {
     } else {
         log::error("failed to load icons and selection sprites (this should never happen)");
     }
-
-    // todo !!!
-    bool p2 = false;
 
     auto inner_button = ButtonSprite::create("color cube in ship/ufo", 77, true, "bigFont.fnt",
             settings->m_overrides[CGC_PLAYER_INDEX].m_override_inner_cube ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED, 20.0f, 4.0f);
@@ -284,9 +283,7 @@ void CustomCharacterColorPage::close(CCObject* sender) {
 void CustomCharacterColorPage::updateUI() {
     auto settings = Settings::sharedInstance();
     auto gameManager = GameManager::get();
-
-    // todo !!
-    bool p2 = false;
+    bool p2 = settings->m_current_p2;
 
     if(settings->m_player_cube) {
         int col1 = CGC_OVERRIDE(cube).enabled ? CGC_OVERRIDE(cube).primary   : settings->m_defaultColor;
@@ -405,11 +402,9 @@ void CustomCharacterColorPage::updateUI() {
 
 void CustomCharacterColorPage::updateColorSelectionSprite(CCSprite* sprite, ColorType type) {
     auto settings = Settings::sharedInstance();
+    bool p2 = settings->m_current_p2;
 
     int color = 0;
-
-    // todo !!
-    bool p2 = false;
 
     switch (settings->m_current_mode) {
         case CUBE:
@@ -542,7 +537,7 @@ void CustomCharacterColorPage::onColorClicked(CCObject* sender) {
 
     auto settings = Settings::sharedInstance();
 
-    settings->setOverrideColor(settings->m_current_mode, tag, settings->m_current_color_type);
+    settings->setOverrideColor(settings->m_current_mode, tag, settings->m_current_color_type, settings->m_current_p2);
 
     this->updateUI();
 }
@@ -607,7 +602,8 @@ void CustomCharacterColorPage::onGameModeToggleButtonClicked(CCObject* sender) {
 
     auto game_mode = static_cast<GameMode>(tag);
 
-    Settings::sharedInstance()->toggleOverride(game_mode);
+    auto settings = Settings::sharedInstance();
+    settings->toggleOverride(game_mode, settings->m_current_p2);
     updateUI();
 }
 

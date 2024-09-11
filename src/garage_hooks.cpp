@@ -24,7 +24,19 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
     }
 
     void onColorOverrideButton(CCObject* pSender) {
-        auto custom_color_page = CustomCharacterColorPage::customCreate();
+        // if separate dual icons is loaded
+
+        bool p2 = false;
+        if (Loader::get()->isModLoaded("weebify.separate_dual_icons")) {
+            auto arrow2 = as<CCSprite*>(this->getChildByID("arrow-2")); // this is added by separate dual icons
+            if (arrow2) {
+                log::debug("found arrow 2 from separate dual icons");
+                p2 = arrow2->isVisible();
+                log::debug("p2: {}", p2);
+            }
+        }
+
+        auto custom_color_page = CustomCharacterColorPage::customCreate(p2);
         custom_color_page->FLAlertLayer::show();
     }
 };

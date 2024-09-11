@@ -34,7 +34,7 @@ protected:
 
     CCPoint getPositionOfColor(int color_id);
 public:
-    static CustomCharacterColorPage* customCreate();
+    static CustomCharacterColorPage* customCreate(bool p2 = false);
 
     static std::string getGameModeName(GameMode game_mode);
 };

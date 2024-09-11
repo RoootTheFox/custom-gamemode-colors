@@ -49,7 +49,7 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type, bool p
 
     this->save();
 
-    if (valid_gamemode && !isOverrideEnabled(mode)) {
+    if (valid_gamemode && !isOverrideEnabled(mode, p2)) {
         Notification::create(
             fmt::format(" enable overrides for {} using\n the small buttons at the top!", CustomCharacterColorPage::getGameModeName(mode)),
             NotificationIcon::Warning
