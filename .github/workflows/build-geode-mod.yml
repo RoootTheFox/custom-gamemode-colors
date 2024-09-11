@@ -35,9 +35,7 @@ jobs:
       - name: Build the mod
         uses: geode-ios/build-geode-mod@main
         with:
-          bindings: 'RoootTheFox/geode-bindings'
-          bindings-ref: 'uhhmmuhhhh'
-          combine: true
+          sdk: '3.5.0'
           target: ${{ matrix.config.target }}
 
   package:
