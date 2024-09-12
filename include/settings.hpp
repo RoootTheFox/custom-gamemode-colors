@@ -83,6 +83,8 @@ class Settings {
         ColorType m_current_color_type = PRIMARY;
         bool m_current_p2 = false;
 
+        geode::Ref<GJGarageLayer> m_garage_layer = nullptr;
+
         geode::prelude::CCSprite* m_current_gamemode_sprite = nullptr;
 
         geode::prelude::CCSprite* m_current_color_primary_sprite = nullptr;

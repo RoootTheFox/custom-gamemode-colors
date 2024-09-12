@@ -26,6 +26,8 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
         menu->updateLayout();
 
         this->customUpdateColors();
+
+        Settings::sharedInstance()->m_garage_layer = this;
         return true;
     }
 

@@ -398,6 +398,10 @@ void CustomCharacterColorPage::updateUI() {
     if (settings->m_current_gamemode_sprite) {
         this->updateGameModeSelectionSprite();
     }
+
+    if (settings->m_garage_layer) {
+        settings->m_garage_layer->updatePlayerColors();
+    }
 }
 
 void CustomCharacterColorPage::updateColorSelectionSprite(CCSprite* sprite, ColorType type) {
