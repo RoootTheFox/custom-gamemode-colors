@@ -115,3 +115,14 @@ struct matjson::Serialize<ColorOverride> {
         default: \
             break; \
     }
+
+#define CGC_OVERRIDE_GAMEMODE(mode) \
+    mode == 0 ? CGC_OVERRIDE(cube) : \
+    mode == 1 ? CGC_OVERRIDE(ship) : \
+    mode == 2 ? CGC_OVERRIDE(ball) : \
+    mode == 3 ? CGC_OVERRIDE(ufo) : \
+    mode == 4 ? CGC_OVERRIDE(wave) : \
+    mode == 5 ? CGC_OVERRIDE(robot) : \
+    mode == 6 ? CGC_OVERRIDE(spider) : \
+    mode == 7 ? CGC_OVERRIDE(swing) : \
+    ColorOverride()
