@@ -22,6 +22,11 @@
 			"id": "geode.node-ids",
 			"version": ">=v1.17.0-alpha.1",
 			"importance": "required"
+		},
+		{
+			"id": "weebify.separate_dual_icons",
+			"version": ">=v1.2.4",
+			"importance": "suggested"
 		}
 	]
 }
