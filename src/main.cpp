@@ -97,7 +97,7 @@ $execute {
 		if (saved.isOk()) {
 			log::info("data migrated to format 1 !");
 		} else {
-			log::error("failed to migrate data: {}", saved.error());
+			log::error("failed to migrate data: {}", saved.unwrapErr());
 		}
 	}
 	
@@ -169,7 +169,7 @@ $execute {
 		if (saved.isOk()) {
 			log::info("data migrated to format 2 !");
 		} else {
-			log::error("failed to migrate data: {}", saved.error());
+			log::error("failed to migrate data: {}", saved.unwrapErr());
 		}
 	} else {
 		log::info("data format up to date !");

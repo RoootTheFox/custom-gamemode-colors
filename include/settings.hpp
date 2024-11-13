@@ -2,6 +2,7 @@
 
 #include "include.hpp"
 #include "ui/CustomCharacterColorPage.hpp"
+#include <Geode/Result.hpp>
 
 struct OverridePlayer {
     ColorOverride m_cube;
@@ -18,22 +19,22 @@ struct OverridePlayer {
 
 template<>
 struct matjson::Serialize<OverridePlayer> {
-    static OverridePlayer from_json(matjson::Value const& value) {
-        return OverridePlayer {
-            .m_cube = value["cube"].as<ColorOverride>(),
-            .m_ship = value["ship"].as<ColorOverride>(),
-            .m_ball = value["ball"].as<ColorOverride>(),
-            .m_ufo = value["ufo"].as<ColorOverride>(),
-            .m_wave = value["wave"].as<ColorOverride>(),
-            .m_robot = value["robot"].as<ColorOverride>(),
-            .m_spider = value["spider"].as<ColorOverride>(),
-            .m_swing = value["swing"].as<ColorOverride>(),
-            .m_override_inner_cube = value["override_inner_cube"].as_bool(),
-        };
+    static geode::Result<OverridePlayer> fromJson(matjson::Value const& value) {
+        return geode::Ok(OverridePlayer {
+            .m_cube = GEODE_UNWRAP(value["cube"].as<ColorOverride>()),
+            .m_ship = GEODE_UNWRAP(value["ship"].as<ColorOverride>()),
+            .m_ball = GEODE_UNWRAP(value["ball"].as<ColorOverride>()),
+            .m_ufo = GEODE_UNWRAP(value["ufo"].as<ColorOverride>()),
+            .m_wave = GEODE_UNWRAP(value["wave"].as<ColorOverride>()),
+            .m_robot = GEODE_UNWRAP(value["robot"].as<ColorOverride>()),
+            .m_spider = GEODE_UNWRAP(value["spider"].as<ColorOverride>()),
+            .m_swing = GEODE_UNWRAP(value["swing"].as<ColorOverride>()),
+            .m_override_inner_cube = GEODE_UNWRAP(value["override_inner_cube"].asBool()),
+        });
     }
 
-    static matjson::Value to_json(OverridePlayer const& value) {
-        auto obj = matjson::Object();
+    static matjson::Value toJson(OverridePlayer const& value) {
+        auto obj = matjson::Value();
         obj["cube"] = value.m_cube;
         obj["ship"] = value.m_ship;
         obj["ball"] = value.m_ball;

@@ -18,7 +18,7 @@ class $modify(MenuLayer) {
                     if (res.isOk()) {
                         log::info("sdi hook for {} disabled !!", function_name);
                     } else {
-                        log::error("failed to disable sdi hook for {}: {}", function_name, res.error());
+                        log::error("failed to disable sdi hook for {}: {}", function_name, res.unwrapErr());
                     }
                 }
             }

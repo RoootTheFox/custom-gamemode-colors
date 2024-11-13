@@ -1,4 +1,5 @@
 #pragma once
+#include "include.hpp"
 
 enum GameMode : int {
     NONE = 0,
@@ -27,22 +28,22 @@ struct ColorOverride {
 
 template<>
 struct matjson::Serialize<ColorOverride> {
-    static ColorOverride from_json(matjson::Value const& value) {
-        return ColorOverride {
-            .enabled = value.contains("enabled") ? value["enabled"].as_bool() : false,
-            .primary = value["primary"].as_int(),
-            .secondary = value["secondary"].as_int(),
-            .glow = value["glow"].as_int(),
-        };
+    static geode::Result<ColorOverride> fromJson(matjson::Value const& value) {
+        return geode::Ok(ColorOverride {
+            .enabled = value.contains("enabled") ? GEODE_UNWRAP(value["enabled"].asBool()) : false,
+            .primary = GEODE_UNWRAP(value["primary"].as<int>()),
+            .secondary = GEODE_UNWRAP(value["secondary"].as<int>()),
+            .glow = GEODE_UNWRAP(value["glow"].as<int>()),
+        });
     }
 
-    static matjson::Value to_json(ColorOverride const& value) {
-        auto obj = matjson::Object();
-        obj["enabled"] = value.enabled;
-        obj["primary"] = value.primary;
-        obj["secondary"] = value.secondary;
-        obj["glow"] = value.glow;
-        return obj;
+    static matjson::Value toJson(ColorOverride const& value) {
+        return matjson::makeObject({
+            { "enabled", value.enabled },
+            { "primary", value.primary },
+            { "secondary", value.secondary },
+            { "glow", value.glow },
+        });
     }
 
     // this is needed, else it'll just get ignored
