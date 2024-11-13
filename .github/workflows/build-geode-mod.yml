@@ -33,9 +33,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build the mod
-        uses: geode-ios/build-geode-mod@main
+        uses: geode-sdk/build-geode-mod@main
         with:
-          sdk: '3.5.0'
+          bindings: 'RoootTheFox/geode-bindings'
           target: ${{ matrix.config.target }}
 
   package:
@@ -44,7 +44,7 @@ jobs:
     needs: ['build']
 
     steps:
-      - uses: geode-ios/build-geode-mod/combine@main
+      - uses: geode-sdk/build-geode-mod/combine@main
         id: build
 
       - uses: actions/upload-artifact@v4
