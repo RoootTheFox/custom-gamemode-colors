@@ -15,7 +15,8 @@
 		"customization",
 		"gameplay",
 		"interface",
-		"enhancement"
+		"enhancement",
+		"offline"
 	],
 	"dependencies": [
 		{
