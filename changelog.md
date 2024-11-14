@@ -1,3 +1,10 @@
+# v0.1.9
+
+* update to gd 2.2074 and geode v4
+* experimental **2-player support!** (needs [Separate Dual Icons](<mod:weebify.separate_dual_icons>))
+* the icon kit now shows the custom colors correctly :3
+* internal: slightly improved codebase
+
 # v0.1.8
 
 * bumped geode to 3.0.0-beta.4
