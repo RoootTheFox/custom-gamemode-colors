@@ -1,3 +1,8 @@
+# v0.2.0
+
+* update to geode v4 (stable release)
+* check update below for the changelog :3c
+
 # v0.1.9
 
 * update to gd 2.2074 and geode v4
