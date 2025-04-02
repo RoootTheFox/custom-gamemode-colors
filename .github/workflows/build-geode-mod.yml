@@ -41,6 +41,8 @@ jobs:
         with:
           bindings: RoootTheFox/geode-bindings
           target: ${{ matrix.config.target }}
+          combine: true
+          cli: nightly
           sdk: nightly
 
   package:
@@ -51,6 +53,8 @@ jobs:
     steps:
       - uses: geode-sdk/build-geode-mod/combine@main
         id: build
+        with:
+          cli: nightly
 
       - uses: actions/upload-artifact@v4
         with:
