@@ -39,7 +39,7 @@ jobs:
       - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
         with:
-          bindings: https://github.com/RoootTheFox/geode-bindings
+          bindings: RoootTheFox/geode-bindings
           target: ${{ matrix.config.target }}
           sdk: nightly
 
