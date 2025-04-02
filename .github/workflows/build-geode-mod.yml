@@ -39,8 +39,8 @@ jobs:
       - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
         with:
-          bindings: 'RoootTheFox/geode-bindings'
           target: ${{ matrix.config.target }}
+          sdk: nightly
 
   package:
     name: Package builds
