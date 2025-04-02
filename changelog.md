@@ -1,3 +1,8 @@
+# v0.2.1
+
+* update geode
+* *apple juice for the future*
+
 # v0.2.0
 
 * update to geode v4 (stable release)
