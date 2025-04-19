@@ -41,6 +41,7 @@ jobs:
         with:
           sdk: nightly
           bindings: 'RoootTheFox/geode-bindings'
+          combine: true
           target: ${{ matrix.config.target }}
 
   package:
