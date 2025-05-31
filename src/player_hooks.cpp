@@ -1,6 +1,7 @@
 #include <Geode/modify/PlayerObject.hpp>
 #include <Geode/modify/GameManager.hpp>
 #include <Geode/modify/PlayLayer.hpp>
+#include <Geode/modify/EditorPauseLayer.hpp>
 
 #include "settings.hpp"
 
@@ -139,6 +140,38 @@ class $modify(PlayLayer) {
         PlayLayer::onQuit();
 
         // whenever we quit a level, reset the gameManager player colors (else they'll reflect the last icon override)
+        auto gameManager = GameManager::get();
+        auto settings = Settings::sharedInstance();
+        gameManager->m_playerColor = settings->m_defaultColor;
+        gameManager->m_playerColor2 = settings->m_defaultColor2;
+    }
+};
+
+// whenever we exit the editor, reset the gameManager player colors (else they'll reflect the last icon override)
+class $modify(EditorPauseLayer) {
+    void onExitEditor(cocos2d::CCObject * sender) {
+        EditorPauseLayer::onExitEditor(sender);
+        auto gameManager = GameManager::get();
+        auto settings = Settings::sharedInstance();
+        gameManager->m_playerColor = settings->m_defaultColor;
+        gameManager->m_playerColor2 = settings->m_defaultColor2;
+    }
+    void onExitNoSave(cocos2d::CCObject* sender) {
+        EditorPauseLayer::onExitNoSave(sender);
+        auto gameManager = GameManager::get();
+        auto settings = Settings::sharedInstance();
+        gameManager->m_playerColor = settings->m_defaultColor;
+        gameManager->m_playerColor2 = settings->m_defaultColor2;
+    }
+    void onSaveAndExit(cocos2d::CCObject* sender) {
+        EditorPauseLayer::onSaveAndExit(sender);
+        auto gameManager = GameManager::get();
+        auto settings = Settings::sharedInstance();
+        gameManager->m_playerColor = settings->m_defaultColor;
+        gameManager->m_playerColor2 = settings->m_defaultColor2;
+    }
+    void onSaveAndPlay(cocos2d::CCObject* sender) {
+        EditorPauseLayer::onSaveAndPlay(sender);
         auto gameManager = GameManager::get();
         auto settings = Settings::sharedInstance();
         gameManager->m_playerColor = settings->m_defaultColor;
