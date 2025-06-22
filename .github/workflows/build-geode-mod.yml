@@ -42,8 +42,6 @@ jobs:
           bindings: RoootTheFox/geode-bindings
           target: ${{ matrix.config.target }}
           combine: true
-          cli: nightly
-          sdk: nightly
 
   package:
     name: Package builds
