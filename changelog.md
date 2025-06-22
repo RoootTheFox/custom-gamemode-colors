@@ -1,7 +1,8 @@
 # v0.2.1
 
-* update geode
-* *apple juice for the future*
+* update geode to 4.6.1
+* iOS support is back (including JITless!)
+* fix playtesting in the editor changing default player colors
 
 # v0.2.0
 
