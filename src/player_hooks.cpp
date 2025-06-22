@@ -123,8 +123,6 @@ class $modify(PlayerObject) {
 
         this->setColor(gameManager->colorForIdx(col1));
         this->setSecondColor(gameManager->colorForIdx(col2));
-        gameManager->m_playerColor = col1;
-        gameManager->m_playerColor2 = col2;
 
         // change the tiny cube color inside the ship and ufo
         if ((this->m_isBird || this->m_isShip) && CGC_OVERRIDE(cube).enabled && settings->m_overrides[CGC_PLAYER_INDEX].m_override_inner_cube) {
@@ -133,25 +131,3 @@ class $modify(PlayerObject) {
         }
     }
 };
-
-class $modify(PlayLayer) {
-    void onQuit() {
-        PlayLayer::onQuit();
-
-        // whenever we quit a level, reset the gameManager player colors (else they'll reflect the last icon override)
-        auto gameManager = GameManager::get();
-        auto settings = Settings::sharedInstance();
-        gameManager->m_playerColor = settings->m_defaultColor;
-        gameManager->m_playerColor2 = settings->m_defaultColor2;
-    }
-};
-
-// TODO: fixme (this is inlined everywhere?)
-/*
-class $modify(GameManager) {
-    void setPlayerColor(int id) {
-        Settings::sharedInstance()->m_defaultColor = id;
-        GameManager::setPlayerColor(id);
-    }
-};
-*/
