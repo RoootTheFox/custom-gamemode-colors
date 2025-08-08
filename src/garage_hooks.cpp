@@ -34,8 +34,8 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
     void onColorOverrideButton(CCObject* pSender) {
         bool p2 = this->getIsP2();
 
-        auto custom_color_page = CustomCharacterColorPage::customCreate(p2);
-        custom_color_page->FLAlertLayer::show();
+        auto custom_color_page = CustomCharacterColorPage::create(p2);
+        custom_color_page->show();
     }
 
     void setupPage(int p0, IconType p1) {

@@ -1,156 +1,139 @@
 #include "ui/CustomCharacterColorPage.hpp"
 
-#ifdef GEODE_IS_IOS
-#include <Geode/platform/ItaniumCast.hpp>
-#endif
 using namespace geode::prelude;
 
-CustomCharacterColorPage* CustomCharacterColorPage::customCreate(bool p2) {
-    auto settings = Settings::sharedInstance();
+CustomCharacterColorPage* CustomCharacterColorPage::create(bool p2) {
+    auto ret = new CustomCharacterColorPage();
+    if (ret->init(p2)) {
+        ret->autorelease();
+        return ret;
+    }   
 
-    // i want to properly inherit but everything except this crashes, so: FUCK IT, WE BALL.
-    #ifdef GEODE_IS_WINDOWS
-    auto _sex = new CharacterColorPage();
-    auto self = static_cast<CustomCharacterColorPage*>(_sex);
-    if (!_sex || !_sex->init()) return nullptr;
-    #else
-    auto self = static_cast<CustomCharacterColorPage*>(CharacterColorPage::create());
-    #endif
+    delete ret;
+    return nullptr;
+}
 
-    if (!self) {
-        log::error("failed to create CustomCharacterColorPage");
-        return nullptr;
-    }
+bool CustomCharacterColorPage::init(bool p2) {
+    if (!CharacterColorPage::init()) return false;
 
-    CCMenu* menu = self->m_buttonMenu;
+    setID("gamemode-colors=page"_spr);
 
-    if (menu == nullptr) {
+    if (!m_buttonMenu) {
         log::error("didn't find color menu");
-        return self;
+        return true;
     }
+    auto settings = Settings::sharedInstance();
 
     settings->m_current_p2 = p2;
 
-    // fix a crash that occurs when clicking the x button manually - doesn't happen in 2.206 anymore??
-    /*auto x_button = typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildByID("close-button"));
-    if (x_button) {
-        log::debug("found close button ! :3");
-        x_button->m_pfnSelector = menu_selector(CustomCharacterColorPage::close);
-    }*/
-
     int buttons_found = 0;
 
-    for (int i = 0; i < menu->getChildrenCount(); i++) {
-        auto child = menu->getChildren()->objectAtIndex(i);
-        auto node = typeinfo_cast<CCMenuItemSpriteExtra*>(child);
-        if (!node) {
-            continue;
-        }
+    for (auto node : CCArrayExt<CCNode*>(m_buttonMenu->getChildren())) {
+        auto btn = typeinfo_cast<CCMenuItemSpriteExtra*>(node);
+        if (!btn) continue;
 
-        for (int j = 0; j < node->getChildrenCount(); j++) {
-            auto node_child = node->getChildren()->objectAtIndex(j);
-            if (typeinfo_cast<ColorChannelSprite*>(node_child)) {
-                node->m_pfnSelector = menu_selector(CustomCharacterColorPage::onColorClicked);
+        for (auto btnChild : CCArrayExt<CCNode*>(btn->getChildren())) {
+            if (typeinfo_cast<ColorChannelSprite*>(btnChild)) {
+                btn->setTarget(this, menu_selector(CustomCharacterColorPage::onColorClicked));
             }
-            if (typeinfo_cast<ButtonSprite*>(node_child)) {
+            if (typeinfo_cast<ButtonSprite*>(btnChild)) {
                 if (buttons_found > 2) {
                     // this is mainly here to remove the "Rand" button added by Capeling's randomizer mod
                     log::warn("found too many buttons, removing");
                     node->removeFromParentAndCleanup(true);
                     continue;
                 }
-
                 buttons_found++;
             }
         }
     }
 
-    settings->m_button_primary_color = typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildByID("col1-button"));
-    settings->m_button_secondary_color = typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildByID("col2-button"));
-    settings->m_button_glow_color = typeinfo_cast<CCMenuItemSpriteExtra*>(menu->getChildByID("glow-button"));
+    settings->m_button_primary_color = typeinfo_cast<CCMenuItemSpriteExtra*>(m_buttonMenu->getChildByID("col1-button"));
+    settings->m_button_secondary_color = typeinfo_cast<CCMenuItemSpriteExtra*>(m_buttonMenu->getChildByID("col2-button"));
+    settings->m_button_glow_color = typeinfo_cast<CCMenuItemSpriteExtra*>(m_buttonMenu->getChildByID("glow-button"));
 
     // what an ugly if statement
     if (settings->m_button_primary_color == nullptr || settings->m_button_secondary_color == nullptr || settings->m_button_glow_color == nullptr) {
         log::error("DID NOT FIND ALL BUTTONS");
-        return self;
+        return true;
     } else {
-        settings->m_button_primary_color->m_pfnSelector = menu_selector(CustomCharacterColorPage::onColorTypeButtonClicked);
-        settings->m_button_secondary_color->m_pfnSelector = menu_selector(CustomCharacterColorPage::onColorTypeButtonClicked);
-        settings->m_button_glow_color->m_pfnSelector = menu_selector(CustomCharacterColorPage::onColorTypeButtonClicked);
+        settings->m_button_primary_color->setTarget(this, menu_selector(CustomCharacterColorPage::onColorTypeButtonClicked));
+        settings->m_button_secondary_color->setTarget(this, menu_selector(CustomCharacterColorPage::onColorTypeButtonClicked));
+        settings->m_button_glow_color->setTarget(this, menu_selector(CustomCharacterColorPage::onColorTypeButtonClicked));
     }
 
     // END
     // murder 2nd child from self if it exists (added by an icon hack mod, using it crashes the game)
-    if (self->getChildrenCount() > 1) {
-        self->removeChild(static_cast<CCNode*>(self->getChildren()->objectAtIndex(1)));
+    if (getChildrenCount() > 1) {
+        removeChild(static_cast<CCNode*>(getChildren()->objectAtIndex(1)));
     }
 
     // gotta catch 'em all!
-    if (self->loadSimpsAndSelectionSprites()) {
+    if (loadSimpsAndSelectionSprites()) {
         // find the ship button BEFORE all other player buttons are added
-        auto ship_player = findFirstChildRecursive<SimplePlayer>(menu, [](auto node) {
+        auto ship_player = findFirstChildRecursive<SimplePlayer>(m_buttonMenu, [](auto node) {
             return typeinfo_cast<SimplePlayer*>(node) != nullptr;
         });
         settings->m_player_ship = ship_player;
         auto ship_button = typeinfo_cast<CCMenuItemSprite*>(ship_player->getParent());
         ship_button->setTag(SHIP);
-        ship_button->m_pfnSelector = menu_selector(CustomCharacterColorPage::onPlayerClicked);
+        ship_button->setTarget(this, menu_selector(CustomCharacterColorPage::onPlayerClicked));
 
         // cube button
-        auto cube_button = self->createPlayerButton(settings->m_player_cube, CUBE);
-        menu->addChild(cube_button);
+        auto cube_button = createPlayerButton(settings->m_player_cube, CUBE);
+        m_buttonMenu->addChild(cube_button);
 
-        auto ball_button = self->createPlayerButton(settings->m_player_ball, BALL);
-        menu->addChild(ball_button);
+        auto ball_button = createPlayerButton(settings->m_player_ball, BALL);
+        m_buttonMenu->addChild(ball_button);
 
-        auto ufo_button = self->createPlayerButton(settings->m_player_ufo, UFO);
-        menu->addChild(ufo_button);
+        auto ufo_button = createPlayerButton(settings->m_player_ufo, UFO);
+        m_buttonMenu->addChild(ufo_button);
 
-        auto wave_button = self->createPlayerButton(settings->m_player_wave, WAVE);
-        menu->addChild(wave_button);
+        auto wave_button = createPlayerButton(settings->m_player_wave, WAVE);
+        m_buttonMenu->addChild(wave_button);
 
-        auto robot_button = self->createPlayerButton(settings->m_player_robot, ROBOT);
-        menu->addChild(robot_button);
+        auto robot_button = createPlayerButton(settings->m_player_robot, ROBOT);
+        m_buttonMenu->addChild(robot_button);
 
-        auto spider_button = self->createPlayerButton(settings->m_player_spider, SPIDER);
-        menu->addChild(spider_button);
+        auto spider_button = createPlayerButton(settings->m_player_spider, SPIDER);
+        m_buttonMenu->addChild(spider_button);
 
-        auto swing_button = self->createPlayerButton(settings->m_player_swing, SWING);
-        menu->addChild(swing_button);
+        auto swing_button = createPlayerButton(settings->m_player_swing, SWING);
+        m_buttonMenu->addChild(swing_button);
 
         float button_width = 33.0f;
-        auto cube_toggle_button = self->createGameModeButton(CUBE, {button_width, -7});
-        menu->addChild(cube_toggle_button);
+        auto cube_toggle_button = createGameModeButton(CUBE, {button_width, -7});
+        m_buttonMenu->addChild(cube_toggle_button);
 
-        auto ship_toggle_button = self->createGameModeButton(SHIP, {button_width * 2, -7});
-        menu->addChild(ship_toggle_button);
+        auto ship_toggle_button = createGameModeButton(SHIP, {button_width * 2, -7});
+        m_buttonMenu->addChild(ship_toggle_button);
 
-        auto ball_toggle_button = self->createGameModeButton(BALL, {button_width * 3, -7});
-        menu->addChild(ball_toggle_button);
+        auto ball_toggle_button = createGameModeButton(BALL, {button_width * 3, -7});
+        m_buttonMenu->addChild(ball_toggle_button);
 
-        auto ufo_toggle_button = self->createGameModeButton(UFO, {button_width * 4, -7});
-        menu->addChild(ufo_toggle_button);
+        auto ufo_toggle_button = createGameModeButton(UFO, {button_width * 4, -7});
+        m_buttonMenu->addChild(ufo_toggle_button);
 
-        auto wave_toggle_button = self->createGameModeButton(WAVE, {button_width * 5, -7});
-        menu->addChild(wave_toggle_button);
+        auto wave_toggle_button = createGameModeButton(WAVE, {button_width * 5, -7});
+        m_buttonMenu->addChild(wave_toggle_button);
 
-        auto robot_toggle_button = self->createGameModeButton(ROBOT, {button_width * 6, -7});
-        menu->addChild(robot_toggle_button);
+        auto robot_toggle_button = createGameModeButton(ROBOT, {button_width * 6, -7});
+        m_buttonMenu->addChild(robot_toggle_button);
 
-        auto spider_toggle_button = self->createGameModeButton(SPIDER, {button_width * 7, -7});
-        menu->addChild(spider_toggle_button);
+        auto spider_toggle_button = createGameModeButton(SPIDER, {button_width * 7, -7});
+        m_buttonMenu->addChild(spider_toggle_button);
 
-        auto swing_toggle_button = self->createGameModeButton(SWING, {button_width * 8, -7});
-        menu->addChild(swing_toggle_button);
+        auto swing_toggle_button = createGameModeButton(SWING, {button_width * 8, -7});
+        m_buttonMenu->addChild(swing_toggle_button);
 
         // sprite to show current player
         auto current_gamemode_sprite = CCSprite::createWithSpriteFrameName(TEXTURE_SELECTED_FRAME);
         current_gamemode_sprite->setContentSize({32, 32});
         current_gamemode_sprite->setScale(1.15f);
-        self->m_mainLayer->addChild(current_gamemode_sprite);
+        m_mainLayer->addChild(current_gamemode_sprite);
         settings->m_current_gamemode_sprite = current_gamemode_sprite;
 
-        self->updateUI();
+        updateUI();
     } else {
         log::error("failed to load icons and selection sprites (this should never happen)");
     }
@@ -159,23 +142,17 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate(bool p2) {
             settings->m_overrides[CGC_PLAYER_INDEX].m_override_inner_cube ? TEXTURE_BUTTON_ENABLED : TEXTURE_BUTTON_DISABLED, 20.0f, 4.0f);
     auto button = CCMenuItemSpriteExtra::create(
         inner_button,
-        self,
+        this,
         menu_selector(CustomCharacterColorPage::onCubeInShipUfoToggleButtonClicked)
     );
-    self->m_buttonMenu->addChild(button);
+    m_buttonMenu->addChild(button);
     button->setPosition({53.5f, -265});
 
-    //self->autorelease();
-    //log::debug("CustomCharacterColorPage::create returning self");
-    return self;
+    return true;
 }
 
 CCMenuItemSpriteExtra* CustomCharacterColorPage::createPlayerButton(SimplePlayer* player, GameMode game_mode) {
-    #if defined(GEODE_IS_MACOS) || defined(GEODE_IS_IOS)
-    auto player_pos = player->getParent()->convertToWorldSpace(player->getPosition()) + player->getParent()->getAnchorPointInPoints();
-    #else
     auto player_pos = player->getParent()->convertToWorldSpaceAR(player->getPosition());
-    #endif
     player->removeFromParent();
 
     auto button = CCMenuItemSpriteExtra::create(
@@ -186,11 +163,7 @@ CCMenuItemSpriteExtra* CustomCharacterColorPage::createPlayerButton(SimplePlayer
     button->setContentSize({30, 30});
     player->setPosition({15, 15});
 
-    #if defined(GEODE_IS_MACOS) || defined(GEODE_IS_IOS)
-    button->setPosition(this->m_buttonMenu->convertToNodeSpace(player_pos) - this->m_buttonMenu->getAnchorPointInPoints());
-    #else
     button->setPosition(this->m_buttonMenu->convertToNodeSpaceAR(player_pos));
-    #endif
     button->setTag(game_mode);
 
     return button;
@@ -269,15 +242,6 @@ bool CustomCharacterColorPage::loadSimpsAndSelectionSprites() {
     }
 
     return true;
-}
-
-void CustomCharacterColorPage::close(CCObject* sender) {
-    this->removeAllChildrenWithCleanup(true);
-    // prevent crash, hacky but works for now
-    // a user is probably not going to close this menu so often that this would make any difference
-    this->retain();
-
-    this->removeFromParentAndCleanup(true);
 }
 
 void CustomCharacterColorPage::updateUI() {
@@ -445,11 +409,7 @@ void CustomCharacterColorPage::updateColorSelectionSprite(CCSprite* sprite, Colo
         sprite->setColor(ccc3(255, 255, 255));
     }
 
-    #if defined(GEODE_IS_MACOS) || defined(GEODE_IS_IOS)
-    auto target_pos = this->m_mainLayer->convertToNodeSpace(this->getPositionOfColor(color)) - this->m_mainLayer->getAnchorPointInPoints();
-    #else
     auto target_pos = this->m_mainLayer->convertToNodeSpaceAR(this->getPositionOfColor(color));
-    #endif
     sprite->setPosition(target_pos);
     sprite->setVisible(true);
 }
@@ -503,11 +463,8 @@ void CustomCharacterColorPage::updateGameModeSelectionSprite() {
 
     // all simpleplayers (except ship) are initially children of m_mainLayer,
     // but since we moved them to buttons inside the menu, we need to convert the position
-    #if defined(GEODE_IS_MACOS) || defined(GEODE_IS_IOS)
-    auto pos = this->m_mainLayer->convertToNodeSpace(this->m_buttonMenu->convertToWorldSpace(player->getParent()->getPosition() + this->m_buttonMenu->getAnchorPointInPoints())) - this->m_mainLayer->getAnchorPointInPoints();
-    #else
+
     auto pos = this->m_mainLayer->convertToNodeSpaceAR(this->m_buttonMenu->convertToWorldSpaceAR(player->getParent()->getPosition()));
-    #endif
 
     // pos is slightly off, so we need to fix it
     auto fixed_pos = ccpAdd(pos, ccp(-3.5, -3));
@@ -523,11 +480,7 @@ CCPoint CustomCharacterColorPage::getPositionOfColor(int color_id) {
         log::error("failed to find child with tag: {}", color_id);
         return {0, 0};
     } else {
-        #if defined(GEODE_IS_MACOS) || defined(GEODE_IS_IOS)
-        return this->m_buttonMenu->convertToWorldSpace(child->getPosition()) + this->m_buttonMenu->getAnchorPointInPoints();
-        #else
         return this->m_buttonMenu->convertToWorldSpaceAR(child->getPosition());
-        #endif
     }
 }
 
