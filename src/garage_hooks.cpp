@@ -76,7 +76,7 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
     bool getIsP2() {
         bool p2 = false;
         if (Loader::get()->isModLoaded("weebify.separate_dual_icons")) {
-            auto arrow2 = as<CCSprite*>(this->getChildByID("arrow-2")); // this is added by separate dual icons
+            auto arrow2 = static_cast<CCSprite*>(this->getChildByID("arrow-2")); // this is added by separate dual icons
             if (arrow2) {
                 log::debug("found arrow 2 from separate dual icons");
                 p2 = arrow2->isVisible();
@@ -91,7 +91,7 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
         auto state = State::sharedInstance();
         auto game_manager = GameManager::sharedState();
 
-        auto player1 = as<SimplePlayer*>(this->getChildByID("player-icon"));
+        auto player1 = static_cast<SimplePlayer*>(this->getChildByID("player-icon"));
 
         if (player1) {
             bool p2 = false;
@@ -105,7 +105,7 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
         }
 
         if (Loader::get()->isModLoaded("weebify.separate_dual_icons")) {
-            auto player2 = as<SimplePlayer*>(this->getChildByID("player2-icon"));
+            auto player2 = static_cast<SimplePlayer*>(this->getChildByID("player2-icon"));
             bool p2 = true;
 
             if (player2) {
