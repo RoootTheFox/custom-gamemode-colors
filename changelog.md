@@ -1,3 +1,9 @@
+# v0.2.2
+
+* fix lots of internal jank (thanks @Alphalaneous)
+  * fixes compatibility with [Fine Outline](<mod:alphalaneous.fine_outline>)
+* update geode to 4.7.0
+
 # v0.2.1
 
 * update geode to 4.6.1
