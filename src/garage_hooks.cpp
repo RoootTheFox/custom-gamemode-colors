@@ -27,7 +27,7 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
 
         this->customUpdateColors();
 
-        Settings::sharedInstance()->m_garage_layer = this;
+        State::sharedInstance()->m_garage_layer = this;
         return true;
     }
 
@@ -55,7 +55,7 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
 
     void onSelect(cocos2d::CCObject* sender) {
         GJGarageLayer::onSelect(sender);
-        auto settings = Settings::sharedInstance();
+        auto state = State::sharedInstance();
         if (this->getIsP2()) {
             if (!this->m_fields->m_current_page_invalid) {
                 Mod::get()->setSavedValue<int>("_ui_lasttype2", static_cast<int>(this->m_fields->current_page_type));
@@ -88,7 +88,7 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
 
     void customUpdateColors() {
         auto mod = Mod::get();
-        auto settings = Settings::sharedInstance();
+        auto state = State::sharedInstance();
         auto game_manager = GameManager::sharedState();
 
         auto player1 = as<SimplePlayer*>(this->getChildByID("player-icon"));
@@ -97,8 +97,8 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
             bool p2 = false;
             auto p1_override = CGC_OVERRIDE_GAMEMODE(mod->getSavedValue<int>("_ui_lasttype1", 0));
 
-            int col1 = p1_override.enabled ? p1_override.primary : settings->m_defaultColor;
-            int col2 = p1_override.enabled ? p1_override.secondary : settings->m_defaultColor2;
+            int col1 = p1_override.enabled ? p1_override.primary : state->m_defaultColor;
+            int col2 = p1_override.enabled ? p1_override.secondary : state->m_defaultColor2;
 
             player1->setColor(game_manager->colorForIdx(col1));
             player1->setSecondColor(game_manager->colorForIdx(col2));
@@ -111,8 +111,8 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
             if (player2) {
                 auto p2_override = CGC_OVERRIDE_GAMEMODE(mod->getSavedValue<int>("_ui_lasttype2", 0));
 
-                int col1 = p2_override.enabled ? p2_override.primary : settings->m_defaultColor;
-                int col2 = p2_override.enabled ? p2_override.secondary : settings->m_defaultColor2;
+                int col1 = p2_override.enabled ? p2_override.primary : state->m_defaultColor;
+                int col2 = p2_override.enabled ? p2_override.secondary : state->m_defaultColor2;
 
                 player2->setColor(game_manager->colorForIdx(col1));
                 player2->setSecondColor(game_manager->colorForIdx(col2));
@@ -124,12 +124,12 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
 class $modify(CharacterColorPage) {
     void onPlayerColor(cocos2d::CCObject* sender) {
         auto game_manager = GameManager::sharedState();
-        auto settings = Settings::sharedInstance();
+        auto state = State::sharedInstance();
 
         CharacterColorPage::onPlayerColor(sender);
 
         // the player colors in gamemanager are updated after onPlayerColor is called
-        settings->m_defaultColor = game_manager->m_playerColor;
-        settings->m_defaultColor2 = game_manager->m_playerColor2;
+        state->m_defaultColor = game_manager->m_playerColor;
+        state->m_defaultColor2 = game_manager->m_playerColor2;
     }
 };

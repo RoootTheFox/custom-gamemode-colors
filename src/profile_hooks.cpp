@@ -1,6 +1,6 @@
 #include <Geode/modify/ProfilePage.hpp>
 #include <Geode/Geode.hpp>
-#include "settings.hpp"
+#include "state.hpp"
 
 using namespace geode::prelude;
 
@@ -12,7 +12,7 @@ class $modify(ProfilePage) {
         if(!score->isCurrentUser()) return;
 
         auto gameManager = GameManager::sharedState();
-        auto settings = Settings::sharedInstance();
+        auto state = State::sharedInstance();
 
         auto player_menu = this->m_mainLayer->getChildByID("player-menu");
 

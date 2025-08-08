@@ -1,43 +1,43 @@
 #include "include.hpp"
-#include "settings.hpp"
+#include "state.hpp"
 
 using namespace geode::prelude;
 
-Settings* Settings::sharedInstance() {
-    static auto instance = new Settings();
+State* State::sharedInstance() {
+    static auto instance = new State();
     return instance;
 }
 
 // if someone knows a way to make this less ugly and repetitive, please tell me i will love you forever
-void Settings::setOverrideColor(GameMode mode, int color, ColorType type, bool p2) {
+void State::setOverrideColor(GameMode mode, int color, ColorType type, bool p2) {
     auto mod = Mod::get();
 
     bool valid_gamemode = true;
 
     switch (mode) {
         case CUBE:
-            CGC_SETTINGS_SET_OVERRIDE(cube, type, color);
+            CGC_STATE_SET_OVERRIDE(cube, type, color);
             break;
         case SHIP:
-            CGC_SETTINGS_SET_OVERRIDE(ship, type, color);
+            CGC_STATE_SET_OVERRIDE(ship, type, color);
             break;
         case BALL:
-            CGC_SETTINGS_SET_OVERRIDE(ball, type, color);
+            CGC_STATE_SET_OVERRIDE(ball, type, color);
             break;
         case UFO:
-            CGC_SETTINGS_SET_OVERRIDE(ufo, type, color);
+            CGC_STATE_SET_OVERRIDE(ufo, type, color);
             break;
         case WAVE:
-            CGC_SETTINGS_SET_OVERRIDE(wave, type, color);
+            CGC_STATE_SET_OVERRIDE(wave, type, color);
             break;
         case ROBOT:
-            CGC_SETTINGS_SET_OVERRIDE(robot, type, color);
+            CGC_STATE_SET_OVERRIDE(robot, type, color);
             break;
         case SPIDER:
-            CGC_SETTINGS_SET_OVERRIDE(spider, type, color);
+            CGC_STATE_SET_OVERRIDE(spider, type, color);
             break;
         case SWING:
-            CGC_SETTINGS_SET_OVERRIDE(swing, type, color);
+            CGC_STATE_SET_OVERRIDE(swing, type, color);
             break;
         default:
             // there's no gamemode set yet because the user didn't select one
@@ -57,7 +57,7 @@ void Settings::setOverrideColor(GameMode mode, int color, ColorType type, bool p
     }
 }
 
-bool Settings::isOverrideEnabled(GameMode mode, bool p2) {
+bool State::isOverrideEnabled(GameMode mode, bool p2) {
     switch (mode) {
         case CUBE:
             return CGC_OVERRIDE_THIS(cube).enabled;
@@ -80,7 +80,7 @@ bool Settings::isOverrideEnabled(GameMode mode, bool p2) {
     }
 }
 
-void Settings::toggleOverride(GameMode mode, bool p2) {
+void State::toggleOverride(GameMode mode, bool p2) {
     auto mod = Mod::get();
 
     switch (mode) {
@@ -115,7 +115,7 @@ void Settings::toggleOverride(GameMode mode, bool p2) {
     this->save();
 }
 
-void Settings::save() {
+void State::save() {
     auto mod = Mod::get();
 
     mod->setSavedValue<OverridePlayer>(P1_OVERRIDE, this->m_overrides[0]);

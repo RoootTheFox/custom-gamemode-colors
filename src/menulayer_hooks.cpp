@@ -1,6 +1,6 @@
 #include <Geode/modify/MenuLayer.hpp>
 
-#include "settings.hpp"
+#include "state.hpp"
 using namespace geode::prelude;
 
 class $modify(MenuLayer) {

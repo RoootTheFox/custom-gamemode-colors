@@ -53,7 +53,7 @@ struct matjson::Serialize<OverridePlayer> {
     }
 };
 
-class Settings {
+class State {
     public:
         int m_defaultColor;
         int m_defaultColor2;
@@ -61,7 +61,7 @@ class Settings {
         // overrides for each player
         OverridePlayer m_overrides[2] = {};
 
-        // not actual settings, but they're still needed
+        // in-memory state
         SimplePlayer* m_player_cube;
         SimplePlayer* m_player_ship;
         SimplePlayer* m_player_ball;
@@ -103,5 +103,5 @@ class Settings {
 
         void save();
 
-        static Settings* sharedInstance();
+        static State* sharedInstance();
 };

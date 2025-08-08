@@ -5,8 +5,8 @@ using namespace geode::prelude;
 $execute {
 	auto mod = Mod::get();
 
-	// initialize settings (please don't stab me)
-	auto settings = Settings::sharedInstance();
+	// initialize state (please don't stab me)
+	auto state = State::sharedInstance();
 
 	// legacy migration (v0)
 	if (mod->getSavedValue<int>("format", 0) == 0) {
@@ -176,17 +176,17 @@ $execute {
 	}
 
 	// load players
-	settings->m_overrides[0] = mod->getSavedValue<OverridePlayer>("player1_override", OverridePlayer {});
-	settings->m_overrides[1] = mod->getSavedValue<OverridePlayer>("player2_override", OverridePlayer {});
+	state->m_overrides[0] = mod->getSavedValue<OverridePlayer>("player1_override", OverridePlayer {});
+	state->m_overrides[1] = mod->getSavedValue<OverridePlayer>("player2_override", OverridePlayer {});
 }
 
 $on_mod(Loaded) {
 	log::info("mod loaded");
 	auto gameManager = GameManager::get();
 
-	Settings* settings = Settings::sharedInstance();
-	settings->m_defaultColor = gameManager->m_playerColor;
-	settings->m_defaultColor2 = gameManager->m_playerColor2;
+	State* state = State::sharedInstance();
+	state->m_defaultColor = gameManager->m_playerColor;
+	state->m_defaultColor2 = gameManager->m_playerColor2;
 #if defined(GEODE_IS_MACOS) && false
 	static_assert(GEODE_COMP_GD_VERSION == 22000, "Mod needs to target 2.200 on mac"); // thanks to cvolton for this (misc bugfixes) <3
 
