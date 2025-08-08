@@ -16,7 +16,7 @@ CustomCharacterColorPage* CustomCharacterColorPage::create(bool p2) {
 bool CustomCharacterColorPage::init(bool p2) {
     if (!CharacterColorPage::init()) return false;
 
-    setID("gamemode-colors=page"_spr);
+    setID("gamemode-colors-page"_spr);
 
     if (!m_buttonMenu) {
         log::error("didn't find color menu");
