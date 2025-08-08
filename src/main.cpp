@@ -19,7 +19,7 @@ $execute {
 			.secondary = mod->getSavedValue<int>(CUBE_OVERRIDE_SECONDARY, 0),
 			.glow = 0,
 		};
-		
+
 		ColorOverride ship_override = {
 			.primary = mod->getSavedValue<int>(SHIP_OVERRIDE, 0),
 			.secondary = mod->getSavedValue<int>(SHIP_OVERRIDE_SECONDARY, 0),
@@ -90,7 +90,7 @@ $execute {
 		mod->setSavedValue<ColorOverride>(ROBOT_OVERRIDE, robot_override);
 		mod->setSavedValue<ColorOverride>(SPIDER_OVERRIDE, spider_override);
 		mod->setSavedValue<ColorOverride>(SWING_OVERRIDE, swing_override);
-		
+
 		mod->setSavedValue<int>("format", 1);
 
 		auto saved = mod->saveData();
@@ -100,7 +100,7 @@ $execute {
 			log::error("failed to migrate data: {}", saved.unwrapErr());
 		}
 	}
-	
+
 	// migrate to format 2
 	if (mod->getSavedValue<int>("format", 0) == 1) {
 		log::info("data format outdated, migrating (1 -> 2)!");

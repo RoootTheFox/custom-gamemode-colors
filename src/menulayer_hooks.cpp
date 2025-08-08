@@ -10,7 +10,7 @@ class $modify(MenuLayer) {
 
     bool init() {
         // this is **TEMPORARY** - this will be removed once SDI doesn't hook setColor anymore (lmao)
-        if (Loader::get()->isModLoaded("weebify.separate_dual_icons") && !m_fields->overriden) {            
+        if (Loader::get()->isModLoaded("weebify.separate_dual_icons") && !m_fields->overriden) {
             for (Hook* h : Loader::get()->getLoadedMod("weebify.separate_dual_icons")->getHooks()) {
                 auto function_name = h->getDisplayName();
                 if (function_name == "PlayerObject::setColor" || function_name == "PlayerObject::setSecondColor") {

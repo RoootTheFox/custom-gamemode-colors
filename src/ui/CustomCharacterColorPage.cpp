@@ -23,7 +23,7 @@ CustomCharacterColorPage* CustomCharacterColorPage::customCreate(bool p2) {
     }
 
     CCMenu* menu = self->m_buttonMenu;
-    
+
     if (menu == nullptr) {
         log::error("didn't find color menu");
         return self;
@@ -276,7 +276,7 @@ void CustomCharacterColorPage::close(CCObject* sender) {
     // prevent crash, hacky but works for now
     // a user is probably not going to close this menu so often that this would make any difference
     this->retain();
-    
+
     this->removeFromParentAndCleanup(true);
 }
 
@@ -508,7 +508,7 @@ void CustomCharacterColorPage::updateGameModeSelectionSprite() {
     #else
     auto pos = this->m_mainLayer->convertToNodeSpaceAR(this->m_buttonMenu->convertToWorldSpaceAR(player->getParent()->getPosition()));
     #endif
-    
+
     // pos is slightly off, so we need to fix it
     auto fixed_pos = ccpAdd(pos, ccp(-3.5, -3));
 

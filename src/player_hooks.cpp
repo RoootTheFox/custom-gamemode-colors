@@ -7,7 +7,7 @@
 using namespace geode::prelude;
 
 class $modify(PlayerObject) {
-    void switchedToMode(GameObjectType p0) {       
+    void switchedToMode(GameObjectType p0) {
         PlayerObject::switchedToMode(p0);
         //log::info("switchedToMode");
 
