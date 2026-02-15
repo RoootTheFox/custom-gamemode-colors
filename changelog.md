@@ -1,3 +1,8 @@
+# v0.2.3
+
+* update geode to v5 beta 1
+* update to gd 2.2081
+
 # v0.2.2
 
 * fix lots of internal jank (thanks @Alphalaneous)
