@@ -104,6 +104,7 @@ class $modify(PlayerObject) {
         if(this->m_isDart) {
             col1 = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).primary   : state->m_defaultColor;
             col2 = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).secondary : state->m_defaultColor2;
+            this->m_waveTrail->setColor(gameManager->colorForIdx(col1)); // fix wave trail
         }
 
         if(this->m_isRobot) {
@@ -126,7 +127,6 @@ class $modify(PlayerObject) {
         this->setColor(real_col1);
         this->setSecondColor(real_col2);
 
-        this->m_waveTrail->setColor(real_col1); // fix wave trail
         this->m_regularTrail->setColor(real_col1); // fix small trail/particles behind player#
         if (this->m_ghostTrail) this->m_ghostTrail->m_color = real_col1; // fix ghost ("enable trail" trigger) trail
 
