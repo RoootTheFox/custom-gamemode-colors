@@ -80,6 +80,8 @@ class State {
         ButtonSprite* m_button_spider = nullptr;
         ButtonSprite* m_button_swing = nullptr;
 
+        ButtonSprite* m_button_togglep2 = nullptr;
+
         GameMode m_current_mode = NONE;
         ColorType m_current_color_type = PRIMARY;
         bool m_current_p2 = false;

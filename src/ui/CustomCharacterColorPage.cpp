@@ -26,6 +26,11 @@ bool CustomCharacterColorPage::init(bool p2) {
 
     state->m_current_p2 = p2;
 
+    // crash prevention :3
+    // should technically do this for all other buttons too but
+    // a: im lazy, and b: not needed for them as they're not used in updateUI()
+    state->m_button_togglep2 = nullptr;
+
     int buttons_found = 0;
 
     for (auto node : CCArrayExt<CCNode*>(m_buttonMenu->getChildren())) {
@@ -147,6 +152,21 @@ bool CustomCharacterColorPage::init(bool p2) {
     );
     m_buttonMenu->addChild(button);
     button->setPosition({53.5f, -265});
+
+    // 2p support without SDI
+    if (!Loader::get()->isModLoaded("weebify.separate_dual_icons")) {
+        state->m_button_togglep2 = ButtonSprite::create(state->m_current_p2 ? "P2" : "P1", 22, true, "bigFont.fnt",
+            TEXTURE_BUTTON_ENABLED, 20.0f, 4.0f);
+        auto ass = CCMenuItemSpriteExtra::create(
+            state->m_button_togglep2,
+            this,
+            menu_selector(CustomCharacterColorPage::onP2Toggled)
+        );
+        m_buttonMenu->addChild(ass);
+        ass->setPosition({234.5f, -267});
+    }
+
+    updateUI(); // call AT END OF INIT !!!!!!!
 
     return true;
 }
@@ -365,6 +385,10 @@ void CustomCharacterColorPage::updateUI() {
 
     if (state->m_garage_layer) {
         state->m_garage_layer->updatePlayerColors();
+    }
+
+    if (state->m_button_togglep2) {
+        state->m_button_togglep2->setString(p2 ? "P2" : "P1");
     }
 }
 
@@ -587,6 +611,14 @@ void CustomCharacterColorPage::onCubeInShipUfoToggleButtonClicked(CCObject* send
     } else {
         Notification::create("cube in ship/ufo disabled", NotificationIcon::Success)->show();
     }
+}
+
+void CustomCharacterColorPage::onP2Toggled(CCObject* sender) {
+    log::info("toggling p2");
+    auto state = State::sharedInstance();
+    state->m_current_p2 = !state->m_current_p2;
+
+    this->updateUI();
 }
 
 // todo: move this to a utils class
