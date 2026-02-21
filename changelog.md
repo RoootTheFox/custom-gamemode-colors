@@ -2,7 +2,8 @@
 
 * update geode to v5 beta 3
 * allow 2 player modification without [Separate Dual Icons](<mod:weebify.separate_dual_icons>) (ugly ui but whatever)
- 
+* fixed trail colors not changing
+
 # v0.2.3
 
 * update geode to v5 beta 1
