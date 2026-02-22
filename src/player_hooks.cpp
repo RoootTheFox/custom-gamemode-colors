@@ -80,52 +80,65 @@ class $modify(PlayerObject) {
 
         int col1 = state->m_defaultColor;
         int col2 = state->m_defaultColor2;
+        int colg = state->m_defaultColorGlow;
 
         if(isCube) {
             col1 = CGC_OVERRIDE(cube).enabled ? CGC_OVERRIDE(cube).primary   : state->m_defaultColor;
             col2 = CGC_OVERRIDE(cube).enabled ? CGC_OVERRIDE(cube).secondary : state->m_defaultColor2;
+            colg = CGC_OVERRIDE(cube).enabled ? CGC_OVERRIDE(cube).glow      : state->m_defaultColorGlow;
         }
 
         if(this->m_isShip) {
             col1 = CGC_OVERRIDE(ship).enabled ? CGC_OVERRIDE(ship).primary   : state->m_defaultColor;
             col2 = CGC_OVERRIDE(ship).enabled ? CGC_OVERRIDE(ship).secondary : state->m_defaultColor2;
+            colg = CGC_OVERRIDE(ship).enabled ? CGC_OVERRIDE(ship).glow      : state->m_defaultColorGlow;
         }
 
         if(this->m_isBall) {
             col1 = CGC_OVERRIDE(ball).enabled ? CGC_OVERRIDE(ball).primary   : state->m_defaultColor;
             col2 = CGC_OVERRIDE(ball).enabled ? CGC_OVERRIDE(ball).secondary : state->m_defaultColor2;
+            colg = CGC_OVERRIDE(ball).enabled ? CGC_OVERRIDE(ball).glow      : state->m_defaultColorGlow;
         }
 
         if(this->m_isBird) {
             col1 = CGC_OVERRIDE(ufo).enabled ? CGC_OVERRIDE(ufo).primary   : state->m_defaultColor;
             col2 = CGC_OVERRIDE(ufo).enabled ? CGC_OVERRIDE(ufo).secondary : state->m_defaultColor2;
+            colg = CGC_OVERRIDE(ufo).enabled ? CGC_OVERRIDE(ufo).glow      : state->m_defaultColorGlow;
         }
 
         if(this->m_isDart) {
             col1 = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).primary   : state->m_defaultColor;
             col2 = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).secondary : state->m_defaultColor2;
+            colg = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).glow      : state->m_defaultColorGlow;
             this->m_waveTrail->setColor(gameManager->colorForIdx(col1)); // fix wave trail
         }
 
         if(this->m_isRobot) {
-            col1 = CGC_OVERRIDE(robot).enabled ? CGC_OVERRIDE(robot).primary  : state->m_defaultColor;
+            col1 = CGC_OVERRIDE(robot).enabled ? CGC_OVERRIDE(robot).primary   : state->m_defaultColor;
             col2 = CGC_OVERRIDE(robot).enabled ? CGC_OVERRIDE(robot).secondary : state->m_defaultColor2;
+            colg = CGC_OVERRIDE(robot).enabled ? CGC_OVERRIDE(robot).glow      : state->m_defaultColorGlow;
         }
 
         if(this->m_isSpider) {
-            col1 = CGC_OVERRIDE(spider).enabled ? CGC_OVERRIDE(spider).primary  : state->m_defaultColor;
+            col1 = CGC_OVERRIDE(spider).enabled ? CGC_OVERRIDE(spider).primary   : state->m_defaultColor;
             col2 = CGC_OVERRIDE(spider).enabled ? CGC_OVERRIDE(spider).secondary : state->m_defaultColor2;
+            colg = CGC_OVERRIDE(spider).enabled ? CGC_OVERRIDE(spider).glow      : state->m_defaultColorGlow;
         }
 
         if(this->m_isSwing) {
-            col1 = CGC_OVERRIDE(swing).enabled ? CGC_OVERRIDE(swing).primary  : state->m_defaultColor;
+            col1 = CGC_OVERRIDE(swing).enabled ? CGC_OVERRIDE(swing).primary   : state->m_defaultColor;
             col2 = CGC_OVERRIDE(swing).enabled ? CGC_OVERRIDE(swing).secondary : state->m_defaultColor2;
+            colg = CGC_OVERRIDE(swing).enabled ? CGC_OVERRIDE(swing).glow      : state->m_defaultColorGlow;
         }
 
         auto real_col1 = gameManager->colorForIdx(col1);
         auto real_col2 = gameManager->colorForIdx(col2);
         this->setColor(real_col1);
         this->setSecondColor(real_col2);
+
+        // glow :3
+        this->m_glowColor = gameManager->colorForIdx(colg);
+        this->updateGlowColor();
 
         if (this->m_ghostTrail) this->m_ghostTrail->m_color = real_col1; // fix ghost ("enable trail" trigger) trail
 

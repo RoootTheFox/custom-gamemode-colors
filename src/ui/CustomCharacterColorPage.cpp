@@ -272,65 +272,89 @@ void CustomCharacterColorPage::updateUI() {
     if(state->m_player_cube) {
         int col1 = CGC_OVERRIDE(cube).enabled ? CGC_OVERRIDE(cube).primary   : state->m_defaultColor;
         int col2 = CGC_OVERRIDE(cube).enabled ? CGC_OVERRIDE(cube).secondary : state->m_defaultColor2;
+        int colg = CGC_OVERRIDE(cube).enabled ? CGC_OVERRIDE(cube).glow      : state->m_defaultColorGlow;
 
         state->m_player_cube->setColor(gameManager->colorForIdx(col1));
         state->m_player_cube->setSecondColor(gameManager->colorForIdx(col2));
+
+        if (gameManager->m_playerGlow) state->m_player_cube->setGlowOutline(gameManager->colorForIdx(colg));
     }
 
     if(state->m_player_ship) {
         int col1 = CGC_OVERRIDE(ship).enabled ? CGC_OVERRIDE(ship).primary   : state->m_defaultColor;
         int col2 = CGC_OVERRIDE(ship).enabled ? CGC_OVERRIDE(ship).secondary : state->m_defaultColor2;
+        int colg = CGC_OVERRIDE(ship).enabled ? CGC_OVERRIDE(ship).glow      : state->m_defaultColorGlow;
 
         state->m_player_ship->setColor(gameManager->colorForIdx(col1));
         state->m_player_ship->setSecondColor(gameManager->colorForIdx(col2));
+
+        if (gameManager->m_playerGlow) state->m_player_ship->setGlowOutline(gameManager->colorForIdx(colg));
     }
 
     if(state->m_player_ball) {
         int col1 = CGC_OVERRIDE(ball).enabled ? CGC_OVERRIDE(ball).primary   : state->m_defaultColor;
         int col2 = CGC_OVERRIDE(ball).enabled ? CGC_OVERRIDE(ball).secondary : state->m_defaultColor2;
+        int colg = CGC_OVERRIDE(ball).enabled ? CGC_OVERRIDE(ball).glow      : state->m_defaultColorGlow;
 
         state->m_player_ball->setColor(gameManager->colorForIdx(col1));
         state->m_player_ball->setSecondColor(gameManager->colorForIdx(col2));
+
+        if (gameManager->m_playerGlow) state->m_player_ball->setGlowOutline(gameManager->colorForIdx(colg));
     }
 
     if(state->m_player_ufo) {
         int col1 = CGC_OVERRIDE(ufo).enabled ? CGC_OVERRIDE(ufo).primary   : state->m_defaultColor;
         int col2 = CGC_OVERRIDE(ufo).enabled ? CGC_OVERRIDE(ufo).secondary : state->m_defaultColor2;
+        int colg = CGC_OVERRIDE(ufo).enabled ? CGC_OVERRIDE(ufo).glow      : state->m_defaultColorGlow;
 
         state->m_player_ufo->setColor(gameManager->colorForIdx(col1));
         state->m_player_ufo->setSecondColor(gameManager->colorForIdx(col2));
+
+        if (gameManager->m_playerGlow) state->m_player_ufo->setGlowOutline(gameManager->colorForIdx(colg));
     }
 
     if(state->m_player_wave) {
         int col1 = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).primary   : state->m_defaultColor;
         int col2 = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).secondary : state->m_defaultColor2;
+        int colg = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).glow      : state->m_defaultColorGlow;
 
         state->m_player_wave->setColor(gameManager->colorForIdx(col1));
         state->m_player_wave->setSecondColor(gameManager->colorForIdx(col2));
+
+        if (gameManager->m_playerGlow) state->m_player_wave->setGlowOutline(gameManager->colorForIdx(colg));
     }
 
     if(state->m_player_robot) {
         int col1 = CGC_OVERRIDE(robot).enabled ? CGC_OVERRIDE(robot).primary   : state->m_defaultColor;
         int col2 = CGC_OVERRIDE(robot).enabled ? CGC_OVERRIDE(robot).secondary : state->m_defaultColor2;
+        int colg = CGC_OVERRIDE(robot).enabled ? CGC_OVERRIDE(robot).glow      : state->m_defaultColorGlow;
 
         state->m_player_robot->setColor(gameManager->colorForIdx(col1));
         state->m_player_robot->setSecondColor(gameManager->colorForIdx(col2));
+
+        if (gameManager->m_playerGlow) state->m_player_robot->setGlowOutline(gameManager->colorForIdx(colg));
     }
 
     if(state->m_player_spider) {
         int col1 = CGC_OVERRIDE(spider).enabled ? CGC_OVERRIDE(spider).primary   : state->m_defaultColor;
         int col2 = CGC_OVERRIDE(spider).enabled ? CGC_OVERRIDE(spider).secondary : state->m_defaultColor2;
+        int colg = CGC_OVERRIDE(spider).enabled ? CGC_OVERRIDE(spider).glow      : state->m_defaultColorGlow;
 
         state->m_player_spider->setColor(gameManager->colorForIdx(col1));
         state->m_player_spider->setSecondColor(gameManager->colorForIdx(col2));
+
+        if (gameManager->m_playerGlow) state->m_player_spider->setGlowOutline(gameManager->colorForIdx(colg));
     }
 
     if(state->m_player_swing) {
         int col1 = CGC_OVERRIDE(swing).enabled ? CGC_OVERRIDE(swing).primary   : state->m_defaultColor;
         int col2 = CGC_OVERRIDE(swing).enabled ? CGC_OVERRIDE(swing).secondary : state->m_defaultColor2;
+        int colg = CGC_OVERRIDE(swing).enabled ? CGC_OVERRIDE(swing).glow      : state->m_defaultColorGlow;
 
         state->m_player_swing->setColor(gameManager->colorForIdx(col1));
         state->m_player_swing->setSecondColor(gameManager->colorForIdx(col2));
+
+        if (gameManager->m_playerGlow) state->m_player_swing->setGlowOutline(gameManager->colorForIdx(colg));
     }
 
     if(state->m_current_color_primary_sprite) {
@@ -350,8 +374,11 @@ void CustomCharacterColorPage::updateUI() {
     }
 
     if(state->m_current_color_glow_sprite) {
-        // not supported yet
-        state->m_current_color_glow_sprite->setVisible(false);
+        if (state->m_current_mode == NONE) {
+            state->m_current_color_glow_sprite->setVisible(false);
+        } else {
+            this->updateColorSelectionSprite(state->m_current_color_glow_sprite, GLOW);
+        }
     }
 
     if (state->m_button_cube) {
@@ -400,28 +427,28 @@ void CustomCharacterColorPage::updateColorSelectionSprite(CCSprite* sprite, Colo
 
     switch (state->m_current_mode) {
         case CUBE:
-            color = type == PRIMARY ? CGC_OVERRIDE(cube).primary : CGC_OVERRIDE(cube).secondary;
+        color = type == PRIMARY ? CGC_OVERRIDE(cube).primary : (type == SECONDARY ? CGC_OVERRIDE(cube).secondary : CGC_OVERRIDE(cube).glow);
             break;
         case SHIP:
-            color = type == PRIMARY ? CGC_OVERRIDE(ship).primary : CGC_OVERRIDE(ship).secondary;
+            color = type == PRIMARY ? CGC_OVERRIDE(ship).primary : (type == SECONDARY ? CGC_OVERRIDE(ship).secondary : CGC_OVERRIDE(ship).glow);
             break;
         case BALL:
-            color = type == PRIMARY ? CGC_OVERRIDE(ball).primary : CGC_OVERRIDE(ball).secondary;
+            color = type == PRIMARY ? CGC_OVERRIDE(ball).primary : (type == SECONDARY ? CGC_OVERRIDE(ball).secondary : CGC_OVERRIDE(ball).glow);
             break;
         case UFO:
-            color = type == PRIMARY ? CGC_OVERRIDE(ufo).primary : CGC_OVERRIDE(ufo).secondary;
+            color = type == PRIMARY ? CGC_OVERRIDE(ufo).primary : (type == SECONDARY ? CGC_OVERRIDE(ufo).secondary : CGC_OVERRIDE(ufo).glow);
             break;
         case WAVE:
-            color = type == PRIMARY ? CGC_OVERRIDE(wave).primary : CGC_OVERRIDE(wave).secondary;
+            color = type == PRIMARY ? CGC_OVERRIDE(wave).primary : (type == SECONDARY ? CGC_OVERRIDE(wave).secondary : CGC_OVERRIDE(wave).glow);
             break;
         case ROBOT:
-            color = type == PRIMARY ? CGC_OVERRIDE(robot).primary : CGC_OVERRIDE(robot).secondary;
+            color = type == PRIMARY ? CGC_OVERRIDE(robot).primary : (type == SECONDARY ? CGC_OVERRIDE(robot).secondary : CGC_OVERRIDE(robot).glow);
             break;
         case SPIDER:
-            color = type == PRIMARY ? CGC_OVERRIDE(spider).primary : CGC_OVERRIDE(spider).secondary;
+            color = type == PRIMARY ? CGC_OVERRIDE(spider).primary : (type == SECONDARY ? CGC_OVERRIDE(spider).secondary : CGC_OVERRIDE(spider).glow);
             break;
         case SWING:
-            color = type == PRIMARY ? CGC_OVERRIDE(swing).primary : CGC_OVERRIDE(swing).secondary;
+            color = type == PRIMARY ? CGC_OVERRIDE(swing).primary : (type == SECONDARY ? CGC_OVERRIDE(swing).secondary : CGC_OVERRIDE(swing).glow);
             break;
         default:
             break;
@@ -551,12 +578,6 @@ void CustomCharacterColorPage::onColorTypeButtonClicked(CCObject* sender) {
 
     if (tag < 0 || tag > 2) {
         log::error("invalid tag: {}", tag);
-        return;
-    }
-
-    if (tag == 2) {
-        log::warn("changing glow isn't supported yet");
-        Notification::create("changing glow isn't supported yet", NotificationIcon::Error)->show();
         return;
     }
 

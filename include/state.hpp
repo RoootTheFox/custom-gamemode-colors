@@ -57,6 +57,7 @@ class State {
     public:
         int m_defaultColor;
         int m_defaultColor2;
+        int m_defaultColorGlow;
 
         // overrides for each player
         OverridePlayer m_overrides[2] = {};

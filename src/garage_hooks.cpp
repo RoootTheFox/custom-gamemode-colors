@@ -131,5 +131,6 @@ class $modify(CharacterColorPage) {
         // the player colors in gamemanager are updated after onPlayerColor is called
         state->m_defaultColor = game_manager->m_playerColor;
         state->m_defaultColor2 = game_manager->m_playerColor2;
+        state->m_defaultColorGlow = game_manager->m_playerGlowColor;
     }
 };
