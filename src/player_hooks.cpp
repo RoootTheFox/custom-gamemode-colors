@@ -127,7 +127,6 @@ class $modify(PlayerObject) {
         this->setColor(real_col1);
         this->setSecondColor(real_col2);
 
-        this->m_regularTrail->setColor(real_col1); // fix small trail/particles behind player#
         if (this->m_ghostTrail) this->m_ghostTrail->m_color = real_col1; // fix ghost ("enable trail" trigger) trail
 
         // change the tiny cube color inside the ship and ufo
