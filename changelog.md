@@ -1,3 +1,10 @@
+# v0.2.5
+
+* **glow support!**
+* fix: wave trail fade on gamemode change
+* fix: wrong trail getting colored
+* update geode to v5.0.0
+
 # v0.2.4
 
 * update geode to v5 beta 3

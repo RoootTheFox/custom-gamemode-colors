@@ -1,12 +1,12 @@
 {
-	"geode": "5.0.0-beta.3",
+	"geode": "5.0.0",
 	"gd": {
 		"win": "2.2081",
 		"android": "2.2081",
 		"mac": "2.2081",
 		"ios": "2.2081"
 	},
-	"version": "v0.2.4",
+	"version": "v0.2.5",
 	"id": "rooot.custom-gamemode-colors",
 	"name": "Custom Gamemode Colors",
 	"developer": "rooot",
