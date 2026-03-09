@@ -11,6 +11,11 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
         bool m_current_page_invalid = false;
     };
 
+    static void onModify(auto& self) {
+        (void)self.setHookPriorityAfterPost("GJGarageLayer::init", "weebify.separate_dual_icons");
+        (void)self.setHookPriorityAfterPost("GJGarageLayer::updatePlayerColors", "weebify.separate_dual_icons");
+    }
+
     virtual bool init() {
         if (!GJGarageLayer::init()) return false;
 
@@ -75,13 +80,8 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
 
     bool getIsP2() {
         bool p2 = false;
-        if (Loader::get()->isModLoaded("weebify.separate_dual_icons")) {
-            auto arrow2 = static_cast<CCSprite*>(this->getChildByID("arrow-2")); // this is added by separate dual icons
-            if (arrow2) {
-                log::debug("found arrow 2 from separate dual icons");
-                p2 = arrow2->isVisible();
-                log::debug("p2: {}", p2);
-            }
+        if (auto separate_dual_icons = Loader::get()->getLoadedMod("weebify.separate_dual_icons")) {
+            p2 = separate_dual_icons->getSavedValue("2pselected", false);
         }
         return p2;
     }
@@ -99,23 +99,27 @@ class $modify(GJGarageLayerModify, GJGarageLayer) {
 
             int col1 = p1_override.enabled ? p1_override.primary : state->m_defaultColor;
             int col2 = p1_override.enabled ? p1_override.secondary : state->m_defaultColor2;
+            int colg = p1_override.enabled ? p1_override.glow : state->m_defaultColorGlow;
 
             player1->setColor(game_manager->colorForIdx(col1));
             player1->setSecondColor(game_manager->colorForIdx(col2));
+            if (game_manager->m_playerGlow) player1->setGlowOutline(game_manager->colorForIdx(colg));
         }
 
-        if (Loader::get()->isModLoaded("weebify.separate_dual_icons")) {
+        if (auto separate_dual_icons = Loader::get()->getLoadedMod("weebify.separate_dual_icons")) {
             auto player2 = static_cast<SimplePlayer*>(this->getChildByID("player2-icon"));
             bool p2 = true;
 
             if (player2) {
                 auto p2_override = CGC_OVERRIDE_GAMEMODE(mod->getSavedValue<int>("_ui_lasttype2", 0));
 
-                int col1 = p2_override.enabled ? p2_override.primary : state->m_defaultColor;
-                int col2 = p2_override.enabled ? p2_override.secondary : state->m_defaultColor2;
+                int col1 = p2_override.enabled ? p2_override.primary : state->m_defaultDualColor;
+                int col2 = p2_override.enabled ? p2_override.secondary : state->m_defaultDualColor2;
+                int colg = p2_override.enabled ? p2_override.glow : state->m_defaultDualColorGlow;
 
                 player2->setColor(game_manager->colorForIdx(col1));
                 player2->setSecondColor(game_manager->colorForIdx(col2));
+                if (separate_dual_icons->getSavedValue("glow", false)) player2->setGlowOutline(game_manager->colorForIdx(colg));
             }
         }
     }
@@ -132,5 +136,11 @@ class $modify(CharacterColorPage) {
         state->m_defaultColor = game_manager->m_playerColor;
         state->m_defaultColor2 = game_manager->m_playerColor2;
         state->m_defaultColorGlow = game_manager->m_playerGlowColor;
+
+        if (auto separate_dual_icons = Loader::get()->getLoadedMod("weebify.separate_dual_icons")) {
+            state->m_defaultDualColor = separate_dual_icons->getSavedValue<int>("color1", 0);
+            state->m_defaultDualColor2 = separate_dual_icons->getSavedValue<int>("color2", 0);
+            state->m_defaultDualColorGlow = separate_dual_icons->getSavedValue<int>("colorglow", 0);
+        }
     }
 };

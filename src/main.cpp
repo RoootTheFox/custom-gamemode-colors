@@ -187,6 +187,22 @@ $on_mod(Loaded) {
 	State* state = State::sharedInstance();
 	state->m_defaultColor = gameManager->m_playerColor;
 	state->m_defaultColor2 = gameManager->m_playerColor2;
+	state->m_defaultColorGlow = gameManager->m_playerGlowColor;
+	
+	if (auto separate_dual_icons = Loader::get()->getInstalledMod("weebify.separate_dual_icons")) {	
+		if (separate_dual_icons->isLoaded()) {
+			state->m_defaultDualColor = separate_dual_icons->getSavedValue<int>("color1", 0);
+			state->m_defaultDualColor2 = separate_dual_icons->getSavedValue<int>("color2", 0);
+			state->m_defaultDualColorGlow = separate_dual_icons->getSavedValue<int>("colorglow", 0);
+		}
+		else if (separate_dual_icons->shouldLoad()) {
+			ModStateEvent(ModEventType::Loaded, separate_dual_icons).listen([state, separate_dual_icons] {
+				state->m_defaultDualColor = separate_dual_icons->getSavedValue<int>("color1", 0);
+				state->m_defaultDualColor2 = separate_dual_icons->getSavedValue<int>("color2", 0);
+				state->m_defaultDualColorGlow = separate_dual_icons->getSavedValue<int>("colorglow", 0);
+			}).leak();
+		}
+	}
 #if defined(GEODE_IS_MACOS) && false
 	static_assert(GEODE_COMP_GD_VERSION == 22000, "Mod needs to target 2.200 on mac"); // thanks to cvolton for this (misc bugfixes) <3
 

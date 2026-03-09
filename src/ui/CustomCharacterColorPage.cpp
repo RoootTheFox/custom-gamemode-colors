@@ -270,9 +270,9 @@ void CustomCharacterColorPage::updateUI() {
     bool p2 = state->m_current_p2;
 
     if(state->m_player_cube) {
-        int col1 = CGC_OVERRIDE(cube).enabled ? CGC_OVERRIDE(cube).primary   : state->m_defaultColor;
-        int col2 = CGC_OVERRIDE(cube).enabled ? CGC_OVERRIDE(cube).secondary : state->m_defaultColor2;
-        int colg = CGC_OVERRIDE(cube).enabled ? CGC_OVERRIDE(cube).glow      : state->m_defaultColorGlow;
+        int col1 = CGC_OVERRIDE(cube).enabled ? CGC_OVERRIDE(cube).primary   : p2 ? state->m_defaultDualColor     : state->m_defaultColor;
+        int col2 = CGC_OVERRIDE(cube).enabled ? CGC_OVERRIDE(cube).secondary : p2 ? state->m_defaultDualColor2    : state->m_defaultColor2;
+        int colg = CGC_OVERRIDE(cube).enabled ? CGC_OVERRIDE(cube).glow      : p2 ? state->m_defaultDualColorGlow : state->m_defaultColorGlow;
 
         state->m_player_cube->setColor(gameManager->colorForIdx(col1));
         state->m_player_cube->setSecondColor(gameManager->colorForIdx(col2));
@@ -281,9 +281,9 @@ void CustomCharacterColorPage::updateUI() {
     }
 
     if(state->m_player_ship) {
-        int col1 = CGC_OVERRIDE(ship).enabled ? CGC_OVERRIDE(ship).primary   : state->m_defaultColor;
-        int col2 = CGC_OVERRIDE(ship).enabled ? CGC_OVERRIDE(ship).secondary : state->m_defaultColor2;
-        int colg = CGC_OVERRIDE(ship).enabled ? CGC_OVERRIDE(ship).glow      : state->m_defaultColorGlow;
+        int col1 = CGC_OVERRIDE(ship).enabled ? CGC_OVERRIDE(ship).primary   : p2 ? state->m_defaultDualColor     : state->m_defaultColor;
+        int col2 = CGC_OVERRIDE(ship).enabled ? CGC_OVERRIDE(ship).secondary : p2 ? state->m_defaultDualColor2    : state->m_defaultColor2;
+        int colg = CGC_OVERRIDE(ship).enabled ? CGC_OVERRIDE(ship).glow      : p2 ? state->m_defaultDualColorGlow : state->m_defaultColorGlow;
 
         state->m_player_ship->setColor(gameManager->colorForIdx(col1));
         state->m_player_ship->setSecondColor(gameManager->colorForIdx(col2));
@@ -292,9 +292,9 @@ void CustomCharacterColorPage::updateUI() {
     }
 
     if(state->m_player_ball) {
-        int col1 = CGC_OVERRIDE(ball).enabled ? CGC_OVERRIDE(ball).primary   : state->m_defaultColor;
-        int col2 = CGC_OVERRIDE(ball).enabled ? CGC_OVERRIDE(ball).secondary : state->m_defaultColor2;
-        int colg = CGC_OVERRIDE(ball).enabled ? CGC_OVERRIDE(ball).glow      : state->m_defaultColorGlow;
+        int col1 = CGC_OVERRIDE(ball).enabled ? CGC_OVERRIDE(ball).primary   : p2 ? state->m_defaultDualColor     : state->m_defaultColor;
+        int col2 = CGC_OVERRIDE(ball).enabled ? CGC_OVERRIDE(ball).secondary : p2 ? state->m_defaultDualColor2    : state->m_defaultColor2;
+        int colg = CGC_OVERRIDE(ball).enabled ? CGC_OVERRIDE(ball).glow      : p2 ? state->m_defaultDualColorGlow : state->m_defaultColorGlow;
 
         state->m_player_ball->setColor(gameManager->colorForIdx(col1));
         state->m_player_ball->setSecondColor(gameManager->colorForIdx(col2));
@@ -303,9 +303,9 @@ void CustomCharacterColorPage::updateUI() {
     }
 
     if(state->m_player_ufo) {
-        int col1 = CGC_OVERRIDE(ufo).enabled ? CGC_OVERRIDE(ufo).primary   : state->m_defaultColor;
-        int col2 = CGC_OVERRIDE(ufo).enabled ? CGC_OVERRIDE(ufo).secondary : state->m_defaultColor2;
-        int colg = CGC_OVERRIDE(ufo).enabled ? CGC_OVERRIDE(ufo).glow      : state->m_defaultColorGlow;
+        int col1 = CGC_OVERRIDE(ufo).enabled ? CGC_OVERRIDE(ufo).primary   : p2 ? state->m_defaultDualColor     : state->m_defaultColor;
+        int col2 = CGC_OVERRIDE(ufo).enabled ? CGC_OVERRIDE(ufo).secondary : p2 ? state->m_defaultDualColor2    : state->m_defaultColor2;
+        int colg = CGC_OVERRIDE(ufo).enabled ? CGC_OVERRIDE(ufo).glow      : p2 ? state->m_defaultDualColorGlow : state->m_defaultColorGlow;
 
         state->m_player_ufo->setColor(gameManager->colorForIdx(col1));
         state->m_player_ufo->setSecondColor(gameManager->colorForIdx(col2));
@@ -314,9 +314,9 @@ void CustomCharacterColorPage::updateUI() {
     }
 
     if(state->m_player_wave) {
-        int col1 = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).primary   : state->m_defaultColor;
-        int col2 = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).secondary : state->m_defaultColor2;
-        int colg = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).glow      : state->m_defaultColorGlow;
+        int col1 = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).primary   : p2 ? state->m_defaultDualColor     : state->m_defaultColor;
+        int col2 = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).secondary : p2 ? state->m_defaultDualColor2    : state->m_defaultColor2;
+        int colg = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).glow      : p2 ? state->m_defaultDualColorGlow : state->m_defaultColorGlow;
 
         state->m_player_wave->setColor(gameManager->colorForIdx(col1));
         state->m_player_wave->setSecondColor(gameManager->colorForIdx(col2));
@@ -325,9 +325,9 @@ void CustomCharacterColorPage::updateUI() {
     }
 
     if(state->m_player_robot) {
-        int col1 = CGC_OVERRIDE(robot).enabled ? CGC_OVERRIDE(robot).primary   : state->m_defaultColor;
-        int col2 = CGC_OVERRIDE(robot).enabled ? CGC_OVERRIDE(robot).secondary : state->m_defaultColor2;
-        int colg = CGC_OVERRIDE(robot).enabled ? CGC_OVERRIDE(robot).glow      : state->m_defaultColorGlow;
+        int col1 = CGC_OVERRIDE(robot).enabled ? CGC_OVERRIDE(robot).primary   : p2 ? state->m_defaultDualColor     : state->m_defaultColor;
+        int col2 = CGC_OVERRIDE(robot).enabled ? CGC_OVERRIDE(robot).secondary : p2 ? state->m_defaultDualColor2    : state->m_defaultColor2;
+        int colg = CGC_OVERRIDE(robot).enabled ? CGC_OVERRIDE(robot).glow      : p2 ? state->m_defaultDualColorGlow : state->m_defaultColorGlow;
 
         state->m_player_robot->setColor(gameManager->colorForIdx(col1));
         state->m_player_robot->setSecondColor(gameManager->colorForIdx(col2));
@@ -336,9 +336,9 @@ void CustomCharacterColorPage::updateUI() {
     }
 
     if(state->m_player_spider) {
-        int col1 = CGC_OVERRIDE(spider).enabled ? CGC_OVERRIDE(spider).primary   : state->m_defaultColor;
-        int col2 = CGC_OVERRIDE(spider).enabled ? CGC_OVERRIDE(spider).secondary : state->m_defaultColor2;
-        int colg = CGC_OVERRIDE(spider).enabled ? CGC_OVERRIDE(spider).glow      : state->m_defaultColorGlow;
+        int col1 = CGC_OVERRIDE(spider).enabled ? CGC_OVERRIDE(spider).primary   : p2 ? state->m_defaultDualColor     : state->m_defaultColor;
+        int col2 = CGC_OVERRIDE(spider).enabled ? CGC_OVERRIDE(spider).secondary : p2 ? state->m_defaultDualColor2    : state->m_defaultColor2;
+        int colg = CGC_OVERRIDE(spider).enabled ? CGC_OVERRIDE(spider).glow      : p2 ? state->m_defaultDualColorGlow : state->m_defaultColorGlow;
 
         state->m_player_spider->setColor(gameManager->colorForIdx(col1));
         state->m_player_spider->setSecondColor(gameManager->colorForIdx(col2));
@@ -347,9 +347,9 @@ void CustomCharacterColorPage::updateUI() {
     }
 
     if(state->m_player_swing) {
-        int col1 = CGC_OVERRIDE(swing).enabled ? CGC_OVERRIDE(swing).primary   : state->m_defaultColor;
-        int col2 = CGC_OVERRIDE(swing).enabled ? CGC_OVERRIDE(swing).secondary : state->m_defaultColor2;
-        int colg = CGC_OVERRIDE(swing).enabled ? CGC_OVERRIDE(swing).glow      : state->m_defaultColorGlow;
+        int col1 = CGC_OVERRIDE(swing).enabled ? CGC_OVERRIDE(swing).primary   : p2 ? state->m_defaultDualColor     : state->m_defaultColor;
+        int col2 = CGC_OVERRIDE(swing).enabled ? CGC_OVERRIDE(swing).secondary : p2 ? state->m_defaultDualColor2    : state->m_defaultColor2;
+        int colg = CGC_OVERRIDE(swing).enabled ? CGC_OVERRIDE(swing).glow      : p2 ? state->m_defaultDualColorGlow : state->m_defaultColorGlow;
 
         state->m_player_swing->setColor(gameManager->colorForIdx(col1));
         state->m_player_swing->setSecondColor(gameManager->colorForIdx(col2));
