@@ -1,3 +1,8 @@
+# v0.2.6
+
+* fix glow and dual icons (thanks jasmine :3)
+* update geode to v5.3.0
+
 # v0.2.5
 
 * **glow support!**
