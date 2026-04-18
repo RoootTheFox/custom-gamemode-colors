@@ -1,3 +1,8 @@
+# v0.2.7
+
+* fix wave trail changing color to wrong gamemode
+* update geode to v5.6.1
+
 # v0.2.6
 
 * fix glow and dual icons (thanks jasmine :3)

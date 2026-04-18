@@ -103,11 +103,11 @@ class $modify(PlayerObject) {
             colg = CGC_OVERRIDE(ufo).enabled ? CGC_OVERRIDE(ufo).glow      : p2 ? state->m_defaultDualColorGlow : state->m_defaultColorGlow;
         }
 
+        auto colw = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).primary  : p2 ? state->m_defaultDualColor     : state->m_defaultColor;
         if(this->m_isDart) {
-            col1 = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).primary   : p2 ? state->m_defaultDualColor     : state->m_defaultColor;
+            col1 = colw;
             col2 = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).secondary : p2 ? state->m_defaultDualColor2    : state->m_defaultColor2;
             colg = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).glow      : p2 ? state->m_defaultDualColorGlow : state->m_defaultColorGlow;
-            this->m_waveTrail->setColor(gameManager->colorForIdx(col1)); // fix wave trail
         }
 
         if(this->m_isRobot) {
@@ -145,5 +145,10 @@ class $modify(PlayerObject) {
             this->m_iconSpriteSecondary->setColor(gameManager->colorForIdx(CGC_OVERRIDE(cube).secondary));
             this->m_iconGlow->setColor(gameManager->colorForIdx(CGC_OVERRIDE(cube).glow));
         }
+
+        // fix wave trail
+        // this is needed bcs apparently PlayerObject::setColor also sets the wave trail color lmao.
+        // im stupid
+        this->m_waveTrail->setColor(gameManager->colorForIdx(colw));
     }
 };
