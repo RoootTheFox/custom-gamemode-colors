@@ -1,3 +1,7 @@
+# v0.2.8
+
+* fix flipped wave trail
+
 # v0.2.7
 
 * fix wave trail changing color to wrong gamemode

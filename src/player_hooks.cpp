@@ -103,9 +103,13 @@ class $modify(PlayerObject) {
             colg = CGC_OVERRIDE(ufo).enabled ? CGC_OVERRIDE(ufo).glow      : p2 ? state->m_defaultDualColorGlow : state->m_defaultColorGlow;
         }
 
-        auto colw = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).primary  : p2 ? state->m_defaultDualColor     : state->m_defaultColor;
+        // eat my ternary grahhh 👹👹👹👹👹
+        auto colw = CGC_OVERRIDE(wave).enabled ?
+            (this->m_switchWaveTrailColor ? CGC_OVERRIDE(wave).primary : CGC_OVERRIDE(wave).secondary) :
+            (p2 ? (this->m_switchWaveTrailColor ? state->m_defaultDualColor : state->m_defaultDualColor2) :
+            (this->m_switchWaveTrailColor ? state->m_defaultColor : state->m_defaultColor2));
         if(this->m_isDart) {
-            col1 = colw;
+            col1 = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).primary   : p2 ? state->m_defaultDualColor     : state->m_defaultColor;
             col2 = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).secondary : p2 ? state->m_defaultDualColor2    : state->m_defaultColor2;
             colg = CGC_OVERRIDE(wave).enabled ? CGC_OVERRIDE(wave).glow      : p2 ? state->m_defaultDualColorGlow : state->m_defaultColorGlow;
         }
